@@ -1,22 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AfriConnect Summit 2026 | Le Carrefour de la Tech Panafricaine</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <nav class="navbar">
+  <div class="nav-container">
+    <i class="fa-solid fa-circle-nodes logo-icon"></i>
+    <span>AfriConnect <span class="anim-logo">Summit 2026</span></span>
     
+    <ul class="nav-menu" id="navMenu" type="none">
+      <li class="li-nav"><a href="#index.html" class="nav-lien">Accueil</a></li>
+      <li class="li-nav"><a href="#programme.html" class="nav-lien">Programme</a></li>
+      <li class="li-nav"><a href="#intervenants.html" class="nav-lien">Intervenants</a></li>
+      <li class="li-nav"><a href="#contact.html" class="nav-lien">Contact</a></li>
+    </ul>
+    
+    <a href="#contact.html" class="cta-btn">S'INSCRIRE</a>
+    
+    <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    
+    <button id="mode-sombre" class="theme-btn" aria-label="Changer de thème">
+      <i class="fa-regular fa-moon icon-moon"></i>
+      <i class="fa-regular fa-sun icon-sun"></i>
+    </button>
+  </div>
+</nav>
+  
+
+<!-- HERO INTERNE -->
+<section class="banniere-hero-interne">
+  <div class="conteneur-hero-interne">
+    
+    <!-- Fil d'Ariane (Breadcrumb) -->
+    <nav class="fil-ariane">
+      <a href="index.html" class="lien-ariane-parent">ACCUEIL</a>
+      <span class="separateur-ariane">/</span>
+      <span class="lien-ariane-actuel">CONTACT</span>
+    </nav>
+    
+    <!-- Titre principal de la page d'inscription -->
+    <h1 class="titre-principal-interne">Contact & Inscription</h1>
+    
+    <!-- Ligne bleue décorative sous le titre -->
+    <div class="soulignement-decoratif"></div>
+
+  </div>
+</section>
 
 
+<!-- FORMULAIRE D'INSCRIPTION -->
+<section class="section-inscription-contact">
+  <div class="conteneur-inscription-flex">
+    
+    <div class="colonne-formulaire">
+      <div class="en-tete-section-form">
+        <span class="index-section-num">01/</span>
+        <span class="titre-section-caps">Formulaire d'inscription</span>
+      </div>
+
+      <form action="#" method="POST" class="formulaire-principal">
+        <div class="grille-champs-internes">
+          
+          <div class="groupe-champ">
+            <label for="nom">Nom complet *</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom complet" required>
+          </div>
+
+          <div class="groupe-champ">
+            <label for="email">Adresse email *</label>
+            <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+          </div>
+
+          <div class="groupe-champ">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="+221 77 000 00 00">
+          </div>
+
+          <div class="groupe-champ">
+            <label for="participation">Type de participation *</label>
+            <div class="wrapper-select">
+              <select id="participation" name="participation" required>
+                <option value="" disabled selected>Choisir un type</option>
+                <option value="standard">Participant Standard</option>
+                <option value="speaker">Intervenant / Speaker</option>
+                <option value="sponsor">Partenaire / Sponsor</option>
+                <option value="media">Média / Presse</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="groupe-champ champ-pleine-largeur">
+          <label for="pays">Pays *</label>
+          <div class="wrapper-select">
+            <select id="pays" name="pays" required>
+              <option value="" disabled selected>Sélectionnez votre pays</option>
+              <option value="SN">Sénégal</option>
+              <option value="MA">Maroc</option>
+              <option value="NG">Nigeria</option>
+              <option value="GH">Ghana</option>
+              <option value="CI">Côte d'Ivoire</option>
+              <option value="KE">Kenya</option>
+              <option value="DZ">Algérie</option>
+              <option value="TN">Tunisie</option>
+              <option value="CM">Cameroun</option>
+              <option value="ZA">Afrique du Sud</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="groupe-champ champ-pleine-largeur">
+          <label for="motivation" class="label-mono">Motivation</label>
+          <textarea id="motivation" name="motivation" rows="6" placeholder="Décrivez votre motivation à participer à AfriConnect Summit 2026..."></textarea>
+        </div>
+
+        <button type="submit" class="bouton-soumettre-bleu">
+          <span>SOUMETTRE MON INSCRIPTION</span>
+          <span class="fleche-bouton">&rarr;</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="colonne-infos">
+      <div class="en-tete-section-form">
+        <span class="index-section-num">02/</span>
+        <span class="titre-section-caps">Lieu & Informations</span>
+      </div>
+
+      <div class="carte-blanche-infos">
+        <div class="entete-lieu">
+          <i class="fa-solid fa-location-dot icone-adresse-cyan"></i>
+          <span class="label-lieu-titre">LIEU PRINCIPAL</span>
+        </div>
+        
+        <h3 class="nom-batiment">CICAD Diamniadio</h3>
+        <p class="details-adresse">
+          Centre International de Conférences<br>
+          Abdou Diouf, Diamniadio<br>
+          Dakar, Sénégal
+        </p>
+
+        <div class="liste-details-specifiques">
+          
+          <div class="item-detail">
+            <div class="encadre-icone-mini">
+              <i class="fa-regular fa-calendar-days"></i>
+            </div>
+            <div class="textes-item">
+              <span class="meta-label-mono">DATES</span>
+              <span class="meta-valeur">15–17 Novembre 2026</span>
+            </div>
+          </div>
+
+          <div class="item-detail">
+            <div class="encadre-icone-mini">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="textes-item">
+              <span class="meta-label-mono">CAPACITÉ</span>
+              <span class="meta-valeur">1 200+ participants</span>
+            </div>
+          </div>
+
+          <div class="item-detail">
+            <div class="encadre-icone-mini">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="textes-item">
+              <span class="meta-label-mono">LANGUES</span>
+              <span class="meta-valeur">Français & Anglais</span>
+            </div>
+          </div>
+
+          <div class="item-detail">
+            <div class="encadre-icone-mini">
+              <i class="fa-solid fa-microphone-lines"></i>
+            </div>
+            <div class="textes-item">
+              <span class="meta-label-mono">SPEAKERS</span>
+              <span class="meta-valeur">48 intervenants confirmés</span>
+            </div>
+          </div>
+
+          <div class="item-detail">
+            <div class="encadre-icone-mini">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="textes-item">
+              <span class="meta-label-mono">CONTACT</span>
+              <a href="mailto:hello@africonnect.africa" class="meta-valeur lien-email-info">hello@africonnect.africa</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mini-carte-technique">
+          <div class="repere-geographique">
+            <div class="point-ancre-bleu">
+              <i class="fa-solid fa-location-crosshairs" style="color: white; font-size: 0.9rem;"></i>
+            </div>
+            <span class="label-adresse-carte">DIAMNIADIO &middot; DAKAR</span>
+            <span class="coordonnees-gps">14.7264&deg; N, 17.0847&deg; W</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
+<section id="section-faq" class="conteneur-faq">
+  
+  <div class="en-tete-faq">
+    <span class="numero-section">03/</span>
+    <span class="titre-section">QUESTIONS FRÉQUENTES</span>
+  </div>
+  
+  <h2 class="grand-titre-faq">Des réponses à vos questions.</h2>
+
+  <div class="accordeon-faq">
+    
+    <div class="item-faq">
+      <input type="checkbox" id="faq-1" class="declencheur-faq">
+      <label for="faq-1" class="entete-item">
+        <span class="question-texte">Comment puis-je obtenir mon badge après l'inscription ?</span>
+        <i class="fa-solid fa-chevron-down icone-fleche"></i>
+      </label>
+      <div class="panneau-reponse">
+        <div class="contenu-reponse">
+          <p>Une fois votre inscription validée et confirmée, vous recevrez un e-mail contenant un QR Code unique. Ce badge numérique pourra être scanné directement à l'entrée du CICAD pour imprimer votre badge physique dès le premier jour du sommet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-faq">
+      <input type="checkbox" id="faq-2" class="declencheur-faq">
+      <label for="faq-2" class="entete-item">
+        <span class="question-texte">Le AfriConnect Summit 2026 est-il accessible en ligne ?</span>
+        <i class="fa-solid fa-chevron-down icone-fleche"></i>
+      </label>
+      <div class="panneau-reponse">
+        <div class="contenu-reponse">
+          <p>Oui, le sommet adopte un format hybride. Les conférences principales de la Grande Salle A seront diffusées en direct pour les participants enregistrés sous l'option "Média / En ligne". Les ateliers pratiques resteront cependant exclusivement physiques.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-faq">
+      <input type="checkbox" id="faq-3" class="declencheur-faq">
+      <label for="faq-3" class="entete-item">
+        <span class="question-texte">Des solutions de transport sont-elles prévues vers le CICAD ?</span>
+        <i class="fa-solid fa-chevron-down icone-fleche"></i>
+      </label>
+      <div class="panneau-reponse">
+        <div class="contenu-reponse">
+          <p>Absolument. Des navettes gratuites AfriConnect feront la liaison toutes les 30 minutes entre le centre-ville de Dakar (Place de l'Indépendance), la gare du TER de Diamniadio, et le CICAD pendant les 3 jours de l'événement.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-faq">
+      <input type="checkbox" id="faq-4" class="declencheur-faq">
+      <label for="faq-4" class="entete-item">
+        <span class="question-texte">Quelles sont les options de partenariat pour les startups ?</span>
+        <i class="fa-solid fa-chevron-down icone-fleche"></i>
+      </label>
+      <div class="panneau-reponse">
+        <div class="contenu-reponse">
+          <p>Les startups en phase de seed ou série A peuvent postuler au programme "Pitching Startup" via le sélecteur du formulaire ci-dessus. Des espaces démo réduits et des tarifs préférentiels pour les stands sont également disponibles sur demande motivée.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-faq">
+      <input type="checkbox" id="faq-5" class="declencheur-faq">
+      <label for="faq-5" class="entete-item">
+        <span class="question-texte">Puis-je modifier mon type de participation ultérieurement ?</span>
+        <i class="fa-solid fa-chevron-down icone-fleche"></i>
+      </label>
+      <div class="panneau-reponse">
+        <div class="contenu-reponse">
+          <p>Toute demande de modification de profil (passer de standard à sponsor, par exemple) doit être adressée directement à notre équipe administrative par e-mail avant le 30 octobre 2026, sous réserve des places disponibles dans chaque catégorie.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
+<!-- footer -->
+<footer class="pied-de-page">
+  <div class="conteneur-pied">
+    
+    <div class="colonnes-pied">
+      <div class="colonne-info">
+        <h3 class="logo-sommet">
+          <i class="fa-solid fa-layer-group icone-logo"></i> 
+          AfriConnect <span class="texte-bleu">Summit 2026</span>
+        </h3>
+        <p class="description-sommet">
+          Le rendez-vous annuel de l'innovation et de la technologie en Afrique. Dakar, Sénégal. 15–17 Novembre 2026.
+        </p>
+        <div class="statut-inscription">
+          <span class="puce-inscription">•</span> Inscriptions Ouvertes
+        </div>
+      </div>
 
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">NAVIGATION</h4>
+        <nav class="liens-navigation">
+          <a href="#accueil">Accueil</a>
+          <a href="#programme">Programme</a>
+          <a href="#intervenants">Intervenants</a>
+          <a href="#contact">Contact & Inscription</a>
+        </nav>
+      </div>
 
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">SUIVEZ-NOUS</h4>
+        <nav class="liens-navigation">
+          <a href="https://twitter.com" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter icone-reseau"></i> Twitter / X</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in icone-reseau"></i> LinkedIn</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram icone-reseau"></i> Instagram</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener"><i class="fa-brands fa-youtube icone-reseau"></i> YouTube</a>
+        </nav>
+      </div>
+    </div>
 
+    <div class="barre-basse">
+      <p class="texte-copyright">
+        &copy; <span id="annee-dynamique"></span> AfriConnect Summit. Tous droits réservés.
+      </p>
+      
+    </div>
+
+  </div>
+
+      <button id="bouton-retour-haut" class="action-retour-haut">
+        <i class="fa-solid fa-arrow-up"></i> RETOUR EN HAUT
+      </button>
+</footer>
 
 
 

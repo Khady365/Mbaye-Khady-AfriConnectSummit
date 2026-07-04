@@ -1,23 +1,315 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AfriConnect Summit 2026 | Le Carrefour de la Tech Panafricaine</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+
+<nav class="navbar">
+  <div class="nav-container">
+    <i class="fa-solid fa-circle-nodes logo-icon"></i>
+    <span>AfriConnect <span class="anim-logo">Summit 2026</span></span>
     
+    <ul class="nav-menu" id="navMenu" type="none">
+      <li class="li-nav"><a href="#index.html" class="nav-lien">Accueil</a></li>
+      <li class="li-nav"><a href="#programme.html" class="nav-lien">Programme</a></li>
+      <li class="li-nav"><a href="#intervenants.html" class="nav-lien">Intervenants</a></li>
+      <li class="li-nav"><a href="#contact.html" class="nav-lien">Contact</a></li>
+    </ul>
+    
+    <a href="#contact.html" class="cta-btn">S'INSCRIRE</a>
+    
+    <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    
+    <button id="mode-sombre" class="theme-btn" aria-label="Changer de thème">
+      <i class="fa-regular fa-moon icon-moon"></i>
+      <i class="fa-regular fa-sun icon-sun"></i>
+    </button>
+  </div>
+</nav>
+
+    <!-- HERO INTERNE -->
+    <section class="banniere-hero-interne">
+        <div class="conteneur-hero-interne">
+            <nav class="fil-ariane">
+                <a href="index.html" class="lien-ariane-parent">ACCUEIL</a>
+                <span class="separateur-ariane">/</span>
+                <span class="lien-ariane-actuel">PROGRAMME</span>
+            </nav>
+            <h1 class="titre-principal-interne">Programme</h1>
+            <div class="soulignement-decoratif"></div>
+        </div>
+    </section>
+
+    <!-- ONGLETS 3 JOURS -->
+    <section id="zone-planning" class="conteneur-planning">
+        <div class="navigation-onglets">
+            <button class="onglet-jour actif" data-cible="jour1">
+                <span class="meta-date">15 Nov.</span>
+                <span class="titre-jour">Jour 1</span>
+                <span class="theme-jour">Ouverture & IA</span>
+            </button>
+
+            <button class="onglet-jour" data-cible="jour2">
+                <span class="meta-date">16 Nov.</span>
+                <span class="titre-jour">Jour 2</span>
+                <span class="theme-jour">Blockchain & Design</span>
+            </button>
+
+            <button class="onglet-jour" data-cible="jour3">
+                <span class="meta-date">17 Nov.</span>
+                <span class="titre-jour">Jour 3</span>
+                <span class="theme-jour">Clôture & Awards</span>
+            </button>
+        </div>
+
+        <div class="conteneur-tables-planning">
+            <div id="jour1" class="contenu-planning actif">
+                <table class="table-programme">
+                    <tbody>
+                        <tr>
+                            <td class="colonne-heure">09:00</td>
+                            <td class="colonne-session">Cérémonie d’Ouverture & Keynote Principale</td>
+                            <td class="colonne-intervenant">Aminata Diallo</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">10:30</td>
+                            <td class="colonne-session">L’IA au Service du Développement Africain</td>
+                            <td class="colonne-intervenant">Kofi Mensah</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Salle Innovation</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">12:00</td>
+                            <td class="colonne-session">Panel: Fintech et Inclusion Financière</td>
+                            <td class="colonne-intervenant">Multiple Intervenants</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">14:00</td>
+                            <td class="colonne-session">Workshop: Machine Learning Pratique</td>
+                            <td class="colonne-intervenant">Dr. Nadia Bouazzaoui</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Atelier Lab 1</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">16:00</td>
+                            <td class="colonne-session">Pitching Startup — Session Découverte</td>
+                            <td class="colonne-intervenant">12 Startups</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Espace Entrepreneur</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">18:00</td>
+                            <td class="colonne-session">Cocktail de Networking Inaugural</td>
+                            <td class="colonne-intervenant">—</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Terrasse Panoramique</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="jour2" class="contenu-planning">
+                <table class="table-programme">
+                    <tbody>
+                        <tr>
+                            <td class="colonne-heure">09:00</td>
+                            <td class="colonne-session">Keynote: Révolution Web3 et Décentralisation</td>
+                            <td class="colonne-intervenant">Karim Bensalah</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">11:00</td>
+                            <td class="colonne-session">Masterclass: UI/UX pour les Marchés Africains</td>
+                            <td class="colonne-intervenant">Ngozi Adeyemi</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Salle Innovation</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">13:30</td>
+                            <td class="colonne-session">Tokenisation des Actifs Réels (RWA)</td>
+                            <td class="colonne-intervenant">Amadou Sy</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Atelier Lab 2</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">15:00</td>
+                            <td class="colonne-session">Panel: Écosystèmes Cryptos et Régulations</td>
+                            <td class="colonne-intervenant">Experts Blockchain</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">17:00</td>
+                            <td class="colonne-session">Atelier: Design Thinking Appliqué</td>
+                            <td class="colonne-intervenant">Design Studio Team</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Atelier Lab 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="jour3" class="contenu-planning">
+                <table class="table-programme">
+                    <tbody>
+                        <tr>
+                            <td class="colonne-heure">09:30</td>
+                            <td class="colonne-session">Futur du Travail et Capital Humain Tech</td>
+                            <td class="colonne-intervenant">Fatou Diop</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Salle Innovation</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">11:00</td>
+                            <td class="colonne-session">Table Ronde des Investisseurs (VC Africa)</td>
+                            <td class="colonne-intervenant">Panel d'Investisseurs</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">14:00</td>
+                            <td class="colonne-session">Grande Finale du Concours de Pitch</td>
+                            <td class="colonne-intervenant">Finalistes Startups</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">16:00</td>
+                            <td class="colonne-session">Remise des Trophées AfriConnect Awards</td>
+                            <td class="colonne-intervenant">Comité d'Organisation</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                        <tr>
+                            <td class="colonne-heure">17:30</td>
+                            <td class="colonne-session">Discours de Clôture et Perspectives 2027</td>
+                            <td class="colonne-intervenant">Direction du Sommet</td>
+                            <td class="colonne-salle"><i class="fa-solid fa-location-dot"></i> Grande Salle A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION THÉMATIQUES -->
+    <section id="themathiques-sommet" class="conteneur-thematiques">
+        <div class="entete-thematiques">
+            <span class="numero-section">01/</span>
+            <span class="titre-section">THÈMES PRINCIPAUX</span>
+        </div>
+        
+        <h2 class="grand-titre">Sujets au cœur de la conférence.</h2>
+
+        <div class="grille-thematiques">
+            <div class="carte-theme element-anime">
+                <div class="conteneur-icone-theme">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div class="contenu-theme">
+                    <span class="index-theme">THÈME 01</span>
+                    <h3 class="titre-theme">IA & Technologies Émergentes</h3>
+                    <p class="description-theme">
+                        Intelligence artificielle, machine learning, robotique et systèmes autonomes au service de l'Afrique.
+                    </p>
+                </div>
+            </div>
+
+            <div class="carte-theme element-anime">
+                <div class="conteneur-icone-theme">
+                    <i class="fa-solid fa-chart-simple"></i>
+                </div>
+                <div class="contenu-theme">
+                    <span class="index-theme">THÈME 02</span>
+                    <h3 class="titre-theme">Data & Analytics</h3>
+                    <p class="description-theme">
+                        Big data, visualisation, science des données et prise de décision basée sur la donnée africaine.
+                    </p>
+                </div>
+            </div>
+
+            <div class="carte-theme element-anime">
+                <div class="conteneur-icone-theme">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div class="contenu-theme">
+                    <span class="index-theme">THÈME 03</span>
+                    <h3 class="titre-theme">Blockchain & Web3</h3>
+                    <p class="description-theme">
+                        DeFi, NFTs, smart contracts et applications décentralisées adaptées aux marchés africains.
+                    </p>
+                </div>
+            </div>
+
+            <div class="carte-theme element-anime">
+                <div class="conteneur-icone-theme">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="contenu-theme">
+                    <span class="index-theme">THÈME 04</span>
+                    <h3 class="titre-theme">Dev & Open Source</h3>
+                    <p class="description-theme">
+                        Développement logiciel, communautés open source et écosystèmes de développeurs sur le continent.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
+    <!-- footer -->
+<footer class="pied-de-page">
+  <div class="conteneur-pied">
+    
+    <div class="colonnes-pied">
+      <div class="colonne-info">
+        <h3 class="logo-sommet">
+          <i class="fa-solid fa-layer-group icone-logo"></i> 
+          AfriConnect <span class="texte-bleu">Summit 2026</span>
+        </h3>
+        <p class="description-sommet">
+          Le rendez-vous annuel de l'innovation et de la technologie en Afrique. Dakar, Sénégal. 15–17 Novembre 2026.
+        </p>
+        <div class="statut-inscription">
+          <span class="puce-inscription">•</span> Inscriptions Ouvertes
+        </div>
+      </div>
 
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">NAVIGATION</h4>
+        <nav class="liens-navigation">
+          <a href="#accueil">Accueil</a>
+          <a href="#programme">Programme</a>
+          <a href="#intervenants">Intervenants</a>
+          <a href="#contact">Contact & Inscription</a>
+        </nav>
+      </div>
 
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">SUIVEZ-NOUS</h4>
+        <nav class="liens-navigation">
+          <a href="https://twitter.com" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter icone-reseau"></i> Twitter / X</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in icone-reseau"></i> LinkedIn</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram icone-reseau"></i> Instagram</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener"><i class="fa-brands fa-youtube icone-reseau"></i> YouTube</a>
+        </nav>
+      </div>
+    </div>
 
+    <div class="barre-basse">
+      <p class="texte-copyright">
+        &copy; <span id="annee-dynamique"></span> AfriConnect Summit. Tous droits réservés.
+      </p>
+      
+    </div>
 
+  </div>
 
-
-
+      <button id="bouton-retour-haut" class="action-retour-haut">
+        <i class="fa-solid fa-arrow-up"></i> RETOUR EN HAUT
+      </button>
+</footer>
 
 
     <script src="js/main.js"></script>

@@ -1,25 +1,363 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AfriConnect Summit 2026 | Le Carrefour de la Tech Panafricaine</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+<nav class="navbar">
+  <div class="nav-container">
+    <i class="fa-solid fa-circle-nodes logo-icon"></i>
+    <span>AfriConnect <span class="anim-logo">Summit 2026</span></span>
     
+    <ul class="nav-menu" id="navMenu" type="none">
+      <li class="li-nav"><a href="#index.html" class="nav-lien">Accueil</a></li>
+      <li class="li-nav"><a href="#programme.html" class="nav-lien">Programme</a></li>
+      <li class="li-nav"><a href="#intervenants.html" class="nav-lien">Intervenants</a></li>
+      <li class="li-nav"><a href="#contact.html" class="nav-lien">Contact</a></li>
+    </ul>
+    
+    <a href="#contact.html" class="cta-btn">S'INSCRIRE</a>
+    
+    <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    
+    <button id="mode-sombre" class="theme-btn" aria-label="Changer de thème">
+      <i class="fa-regular fa-moon icon-moon"></i>
+      <i class="fa-regular fa-sun icon-sun"></i>
+    </button>
+  </div>
+</nav>
 
+<section class="section">
+  <div class="hero-container">
+    
+    <div class="hero-content">
+      <div class="hero-meta fade-in">
+        <span class="meta-dot"></span> 15-17 NOV. 2026 • DAKAR, SÉNÉGAL
+      </div>
+      
+      <h1 class="hero-titre">
+        <span class="titre-noir">L'AVENIR</span><br>
+        <span class="titre-lumiere">N'ATTEND</span><br>
+        <span class="titre-noir">PAS.</span>
+      </h1>
+      
+      <p class="hero-soustitre">
+        Le sommet panafricain de la technologie et de l'innovation. 
+        Trois jours pour construire, connecter et amplifier le futur numérique de l'Afrique.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="#inscrire" class="btn-primary">S'INSCRIRE &rarr;</a>
+        <a href="#programme" class="btn-secondary">PROGRAMME</a>
+      </div>
+    </div>
 
+    <div class="hero-comptearebours">
+      <div class="compte-rebours">// COMPTE À REBOURS</div>
+      
+      <div class="rebours-grille">
+        <div class="compte-box">
+          <span class="couleur-nombre">1</span>
+          <div class="nombre" id="jours">000</div>
+          <div class="label">JOURS</div>
+        </div>
+        
+        <div class="compte-box">
+          <span class="couleur-nombre">2</span>
+          <div class="nombre" id="heures">00</div>
+          <div class="label">HEURES</div>
+        </div>
+        
+        <div class="compte-box">
+          <span class="couleur-nombre">3</span>
+          <div class="nombre" id="minutes">00</div>
+          <div class="label">MINUTES</div>
+        </div>
+        
+        <div class="compte-box">
+          <span class="couleur-nombre">4</span>
+          <div class="nombre" id="secondes">00</div>
+          <div class="label">SECONDES</div>
+        </div>
+      </div>
+      
+      <div class="rebours-footer">
+        CENTRE INTERNATIONAL, DIAMNIADIO 
+        <i class="fa-solid fa-location-dot location-icon"></i>
+      </div>
+    </div>
 
+  </div>
+</section>
 
+<section class="chiffre-cles">
+  <div class="stat-container">
+    
+    <div class="entete">
+      <span class="section-nombre">01/</span>
+      <span class="section-titre">CHIFFRES CLÉS</span>
+    </div>
 
+    <div class="section-grille-cartes">
+      
+      <div class="section-carte carte-bleu">
+        <span class="couleur-chiffre">1</span>
+        <div class="stat-nombre">
+          <span>+</span><span class="compteur" data-target="1200">0</span>
+        </div>
+        <div class="stat-label">PARTICIPANTS</div>
+      </div>
 
+      <div class="section-carte carte-blanc">
+        <span class="couleur-chiffre">2</span>
+        <div class="stat-nombre">
+          <span class="compteur" data-target="48">0</span><span>+</span>
+        </div>
+        <div class="stat-label">SPEAKERS</div>
+      </div>
 
+      <div class="section-carte carte-neutre">
+        <span class="couleur-chiffre">3</span>
+        <div class="stat-nombre">
+          <span class="compteur" data-target="3">0</span>
+        </div>
+        <div class="stat-label">JOURS</div>
+      </div>
 
+      <div class="section-carte carte-blanc">
+        <span class="couleur-chiffre">4</span>
+        <div class="stat-nombre">
+          <span class="compteur" data-target="12">0</span>
+        </div>
+        <div class="stat-label">PAYS</div>
+      </div>
 
+    </div>
+  </div>
+</section>
 
+<section id="section-pourquoi" class="conteneur-pourquoi">
+  <div class="entete-pourquoi">
+    <span class="numero-section">02/</span>
+    <span class="titre-section">POURQUOI PARTICIPER</span>
+  </div>
+  
+  <h2 class="grand-titre">Rejoignez le mouvement qui change l’Afrique.</h2>
 
+  <div id="conteneur-arguments" class="liste-arguments">
+    
+    <div class="carte-argument anim-scroll">
+      <span class="filigrane-nombre">01</span>
+      <div class="conteneur-icone">
+        <i class="fa-solid fa-brain icone-bleue"></i>
+      </div>
+      <span class="petit-index">01 /</span>
+      <h3 class="titre-argument">Expertise Mondiale</h3>
+      <p class="description-argument">
+        Rencontrez les leaders de l'IA, blockchain et technologies émergentes qui façonnent le futur numérique de l'Afrique.
+      </p>
+    </div>
 
-    <script src="js/main.js"></script>
+    <div class="carte-argument anim-scroll">
+      <span class="filigrane-nombre">02</span>
+      <div class="conteneur-icone">
+        <i class="fa-solid fa-globe icone-bleue"></i>
+      </div>
+      <span class="petit-index">02 /</span>
+      <h3 class="titre-argument">Réseautage Stratégique</h3>
+      <p class="description-argument">
+        Créez des connexions stratégiques avec des innovateurs de 12 pays africains et membres de la diaspora mondiale.
+      </p>
+    </div>
+
+    <div class="carte-argument anim-scroll">
+      <span class="filigrane-nombre">03</span>
+      <div class="conteneur-icone">
+        <i class="fa-solid fa-bolt icone-bleue"></i>
+      </div>
+      <span class="petit-index">03 /</span>
+      <h3 class="titre-argument">Sessions Immersives</h3>
+      <p class="description-argument">
+        Workshops pratiques, keynotes de haut niveau et concours de pitching pour propulser vos projets vers le prochain niveau.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="section-intervenants" class="conteneur-intervenants">
+  <div class="entete-intervenants">
+    <div class="titre-gauche">
+      <div class="meta-titre">
+        <span class="numero-section">03/</span>
+        <span class="titre-section">INTERVENANTS VEDETTES</span>
+      </div>
+      <h2 class="grand-titre">Visages de l’innovation.</h2>
+    </div>
+    <a href="intervenants.html" class="bouton-voir-tous">VOIR TOUS &rarr;</a>
+  </div>
+
+  <div class="grille-intervenants">
+    
+    <div class="carte-intervenant">
+      <div class="conteneur-image">
+        <img src="images/intervenants6.jpg " width="500px" alt="Aminata Diallo" class="image-portrait">
+        <div class="voile-degrade"></div>
+      </div>
+      <div class="infos-intervenant">
+        <h3 class="nom-intervenant">Aminata Diallo</h3>
+        <p class="poste-intervenant">Director, AI Research Lab</p>
+        <div class="badge-pays"><span class="code-pays">SN</span> Sénégal</div>
+      </div>
+    </div>
+
+    <div class="carte-intervenant active">
+      <div class="conteneur-image">
+        <img src="images/intervenants5.jpg" width="500px" alt="Kofi Mensah" class="image-portrait">
+        <div class="voile-degrade"></div>
+      </div>
+      <div class="infos-intervenant">
+        <h3 class="nom-intervenant">Kofi Mensah</h3>
+        <p class="poste-intervenant">CEO, TechBridge Africa</p>
+        <div class="badge-pays"><span class="code-pays">GH</span> Ghana</div>
+      </div>
+    </div>
+
+    <div class="carte-intervenant">
+      <div class="conteneur-image">
+        <img src="images/intervenants7.jpg" width="500px" alt="Ngozi Adeyemi" class="image-portrait">
+        <div class="voile-degrade"></div>
+      </div>
+      <div class="infos-intervenant">
+        <h3 class="nom-intervenant">Ngozi Adeyemi</h3>
+        <p class="poste-intervenant">CTO, DataNigeria Group</p>
+        <div class="badge-pays"><span class="code-pays">NG</span> Nigeria</div>
+      </div>
+    </div>
+
+    <div class="carte-intervenant">
+      <div class="conteneur-image">
+        <img src="images/intervenants9.jpg" width="500px" alt="Karim Bensalah" class="image-portrait">
+        <div class="voile-degrade"></div>
+      </div>
+      <div class="infos-intervenant">
+        <h3 class="nom-intervenant">Karim Bensalah</h3>
+        <p class="poste-intervenant">Founder & CEO, NorthAI</p>
+        <div class="badge-pays"><span class="code-pays">MA</span> Maroc</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="section-sponsors" class="conteneur-sponsors">
+  <div class="entete-sponsors">
+    <span class="numero-section">04/</span>
+    <span class="titre-section">PARTENAIRES & SPONSORS</span>
+  </div>
+  
+  <h2 class="grand-titre">Ils soutiennent l’innovation africaine.</h2>
+
+  <div class="liste-sponsors">
+    
+    <div class="categorie-sponsors bloc-or">
+      <div class="separateur-sponsors">
+        <span class="puce-or">•</span> PARTENAIRE OR
+      </div>
+      <div class="grille-flex-logos">
+        <div class="bloc-logo logo-or">TechCorp Africa</div>
+        <div class="bloc-logo logo-or">InnovateMTN</div>
+        <div class="bloc-logo logo-or">Safaricom Digital</div>
+      </div>
+    </div>
+
+    <div class="categorie-sponsors bloc-argent">
+      <div class="separateur-sponsors">
+        <span class="puce-argent">•</span> PARTENAIRE ARGENT
+      </div>
+      <div class="grille-flex-logos">
+        <div class="bloc-logo logo-argent">DataVault Labs</div>
+        <div class="bloc-logo logo-argent">CloudAfrica</div>
+        <div class="bloc-logo logo-argent">FinTechHub</div>
+        <div class="bloc-logo logo-argent">AILeague</div>
+      </div>
+    </div>
+
+    <div class="categorie-sponsors bloc-bronze">
+      <div class="separateur-sponsors">
+        <span class="puce-bronze">•</span> PARTENAIRE BRONZE
+      </div>
+      <div class="grille-flex-logos">
+        <div class="bloc-logo logo-bronze">StartupDakar</div>
+        <div class="bloc-logo logo-bronze">CodeAfrica</div>
+        <div class="bloc-logo logo-bronze">TechWomen</div>
+        <div class="bloc-logo logo-bronze">AfriDev</div>
+        <div class="bloc-logo logo-bronze">OpenData</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- footer -->
+<footer class="pied-de-page">
+  <div class="conteneur-pied">
+    
+    <div class="colonnes-pied">
+      <div class="colonne-info">
+        <h3 class="logo-sommet">
+          <i class="fa-solid fa-layer-group icone-logo"></i> 
+          AfriConnect <span class="texte-bleu">Summit 2026</span>
+        </h3>
+        <p class="description-sommet">
+          Le rendez-vous annuel de l'innovation et de la technologie en Afrique. Dakar, Sénégal. 15–17 Novembre 2026.
+        </p>
+        <div class="statut-inscription">
+          <span class="puce-inscription">•</span> Inscriptions Ouvertes
+        </div>
+      </div>
+
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">NAVIGATION</h4>
+        <nav class="liens-navigation">
+          <a href="#accueil">Accueil</a>
+          <a href="#programme">Programme</a>
+          <a href="#intervenants">Intervenants</a>
+          <a href="#contact">Contact & Inscription</a>
+        </nav>
+      </div>
+
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">SUIVEZ-NOUS</h4>
+        <nav class="liens-navigation">
+          <a href="https://twitter.com" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter icone-reseau"></i> Twitter / X</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in icone-reseau"></i> LinkedIn</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram icone-reseau"></i> Instagram</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener"><i class="fa-brands fa-youtube icone-reseau"></i> YouTube</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="barre-basse">
+      <p class="texte-copyright">
+        &copy; <span id="annee-dynamique"></span> AfriConnect Summit. Tous droits réservés.
+      </p>
+      
+    </div>
+
+  </div>
+
+      <button id="bouton-retour-haut" class="action-retour-haut">
+        <i class="fa-solid fa-arrow-up"></i> RETOUR EN HAUT
+      </button>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -1,25 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AfriConnect Summit 2026 | Le Carrefour de la Tech Panafricaine</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <nav class="navbar">
+  <div class="nav-container">
+    <i class="fa-solid fa-circle-nodes logo-icon"></i>
+    <span>AfriConnect <span class="anim-logo">Summit 2026</span></span>
     
+    <ul class="nav-menu" id="navMenu" type="none">
+      <li class="li-nav"><a href="#index.html" class="nav-lien">Accueil</a></li>
+      <li class="li-nav"><a href="#programme.html" class="nav-lien">Programme</a></li>
+      <li class="li-nav"><a href="#intervenants.html" class="nav-lien">Intervenants</a></li>
+      <li class="li-nav"><a href="#contact.html" class="nav-lien">Contact</a></li>
+    </ul>
+    
+    <a href="#contact.html" class="cta-btn">S'INSCRIRE</a>
+    
+    <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    
+    <button id="mode-sombre" class="theme-btn" aria-label="Changer de thème">
+      <i class="fa-regular fa-moon icon-moon"></i>
+      <i class="fa-regular fa-sun icon-sun"></i>
+    </button>
+  </div>
+</nav>
+  
+
+    <section class="banniere-hero-interne">
+      <div class="conteneur-hero-interne">
+        
+        <nav class="fil-ariane">
+          <a href="index.html" class="lien-ariane-parent">ACCUEIL</a>
+          <span class="separateur-ariane">/</span>
+          <span class="lien-ariane-actuel">INTERVENANTS</span>
+        </nav>
+        
+        <h1 class="titre-principal-interne">Intervenants</h1>
+        
+        <div class="soulignement-decoratif"></div>
+
+      </div>
+    </section>
+
+    <section class="section-intervenants">
+      <div class="conteneur-filtres-global">
+        
+        <div class="barre-filtres">
+          <button class="bouton-filtre actif" data-filter="tous">Tous</button>
+          <button class="bouton-filtre" data-filter="ia-tech">IA & Tech</button>
+          <button class="bouton-filtre" data-filter="business">Business</button>
+          <button class="bouton-filtre" data-filter="design">Design</button>
+          <button class="bouton-filtre" data-filter="data">Data</button>
+          
+          <span class="compteur-intervenants"><span id="total-compteur">9</span> intervenants</span>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="grille-intervenants">
+      
+      <div class="carte-intervenant" data-category="ia-tech">
+        <div class="wrapper-photo">
+          <img src="images/intervenants6.jpg" width="500px" alt="Aminata Diallo">
+          <span class="badge-thematique-photo">IA & TECH</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Aminata Diallo</h3>
+          <p class="poste-intervenant">Directrice, Labo IA</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">SN</span>
+            <span class="nom-pays">Sénégal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="business">
+        <div class="wrapper-photo">
+          <img src="images/intervenants5.jpg" width="500px" alt="Kofi Mensah">
+          <span class="badge-thematique-photo">BUSINESS</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Kofi Mensah</h3>
+          <p class="poste-intervenant">CEO, TechBridge Africa</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">GH</span>
+            <span class="nom-pays">Ghana</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="design">
+        <div class="wrapper-photo">
+          <img src="images/intervenants7.jpg" width="500px" alt="Ngozi Adeyemi">
+          <span class="badge-thematique-photo">DESIGN</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Ngozi Adeyemi</h3>
+          <p class="poste-intervenant">CTO, DataNigeria Group</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">NG</span>
+            <span class="nom-pays">Nigeria</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="data">
+        <div class="wrapper-photo">
+          <img src="images/intervenants9.jpg" width="500px" alt="Karim Bensalah">
+          <span class="badge-thematique-photo">DATA</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Karim Bensalah</h3>
+          <p class="poste-intervenant">Founder & CEO, NorthAI</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">MA</span>
+            <span class="nom-pays">Maroc</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="data">
+        <div class="wrapper-photo">
+          <img src="images/intervenants4.jpg" width="500px" alt="Karim Bensalah">
+          <span class="badge-thematique-photo">DATA</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Amira Hassan</h3>
+          <p class="poste-intervenant">Cybersécurité & Data Ethics</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">🇪🇬</span>
+            <span class="nom-pays"> Égypte</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="ia-tech">
+        <div class="wrapper-photo">
+          <img src="images/intervenants1.jpg" width="500px" alt="Dr. Nadia Bouazzaoui">
+          <span class="badge-thematique-photo">IA & TECH</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Dr. Nadia Bouazzaoui</h3>
+          <p class="poste-intervenant">Chercheuse en Deep Learning</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">🇹🇳</span>
+            <span class="nom-pays">  Tunisie</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="data">
+        <div class="wrapper-photo">
+          <img src="images/intervenants8.jpg" width="500px" alt="Karim Bensalah">
+          <span class="badge-thematique-photo"> BUSINESS</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Jean-Pierre Nkurunziza</h3>
+          <p class="poste-intervenant">CTO, RwandaTech</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">🇷🇼</span>
+            <span class="nom-pays">  Rwanda</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="carte-intervenant" data-category="data">
+        <div class="wrapper-photo">
+          <img src="images/intervenants2.jpg" width="500px" alt="Karim Bensalah">
+          <span class="badge-thematique-photo"> DESIGN</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Femi Osei</h3>
+          <p class="poste-intervenant">Head of Design, AfroUX</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">🇬🇭</span>
+            <span class="nom-pays">   Ghana</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-intervenant" data-category="data">
+        <div class="wrapper-photo">
+          <img src="images/intervenants3.jpg" width="500px" alt="Karim Bensalah">
+          <span class="badge-thematique-photo"> BUSINESS</span>
+        </div>
+        <div class="infos-intervenant">
+          <h3 class="nom-intervenant">Fatima Zahra</h3>
+          <p class="poste-intervenant">Product Lead, TeleAfrique</p>
+          <div class="zone-pays">
+            <span class="ligne-decorative-pays"></span>
+            <span class="code-pays">🇹🇳</span>
+            <span class="nom-pays">    Tunisie</span>
+          </div>
+        </div>
+      </div>
 
 
 
+<!-- footer -->
+<footer class="pied-de-page">
+  <div class="conteneur-pied">
+    
+    <div class="colonnes-pied">
+      <div class="colonne-info">
+        <h3 class="logo-sommet">
+          <i class="fa-solid fa-layer-group icone-logo"></i> 
+          AfriConnect <span class="texte-bleu">Summit 2026</span>
+        </h3>
+        <p class="description-sommet">
+          Le rendez-vous annuel de l'innovation et de la technologie en Afrique. Dakar, Sénégal. 15–17 Novembre 2026.
+        </p>
+        <div class="statut-inscription">
+          <span class="puce-inscription">•</span> Inscriptions Ouvertes
+        </div>
+      </div>
+
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">NAVIGATION</h4>
+        <nav class="liens-navigation">
+          <a href="#accueil">Accueil</a>
+          <a href="#programme">Programme</a>
+          <a href="#intervenants">Intervenants</a>
+          <a href="#contact">Contact & Inscription</a>
+        </nav>
+      </div>
+
+      <div class="colonne-liens">
+        <h4 class="titre-colonne">SUIVEZ-NOUS</h4>
+        <nav class="liens-navigation">
+          <a href="https://twitter.com" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter icone-reseau"></i> Twitter / X</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in icone-reseau"></i> LinkedIn</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram icone-reseau"></i> Instagram</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener"><i class="fa-brands fa-youtube icone-reseau"></i> YouTube</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="barre-basse">
+      <p class="texte-copyright">
+       &copy; <span id="annee-dynamique"></span> AfriConnect Summit. Tous droits réservés.
+      </p>
+      
+    </div>
+
+  </div>
+
+      <button id="bouton-retour-haut" class="action-retour-haut">
+        <i class="fa-solid fa-arrow-up"></i> RETOUR EN HAUT
+      </button>
+</footer>
 
 
 
-
-
-
-
-
-
-    <script src="js/main.js"></script>
+      <script src="js/main.js"></script>
 </body>
 </html>
