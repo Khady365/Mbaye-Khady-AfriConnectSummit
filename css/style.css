@@ -1,0 +1,2941 @@
+
+/* ========== INDEX HTML========= */
+/* 
+   1. PALETTE DE COULEURS ET VARIABLES CSS (THEMING)
+    */
+
+/* Variables globales applicables par défaut (Mode Clair) */
+:root {
+  --bg-navbar: #f3f6f9;        /* Couleur de fond de la barre de navigation (gris/bleu très clair) */
+  --text-main: #1e293b;        /* Couleur principale du texte (sombre pour la lisibilité) */
+  --text-muted: #64748b;       /* Couleur secondaire pour le texte discret ou inactif */
+  --primary-color: #1d4ed8;    /* Couleur primaire (bleu royal pour l'accentuation et boutons) */
+  --accent-cyan: #0ea5e9;       /* Couleur d'accentuation (cyan pour le logo et liens actifs) */
+  --border-color: #e2e8f0;     /* Couleur de la bordure inférieure de la navbar */
+  --btn-theme-bg: #ffffff;     /* Couleur de fond du bouton de bascule de thème */
+  --transition: all 0.25s ease;/* Transition fluide pour tous les effets de survol/changements */
+}
+
+/* Redéfinition des variables pour le Mode Sombre (Activé via l'attribut data-theme="dark") */
+[data-theme="dark"] {
+  --bg-navbar: #0f172a;        /* Fond de la navbar en bleu très sombre */
+  --text-main: #f8fafc;        /* Texte principal en blanc/gris très clair */
+  --text-muted: #94a3b8;       /* Texte secondaire en gris clair */
+  --primary-color: #3b82f6;    /* Bleu plus vif et lumineux adapté aux fonds sombres */
+  --border-color: #1e293b;     /* Bordure sombre pour un contraste doux */
+  --btn-theme-bg: #1e293b;     /* Fond du bouton de thème assorti au fond sombre */
+}
+
+/* 
+   2. STYLES GÉNÉRAUX ETRÉINITIALISATION (BASE)
+    */
+
+/* Styles appliqués sur tout le corps de la page */
+body {
+  margin: 0;                   /* Annulation des marges par défaut du navigateur */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Police moderne et lisible */
+}
+
+/*
+   3. STRUCTURE ET CONTENEUR DE LA NAVBAR
+    */
+
+/* Bloc principal de la barre de navigation */
+.navbar {
+  position: fixed;             /* Maintient la navbar accrochée en haut lors du défilement */
+  top: 0;                      /* Aligne la navbar tout en haut */
+  left: 0;                     /* Aligne la navbar tout à gauche */
+  width: 100%;                 /* Étend la navbar sur toute la largeur de l'écran */
+  background-color: var(--bg-navbar); /* Applique la couleur de fond dynamique */
+  border-bottom: 1px solid var(--border-color); /* Ajoute une bordure subtile en bas */
+  z-index: 1000;               /* Assure que la navbar reste au-dessus des autres éléments */
+  transition: var(--transition); /* Anime le changement de couleur de fond (mode clair/sombre) */
+}
+
+/* Conteneur interne permettant de centrer et limiter la largeur du contenu */
+.nav-container {
+  display: flex;               /* Active le mode Flexbox pour aligner les enfants sur une ligne */
+  justify-content: space-between; /* Espace équitablement le logo, le menu et les actions */
+  align-items: center;         /* Aligne verticalement tous les éléments au centre */
+  max-width: 1400px;           /* Empêche le contenu de trop s'étaler sur les grands écrans */
+  margin: 0 auto;              /* Centre le conteneur horizontalement dans la page */
+  padding: 0.75rem 2rem;       /* Espacement interne (haut/bas 0.75rem, gauche/droite 2rem) */
+  height: 60px;                /* Fixe la hauteur totale de la barre de navigation */
+  box-sizing: border-box;      /* Inclut le padding et la bordure dans le calcul des 60px */
+}
+
+/* 
+   4. MARQUE ET LOGO
+    */
+
+/* Conteneur du logo (icône + texte) */
+.nav-container > span {
+  display: flex;               /* Aligne l'icône et le texte côte à côte */
+  align-items: center;         /* Aligne verticalement l'icône et le texte */
+  gap: 0.4rem;                 /* Définit un espace de 0.4rem entre l'icône et le texte */
+  font-weight: 700;            /* Met le texte du logo en gras */
+  font-size: 1.15rem;          /* Définit la taille du texte du logo */
+  color: var(--text-main);     /* Applique la couleur de texte principale */
+  user-select: none;           /* Empêche la sélection accidentelle du texte au clic */
+}
+
+/* Style de l'icône dans le logo */
+.logo-icon {
+  font-size: 1.1rem;           /* Ajuste la taille de l'icône du logo */
+  color: var(--accent-cyan);   /* Applique la couleur cyan dynamique */
+}
+
+/* Style de la partie animée/spéciale du texte du logo ("Summit 2026") */
+.anim-logo {
+  color: var(--primary-color); /* Applique la couleur bleu royal dynamique */
+  font-weight: 700;            /* S'assure que le texte reste bien en gras */
+  margin-left: 0.2rem;         /* Décale légèrement la partie bleue vers la droite */
+}
+
+/* 
+   5. MENU DE NAVIGATION ET LIENS
+    */
+
+/* Liste des liens de navigation */
+.nav-menu {
+  display: flex;               /* Aligne les éléments `<li>` horizontalement */
+  list-style: none;            /* Supprime les puces par défaut de la liste `<ul>` */
+  gap: 2rem;                   /* Espace de 2rem entre chaque lien du menu */
+  margin: 0;                   /* Annule les marges par défaut de la liste */
+  padding: 0;                  /* Annule les rembourrages par défaut de la liste */
+  margin-left: auto;           /* Pousse le menu vers la droite en occupant l'espace libre */
+  margin-right: 2.5rem;        /* Ajoute un espace à droite avant les boutons d'action */
+}
+
+/* Éléments individuels de la liste du menu */
+.li-nav {
+  display: flex;               /* Flexbox pour aligner parfaitement le contenu du `<li>` */
+  align-items: center;         /* Aligne verticalement le lien à l'intérieur de la puce */
+}
+
+/* Balises d'ancres/liens dans la navigation */
+.nav-lien {
+  text-decoration: none;       /* Supprime le soulignement par défaut des liens */
+  color: var(--text-muted);     /* Applique la couleur grise inactive */
+  font-weight: 500;            /* Épaisseur de texte moyenne */
+  font-size: 0.95rem;          /* Taille de police des liens */
+  transition: var(--transition); /* Animation fluide lors du changement de couleur */
+}
+
+/* Effets au survol et états actifs sur les liens */
+.nav-lien:hover, 
+.nav-lien.active,
+.nav-lien[href="#index.html"] {
+  color: var(--accent-cyan);   /* Change la couleur en cyan au survol ou si la page est active */
+}
+
+/* 
+   6. BOUTONS D'ACTION (CTA ET THÈME)
+    */
+
+/* Bouton principal d'action (S'inscrire) */
+.cta-btn {
+  background-color: var(--primary-color); /* Fond bleu royal dynamique */
+  color: #ffffff;                         /* Texte toujours blanc pour un fort contraste */
+  text-decoration: none;                  /* Supprime le soulignement du lien */
+  padding: 0.6rem 1.5rem;                  /* Rembourrage interne (haut/bas 0.6rem, gauche/droite 1.5rem) */
+  font-weight: 700;                        /* Texte en gras */
+  font-size: 0.85rem;                      /* Taille de police */
+  letter-spacing: 0.05em;                  /* Légère espacement entre les lettres */
+  border-radius: 4px;                      /* Arrondit légèrement les coins */
+  transition: var(--transition);           /* Animation douce des propriétés CSS */
+  box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2); /* Ombre portée légère */
+  white-space: nowrap;                     /* Empêche le texte du bouton de passer à la ligne */
+  margin-right: 1.25rem;                   /* Espace à droite pour séparer du bouton de thème */
+}
+
+/* Survol du bouton S'inscrire */
+.cta-btn:hover {
+  opacity: 0.9;                            /* Diminue légèrement l'opacité pour donner un retour visuel */
+}
+
+/* Bouton carré pour la bascule du thème (Clair/Sombre) */
+.theme-btn {
+  background-color: var(--btn-theme-bg);   /* Couleur de fond selon le thème */
+  border: 1px solid var(--border-color);    /* Fine bordure grise ou sombre */
+  width: 40px;                             /* Largeur fixe du carré */
+  height: 40px;                            /* Hauteur fixe du carré */
+  display: flex;                           /* Mode Flexbox pour le centrage de l'icône */
+  align-items: center;                     /* Centre l'icône verticalement */
+  justify-content: center;                 /* Centre l'icône horizontalement */
+  cursor: pointer;                         /* Transforme le pointeur de la souris en main */
+  border-radius: 4px;                      /* Coins légèrement arrondis */
+  color: var(--text-muted);                /* Couleur par défaut de l'icône */
+  transition: var(--transition);           /* Animation fluide lors du survol ou changement */
+  flex-shrink: 0;                          /* Empêche le bouton de rétrécir si le conteneur manque d'espace */
+}
+
+/* Taille de l'icône à l'intérieur du bouton thème */
+.theme-btn i {
+  font-size: 1rem;                         /* Taille de l'icône de lune/soleil */
+}
+
+/* Gestion de l'affichage de l'icône du soleil */
+.icon-sun {
+  display: none;                           /* Masqué par défaut en mode clair */
+}
+
+/* Survol du bouton de thème */
+.theme-btn:hover {
+  color: var(--primary-color);             /* L'icône passe en couleur primaire au survol */
+  border-color: var(--primary-color);      /* La bordure passe en couleur primaire au survol */
+}
+
+/* 
+   7. COMPENSATION DE LA NAVBAR FIXE SUR LE CONTENU
+    */
+
+/* Évite que la première section sous la navbar ne soit masquée par `position: fixed` */
+.hero, 
+section:first-of-type {
+  padding-top: 60px;                       /* Ajoute un espace en haut égal à la hauteur de la navbar (60px) */
+}
+
+/* --------SECTION HERO-------- */
+
+/* 
+   1. STYLES GÉNÉRAUX & VARIABLES CSS (MODE CLAIR)
+   = */
+
+:root {
+  /* Fond clair avec un léger dégradé bleuté pour rester moderne */
+  --hero-bg: radial-gradient(circle at 80% 20%, #f1f5f9 0%, #f8fafc 60%);
+  --text-main: #0f172a;        /* Bleu nuit très sombre presque noir */
+  --text-muted: #64748b;       /* Gris pour les sous-titres et détails */
+  --blue-primary: #1d53f5;     /* Bleu royal dynamique */
+  --blue-glow: rgba(29, 83, 245, 0.15); /* Ombre/Lueur bleue douce */
+  --border-color: #e2e8f0;     /* Bordures claires et discrètes */
+  --accent-cyan: #0ea5e9;      /* Cyan pour le point et la localisation */
+}
+
+/* Réinitialisation de base du corps de page */
+body {
+  margin: 0;                   /* Supprime les marges par défaut */
+  padding: 0;                  /* Supprime les rembourrages par défaut */
+  background-color: #f8fafc;   /* Fond clair de secours */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Typographie moderne */
+  color: var(--text-main);     /* Couleur de texte principale */
+  overflow-x: hidden;          /* Évite le défilement horizontal parasite */
+}
+
+/* 
+   2. SECTION HERO & CONTENEUR (GRILLE)
+    */
+
+/* Section globale occupant au moins tout l'écran */
+.section {
+  min-height: 100vh;           /* Occupe au moins 100% de la hauteur de l'écran */
+  width: 100%;                 /* Prend toute la largeur */
+  background: var(--hero-bg);  /* Applique le dégradé clair */
+  display: flex;               /* Flexbox pour centrer le conteneur */
+  align-items: center;         /* Centrage vertical */
+  justify-content: center;     /* Centrage horizontal */
+  padding: 80px 2rem 40px 2rem;/* Espace interne en haut (compensation navbar) et en bas */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la taille */
+}
+
+/* Conteneur principal séparé en 2 colonnes */
+.hero-container {
+  max-width: 1300px;           /* Largeur maximale pour éviter le trop grand étalement */
+  width: 100%;                 /* S'adapte à la largeur du parent */
+  display: grid;               /* Disposition en grille CSS */
+  grid-template-columns: 1.2fr 1fr; /* 60% colonne gauche (texte), 40% droite (compteur) */
+  gap: 4rem;                   /* Espace généreux entre la gauche et la droite */
+  align-items: center;         /* Alignement vertical centré des deux colonnes */
+}
+
+/* Bloc d'emballage du contenu textuel (gauche) */
+.hero-content {
+  display: flex;               /* Empilement vertical des éléments textuels */
+  flex-direction: column;      /* Disposition en colonne */
+}
+
+/* 
+   3. COLONNE GAUCHE : TYPOGRAPHIE ET BOUTONS
+   */
+
+/* Ligne supérieure d'information (Date et Lieu) */
+.hero-meta {
+  font-size: 0.85rem;          /* Petite taille style metadata */
+  letter-spacing: 0.15em;      /* Espacement aéré entre les lettres */
+  color: var(--text-muted);     /* Couleur grise discrète */
+  display: flex;               /* Flexbox pour aligner le point et le texte */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.5rem;                 /* Espace entre le point cyan et le texte */
+  margin-bottom: 1.5rem;       /* Marge sous la ligne méta */
+  font-weight: 600;            /* Texte semi-gras */
+}
+
+/* Petit point lumineux cyan */
+.meta-dot {
+  width: 6px;                  /* Largeur du point */
+  height: 6px;                 /* Hauteur du point */
+  background-color: var(--accent-cyan); /* Couleur cyan */
+  border-radius: 50%;          /* Forme parfaitement ronde */
+  box-shadow: 0 0 8px var(--accent-cyan); /* Effet d'éclat lumineux cyan */
+}
+
+/* Grand titre de l'événement */
+.hero-titre {
+  font-size: clamp(3.5rem, 6vw, 5.5rem); /* Taille réactive selon la largeur de l'écran */
+  font-weight: 900;            /* Épaisseur de police maximale */
+  line-height: 0.95;           /* Interligne serré très esthétique */
+  letter-spacing: -0.02em;     /* Rapproche légèrement les lettres pour l'impact */
+  margin: 0 0 2rem 0;          /* Marge sous le titre */
+  color: var(--text-main);     /* Couleur sombre principale */
+}
+
+/* Style solide pour "L'AVENIR" et "PAS." */
+.titre-noir {
+  color: var(--text-main);     /* Bleu nuit très sombre */
+}
+
+/* Effet de contour en bleu sur "N'ATTEND" */
+.titre-lumiere {
+  color: transparent;          /* Rend le fond des lettres transparent */
+  -webkit-text-stroke: 2px var(--blue-primary); /* Contour bleu royal */
+  filter: drop-shadow(0 2px 8px var(--blue-glow)); /* Légère ombre bleue diffuse */
+}
+
+/* Sous-titre descriptif */
+.hero-soustitre {
+  color: #475569;              /* Gris foncé lisible */
+  font-size: 1.15rem;          /* Taille confortable pour la lecture */
+  line-height: 1.6;            /* Interligne aéré */
+  max-width: 540px;            /* Limite la largeur du paragraphe */
+  margin: 0 0 2.5rem 0;        /* Marge sous le paragraphe */
+}
+
+/* Conteneur des boutons d'action */
+.hero-actions {
+  display: flex;               /* Place les boutons côte à côte */
+  gap: 1.2rem;                 /* Espace entre le bouton principal et secondaire */
+}
+
+/* Styles communs pour les boutons principal et secondaire */
+.btn-primary, 
+.btn-secondary {
+  text-decoration: none;       /* Supprime le soulignement par défaut des liens */
+  font-weight: 700;            /* Texte en gras */
+  font-size: 0.85rem;          /* Taille du texte des boutons */
+  letter-spacing: 0.08em;      /* Espacement des lettres */
+  padding: 1rem 2rem;          /* Rembourrage interne */
+  border-radius: 2px;          /* Angles très légèrement adoucis */
+  transition: all 0.25s ease;  /* Transition douce pour l'effet de survol */
+}
+
+/* Bouton principal : S'INSCRIRE -> */
+.btn-primary {
+  background-color: var(--blue-primary); /* Fond bleu royal */
+  color: #ffffff;                        /* Texte blanc */
+  box-shadow: 0 4px 15px rgba(29, 83, 245, 0.2); /* Ombre bleutée sous le bouton */
+}
+
+/* Survol du bouton principal */
+.btn-primary:hover {
+  background-color: #1545cc;   /* Bleu un peu plus foncé au survol */
+  transform: translateY(-2px); /* Décollement léger vers le haut */
+}
+
+/* Bouton secondaire : PROGRAMME */
+.btn-secondary {
+  background-color: #ffffff;   /* Fond blanc */
+  color: var(--text-muted);     /* Texte gris */
+  border: 1px solid var(--border-color); /* Fine bordure claire */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02); /* Ombre très discrète */
+}
+
+/* Survol du bouton secondaire */
+.btn-secondary:hover {
+  border-color: var(--text-main); /* La bordure devient sombre au survol */
+  color: var(--text-main);        /* Le texte devient sombre au survol */
+}
+
+/* 
+   4. COLONNE DROITE : COMPTE À REBOURS
+    */
+
+/* Conteneur global de la colonne de droite */
+.hero-comptearebours {
+  width: 100%;                 /* Occupe la largeur de la colonne */
+  max-width: 480px;            /* Limite la largeur maximale */
+  justify-self: end;           /* S'aligne vers la droite dans la grille */
+}
+
+/* En-tête "// COMPTE À REBOURS" */
+.compte-rebours {
+  font-size: 0.75rem;          /* Petite taille style console */
+  letter-spacing: 0.15em;      /* Espacement large */
+  color: var(--text-muted);    /* Couleur grise discrète */
+  margin-bottom: 1rem;         /* Espace avant la grille */
+  font-weight: 600;           /* Texte semi-gras */
+  font-family: monospace, monospace; /* Style typographique tech/code */
+}
+
+/* Grille 2x2 des 4 blocs du compte à rebours */
+.rebours-grille {
+  display: grid;               /* Disposition en grille */
+  grid-template-columns: 1fr 1fr; /* 2 colonnes de largeur égale */
+  gap: 1px;                    /* Espace de 1px créant la bordure interne entre les cases */
+  background-color: var(--border-color); /* Couleur de fond servant de bordure pour le gap */
+  border: 1px solid var(--border-color); /* Bordure extérieure de la grille */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Ombre douce de la grille */
+}
+
+/* Carte individuelle de temps */
+.compte-box {
+  background-color: #ffffff;   /* Fond blanc pour chaque case */
+  padding: 2.5rem 2rem;        /* Rembourrage interne généreux */
+  position: relative;          /* Nécessaire pour positionner les numéros 1, 2, 3, 4 */
+  overflow: hidden;            /* Empêche le chiffre en filigrane de dépasser */
+  display: flex;               /* Organisation en colonne */
+  flex-direction: column;      /* Alignement vertical des éléments internes */
+}
+
+/* Chiffres géants d'indexation en arrière-plan (1, 2, 3, 4) */
+.couleur-nombre {
+  position: absolute;          /* Positionnement absolu dans la case */
+  right: 15px;                 /* Calé à droite */
+  bottom: -15px;               /* Légèrement décalé vers le bas */
+  font-size: 6rem;             /* Taille géante */
+  font-weight: 900;            /* Très gras */
+  color: rgba(0, 0, 0, 0.03);  /* Filigrane extrêmement discret pour le mode clair */
+  user-select: none;           /* Rend le chiffre non sélectionnable au curseur */
+  z-index: 1;                  /* Placé derrière les chiffres principaux */
+}
+
+/* Grands chiffres dynamiques (000, 00, etc.) */
+.nombre {
+  font-size: 3.2rem;           /* Taille d'affichage imposante */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: -0.02em;     /* Chiffres légèrement rapprochés */
+  color: var(--text-main);     /* Couleur sombre */
+  margin-bottom: 0.25rem;      /* Espace sous les chiffres */
+  z-index: 2;                  /* Passe au-dessus du filigrane */
+}
+
+/* Libellés des sous-titres ("JOURS", "HEURES", etc.) */
+.label {
+  font-size: 0.7rem;           /* Petite taille */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.1em;       /* Espacement des lettres */
+  color: var(--text-muted);    /* Couleur grise */
+  z-index: 2;                  /* Passe au-dessus du filigrane */
+}
+
+/* Accentuation de couleur pour le premier bloc ("JOURS") */
+.compte-box:first-child .label {
+  color: var(--accent-cyan);   /* Couleur cyan pour faire ressortir la première case */
+}
+
+/* Pied du compte à rebours (Lieu + Icône) */
+.rebours-footer {
+  margin-top: 1.2rem;          /* Espacement au-dessus du pied */
+  border: 1px solid var(--border-color); /* Fine bordure d'encadrement */
+  padding: 1rem;               /* Rembourrage interne */
+  font-size: 0.75rem;          /* Petite taille tech */
+  letter-spacing: 0.08em;      /* Espacement des lettres */
+  color: var(--text-muted);    /* Couleur grise */
+  display: flex;               /* Flexbox pour aligner le texte et l'icône */
+  justify-content: space-between; /* Pousse l'icône à l'extrémité droite */
+  align-items: center;         /* Centrage vertical */
+  background-color: #ffffff;   /* Fond blanc */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); /* Ombre portée discrète */
+  font-family: monospace, monospace; /* Style console tech */
+}
+
+/* Icône de localisation cyan */
+.location-icon {
+  color: var(--accent-cyan);   /* Couleur cyan lumineuse */
+}
+
+/* 
+   5. ANIMATIONS CSS AU CHARGEMENT (COMPATIBILITÉ CLASSES HTML)
+    */
+
+/* Animation de fondue simple */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards ease-out;
+}
+
+/* Animation de fondue avec remontée vers le haut */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Décalages temporels (Delays) pour l'effet en cascade */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+/* Keyframes de l'animation de fondue */
+@keyframes fadeIn {
+  to { 
+    opacity: 1; 
+  }
+}
+
+/* Keyframes de l'animation de remontée */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------CHIFFRE CLES---------- */
+/* ==========================================================================
+   1. SECTION CHIFFRES CLÉS (SECTION GLOBALE)
+   ========================================================================== */
+
+/* Section principale des chiffres clés */
+.chiffre-cles {
+  width: 100%;                 /* Occupe toute la largeur */
+  padding: 80px 2rem;          /* Espacement interne haut/bas et sur les côtés */
+  background-color: #f8fafc;   /* Fond clair assorti au reste du site */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la taille */
+}
+
+/* Conteneur pour centrer la section et limiter sa largeur */
+.stat-container {
+  max-width: 1300px;           /* Largeur maximale identique à la navbar et au hero */
+  margin: 0 auto;              /* Centrage horizontal dans la page */
+  display: flex;               /* Flexbox pour empiler l'en-tête et la grille */
+  flex-direction: column;      /* Disposition verticale */
+  gap: 2.5rem;                 /* Espace entre l'en-tête (01/ CHIFFRES CLÉS) et les cartes */
+}
+
+/* ==========================================================================
+   2. EN-TÊTE DE LA SECTION (01/ CHIFFRES CLÉS)
+   ========================================================================== */
+
+/* Bloc d'en-tête de section */
+.entete {
+  display: flex;               /* Alignement horizontal du numéro et du titre */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.5rem;                 /* Espace entre "01/" et "CHIFFRES CLÉS" */
+  font-family: monospace, monospace; /* Style typographique console/code */
+  font-size: 0.9rem;           /* Taille de police discrete et professionnelle */
+  letter-spacing: 0.12em;      /* Espacement entre les lettres */
+  font-weight: 700;            /* Texte en gras */
+}
+
+/* Numéro de la section ("01/") en cyan */
+.section-nombre {
+  color: #0ea5e9;              /* Cyan identique à la charte graphique */
+}
+
+/* Titre de la section ("CHIFFRES CLÉS") */
+.section-titre {
+  color: #64748b;              /* Gris secondaire lisible */
+}
+
+/* ==========================================================================
+   3. GRILLE ET CARTES DE STATISTIQUES
+   ========================================================================== */
+
+/* Grille contenant les 4 cartes */
+.section-grille-cartes {
+  display: grid;               /* Activation de la grille CSS */
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale sur desktop */
+  gap: 1.5rem;                 /* Espacement entre chaque carte */
+}
+
+/* Style de base pour chaque carte individuelle */
+.section-carte {
+  position: relative;          /* Indispensable pour positionner le chiffre d'arrière-plan */
+  padding: 3rem 2rem 2.5rem 2rem; /* Rembourrage interne pour aérer le contenu */
+  border-radius: 4px;          /* Légers arrondis aux angles */
+  display: flex;               /* Flexbox interne */
+  flex-direction: column;      /* Alignement vertical du chiffre et du label */
+  justify-content: flex-end;   /* Aligne le contenu vers le bas de la carte */
+  min-height: 200px;           /* Hauteur minimale pour des cartes imposantes */
+  overflow: hidden;            /* Empêche le chiffre en filigrane de dépasser */
+  box-sizing: border-box;      /* Inclut le padding dans les dimensions */
+  transition: all 0.3s ease;   /* Transition douce au survol */
+}
+
+/* Survol des cartes : léger soulèvement visuel */
+.section-carte:hover {
+  transform: translateY(-4px); /* Remontée discrète de la carte */
+}
+
+/* ==========================================================================
+   4. VARIANTES DE COULEURS DES CARTES
+   ========================================================================== */
+
+/* Carte 1 : Bleue (Accentuation principale) */
+.carte-bleu {
+  background-color: #1d53f5;   /* Fond bleu royal dynamique */
+  color: #ffffff;              /* Texte écrit en blanc */
+  box-shadow: 0 10px 25px rgba(29, 83, 245, 0.25); /* Ombre portée bleue */
+}
+
+/* Cartes 2 & 4 : Blanches (Standard) */
+.carte-blanc {
+  background-color: #ffffff;   /* Fond blanc pur */
+  color: #0f172a;              /* Texte sombre */
+  border: 1px solid #e2e8f0;   /* Fine bordure grise de séparation */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Ombre Portée subtile */
+}
+
+/* Carte 3 : Neutre / Gris très clair */
+.carte-neutre {
+  background-color: #f1f5f9;   /* Fond gris/bleuté très doux */
+  color: #0f172a;              /* Texte sombre */
+  border: 1px solid #e2e8f0;   /* Fine bordure grise */
+}
+
+/* ==========================================================================
+   5. CONTENU DES CARTES (CHIFFRES ET LABELS)
+   ========================================================================== */
+
+/* Chiffres d'indexation géants en filigrane (1, 2, 3, 4) */
+.couleur-chiffre {
+  position: absolute;          /* Positionnement libre dans la carte */
+  top: -10px;                  /* Calé tout en haut */
+  right: 15px;                 /* Calé à droite */
+  font-size: 7.5rem;           /* Taille d'affichage géante */
+  font-weight: 900;            /* Typographie ultra-grasse */
+  line-height: 1;              /* Interligne minimal */
+  user-select: none;           /* Rend le texte non sélectionnable */
+  z-index: 1;                  /* Positionné derrière le chiffre du compteur */
+}
+
+/* Couleur du filigrane pour la carte bleue */
+.carte-bleu .couleur-chiffre {
+  color: rgba(255, 255, 255, 0.12); /* Blanc très transparent sur fond bleu */
+}
+
+/* Couleur du filigrane pour les cartes blanches et neutres */
+.carte-blanc .couleur-chiffre,
+.carte-neutre .couleur-chiffre {
+  color: rgba(0, 0, 0, 0.04);       /* Noir très discret pour le mode clair */
+}
+
+/* Chiffre principal avec son compteur (+1200, 48+, 3, 12) */
+.stat-nombre {
+  font-size: 3.8rem;           /* Grands chiffres d'impact */
+  font-weight: 900;            /* Épaisseur maximale */
+  letter-spacing: -0.03em;     /* Légèrement resserrés pour un effet compact */
+  line-height: 1;              /* Pas d'interligne parasite */
+  margin-bottom: 0.5rem;       /* Espacement avant le label */
+  z-index: 2;                  /* Placé au-dessus du filigrane */
+}
+
+/* Libellé du chiffre ("PARTICIPANTS", "SPEAKERS", etc.) */
+.stat-label {
+  font-size: 0.8rem;           /* Petite taille typographique */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.12em;      /* Espacement large entre les lettres */
+  z-index: 2;                  /* Placé au-dessus du filigrane */
+}
+
+/* Couleur du label pour la carte bleue */
+.carte-bleu .stat-label {
+  color: rgba(255, 255, 255, 0.85); /* Blanc légèrement adouci pour la lisibilité */
+}
+
+/* Couleur du label pour les cartes blanches et neutres */
+.carte-blanc .stat-label,
+.carte-neutre .stat-label {
+  color: #64748b;              /* Gris discret */
+}
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN (TABLETTES ET MOBILES)
+   ========================================================================== */
+
+/* Adaptation pour écrans moyens (Tablettes) */
+@media (max-width: 1024px) {
+  .section-grille-cartes {
+    grid-template-columns: repeat(2, 1fr); /* Passage à 2 colonnes par ligne */
+    gap: 1.25rem;
+  }
+}
+
+/* Adaptation pour petits écrans (Mobiles) */
+@media (max-width: 600px) {
+  .section-grille-cartes {
+    grid-template-columns: 1fr;            /* Une seule carte par ligne sur mobile */
+  }
+
+  .stat-nombre {
+    font-size: 3.2rem;                     /* Taille de texte ajustée pour mobile */
+  }
+}
+
+
+
+/* -------POURQUOI PARTICIPER------ */
+/* 
+   1. CONTENEUR PRINCIPAL DE LA SECTION "POURQUOI PARTICIPER"
+    */
+
+/* Section globale englobant le titre et les cartes */
+.conteneur-pourquoi {
+  background-color: #f8fafc;   /* Fond clair uniforme et moderne */
+  padding: 80px 2rem;          /* Rembourrage interne haut/bas (80px) et gauche/droite (2rem) */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Typographie du site */
+  max-width: 1300px;           /* Largeur maximale identique aux autres sections */
+  margin: 0 auto;              /* Centrage horizontal de la section */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la largeur */
+}
+
+/*
+   2. EN-TÊTE DE LA SECTION (02/ POURQUOI PARTICIPER)
+   */
+
+/* Conteneur de la ligne d'indexation (Numéro + Titre) */
+.entete-pourquoi {
+  display: flex;               /* Alignement horizontal en mode Flexbox */
+  align-items: center;         /* Centrage vertical du numéro et du texte */
+  gap: 0.75rem;                /* Espacement entre le numéro cyan et le titre */
+  margin-bottom: 1.5rem;       /* Marge inférieure avant le grand titre */
+}
+
+/* Numéro de section ("02/") */
+.numero-section {
+  font-size: 2rem;             /* Taille de police imposante */
+  font-weight: 800;            /* Typographie très grasse */
+  color: #0ea5e9;              /* Couleur cyan lumineuse de la charte */
+}
+
+/* Libellé de section ("POURQUOI PARTICIPER") */
+.titre-section {
+  font-size: 0.85rem;          /* Petite taille typographique style console */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement large entre les lettres */
+  color: #94a3b8;              /* Couleur grise discrète */
+}
+
+/* Grand titre d'accroche ("Rejoignez le mouvement...") */
+.grand-titre {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Taille réactive s'adaptant à la taille d'écran */
+  font-weight: 800;            /* Texte très gras */
+  color: #0f172a;              /* Bleu nuit très sombre */
+  line-height: 1.2;            /* Interligne compact pour dynamiser le titre */
+  margin: 0 0 4rem 0;          /* Espace généreux de 4rem en bas avant les cartes */
+  max-width: 800px;            /* Limite la largeur pour éviter une ligne trop longue */
+}
+
+/* 
+   3. DISPOSITION EN FLEXBOX DE LA LISTE D'ARGUMENTS
+    */
+
+/* Conteneur des 3 cartes d'arguments */
+.liste-arguments {
+  display: flex;               /* Disposition des cartes côte à côte */
+  gap: 2rem;                   /* Espace de 2rem entre chaque carte */
+  justify-content: space-between; /* Répartition égale de l'espace disponible */
+  flex-wrap: wrap;             /* Passage à la ligne automatique sur mobile */
+}
+
+/* 
+   4. STYLE DES CARTES D'ARGUMENTS INDIVIDUELLES
+    */
+
+/* Bloc de chaque carte */
+.carte-argument {
+  flex: 1 1 300px;             /* S'agrandit (1), rétrécit (1) et a une base de 300px */
+  background-color: #ffffff;   /* Fond blanc pur */
+  border: 1px solid #e2e8f0;   /* Fine bordure grise de séparation */
+  padding: 3rem 2.5rem;        /* Rembourrage interne très confortable */
+  position: relative;          /* Nécessaire pour le positionnement du filigrane */
+  overflow: hidden;            /* Empêche le chiffre en filigrane de dépasser de la carte */
+  box-sizing: border-box;      /* Inclut les bordures et paddings dans les dimensions */
+  display: flex;               /* Organisation Flexbox */
+  flex-direction: column;      /* Empilement vertical des éléments internes */
+}
+
+/* Conteneur carré encadrant l'icône FontAwesome */
+.conteneur-icone {
+  width: 50px;                 /* Largeur fixe du carré */
+  height: 50px;                /* Hauteur fixe du carré */
+  border: 1px solid #e2e8f0;   /* Fine bordure autour du carré */
+  display: flex;               /* Flexbox pour centrer l'icône */
+  align-items: center;         /* Centrage vertical de l'icône */
+  justify-content: center;     /* Centrage horizontal de l'icône */
+  margin-bottom: 2rem;         /* Espace en bas avant l'index */
+  background-color: #ffffff;   /* Fond blanc */
+}
+
+/* Icône à l'intérieur du carré (brain, globe, bolt) */
+.icone-bleue {
+  font-size: 1.25rem;          /* Taille d'affichage de l'icône */
+  color: #1d53f5;              /* Bleu royal de la charte graphique */
+}
+
+/* Petit indicateur d'index ("01 /", "02 /", "03 /") */
+.petit-index {
+  font-size: 0.75rem;          /* Petite taille typographique */
+  color: #cbd5e1;              /* Gris très clair */
+  font-weight: 700;            /* Texte en gras */
+  margin-bottom: 0.75rem;      /* Espace sous l'index */
+}
+
+/* Titre de l'argument ("Expertise Mondiale", etc.) */
+.titre-argument {
+  font-size: 1.5rem;           /* Taille de titre intermédiaire */
+  font-weight: 700;            /* Texte en gras */
+  color: #0f172a;              /* Couleur sombre principale */
+  margin: 0 0 1rem 0;          /* Marge sous le titre */
+}
+
+/* Paragraphe explicatif de l'argument */
+.description-argument {
+  font-size: 0.95rem;          /* Taille de texte confortable */
+  color: #64748b;              /* Couleur grise secondaire */
+  line-height: 1.6;            /* Interligne aéré pour la lisibilité */
+  margin: 0;                   /* Supprime la marge par défaut du paragraphe */
+}
+
+/* Grand numéro géant en filigrane (01, 02, 03) */
+.filigrane-nombre {
+  position: absolute;          /* Positionnement absolu dans la carte */
+  right: 20px;                 /* Calé à 20px du bord droit */
+  top: 10px;                   /* Calé à 10px du haut */
+  font-size: 7rem;             /* Taille géante d'arrière-plan */
+  font-weight: 900;            /* Typographie ultra-grasse */
+  color: rgba(0, 0, 0, 0.02);  /* Transparence très subtile pour le mode clair */
+  user-select: none;           /* Empêche la sélection accidentelle du texte */
+}
+
+/* 
+
+
+/* -----intervenants */
+
+/* 
+   1. SECTION INTERVENANTS (CONTENEUR GLOBAL)
+    */
+
+/* Style du conteneur principal de la section des intervenants */
+.conteneur-intervenants {
+  background-color: #e2e8f0;   /* Fond clair global gris/bleuté pour la section */
+  padding: 80px 2rem;          /* Espacement interne : 80px en haut/bas, 2rem sur les côtés */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Famille de police principale */
+  max-width: 1300px;           /* Largeur maximale pour aligner avec les autres conteneurs */
+  margin: 0 auto;              /* Centrage horizontal de la section */
+  box-sizing: border-box;      /* Inclus le padding dans le calcul de la largeur totale */
+}
+
+/* 
+   2. EN-TÊTE DE LA SECTION (TITRE & BOUTON D'ACTION)
+   */
+
+/* Disposition de l'en-tête : Titre à gauche, Bouton à droite */
+.entete-intervenants {
+  display: flex;               /* Utilisation du mode Flexbox */
+  justify-content: space-between; /* Écarte les éléments aux deux extrémités */
+  align-items: flex-end;       /* Aligne le bouton avec le bas du grand titre */
+  margin-bottom: 3.5rem;       /* Marge généreuse sous l'en-tête avant la grille */
+}
+
+/* Alignement du numéro et du libellé de section */
+.meta-titre {
+  display: flex;               /* Mode Flexbox horizontal */
+  align-items: center;         /* Centrage vertical des deux éléments */
+  gap: 0.75rem;                /* Espacement entre "03/" et "SPEAKERS" */
+  margin-bottom: 1rem;         /* Espace sous la ligne d'index avant le grand titre */
+}
+
+/* Numéro de la section ("03/") */
+.numero-section {
+  font-size: 2rem;             /* Grande taille d'affichage */
+  font-weight: 800;            /* Typographie très grasse */
+  color: #0ea5e9;              /* Cyan de la charte graphique */
+}
+
+/* Libellé de la section ("SPEAKERS", "INTERVENANTS", etc.) */
+.titre-section {
+  font-size: 0.85rem;          /* Petite taille style console */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement aéré entre les lettres */
+  color: #94a3b8;              /* Couleur grise discrète */
+}
+
+/* Grand titre d'accroche de la section */
+.grand-titre {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Taille réactive s'adaptant à l'écran */
+  font-weight: 800;            /* Typographie très grasse */
+  color: #0f172a;              /* Bleu nuit très sombre */
+  margin: 0;                   /* Supprime les marges par défaut */
+}
+
+/* Bouton "VOIR TOUS" (Lien d'action secondaire) */
+.bouton-voir-tous {
+  text-decoration: none;       /* Supprime le soulignement par défaut du lien */
+  font-size: 0.75rem;          /* Petite taille de texte */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement large entre les lettres */
+  color: #64748b;              /* Texte gris neutre */
+  border: 1px solid #cbd5e1;   /* Encadrement par une fine bordure grise */
+  padding: 0.8rem 1.5rem;      /* Rembourrage interne du bouton */
+  transition: all 0.25s ease;  /* Transition douce pour l'effet de survol */
+  white-space: nowrap;         /* Empêche le texte du bouton de se couper sur 2 lignes */
+}
+
+/* Survol du bouton "VOIR TOUS" */
+.bouton-voir-tous:hover {
+  color: #1d53f5;              /* Le texte passe en bleu royal */
+  border-color: #1d53f5;       /* La bordure passe en bleu royal */
+  background-color: rgba(29, 83, 245, 0.02); /* Fond très légèrement teinté de bleu */
+}
+
+/* 
+   3. GRILLE CSS DES CARTES INTERVENANTS
+    */
+
+/* Disposition des cartes en grille à 4 colonnes sur écran large */
+.grille-intervenants {
+  display: grid;               /* Activation de la grille CSS */
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes de largeur égale */
+  gap: 1.5rem;                 /* Espace de 1.5rem entre chaque carte */
+}
+
+/* 
+   4. CARTE INDIVIDUELLE INTERVENANT
+   */
+
+/* Bloc de la carte d'un intervenant */
+.carte-intervenant {
+  background-color: #ffffff;   /* Fond blanc pur pour détacher de la section */
+  display: flex;               /* Organisation en mode Flexbox */
+  flex-direction: column;      /* Empilement vertical (Image puis Textes) */
+  box-sizing: border-box;      /* Inclut les bordures dans le calcul des dimensions */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transitions douces pour l'animation */
+  border-left: 3px solid transparent; /* Bordure gauche invisible préparée pour le survol */
+}
+
+/* Conteneur gérant le ratio d'aspect de l'image et le masque dégradé */
+.conteneur-image {
+  position: relative;          /* Référence pour le positionnement absolu de l'image et du voile */
+  width: 100%;                 /* Occupe toute la largeur de la carte */
+  padding-top: 110%;           /* Ratio de hauteur (110% pour un portrait légèrement vertical) */
+  overflow: hidden;            /* Masque tout dépassement lors du zoom de l'image */
+  background-color: #f1f5f9;   /* Couleur de fond temporaire pendant le chargement */
+}
+
+/* Image de portrait de l'intervenant */
+.image-portrait {
+  position: absolute;          /* Rempli tout le conteneur parent */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* Conserve les proportions sans déformer l'image */
+  filter: grayscale(20%);       /* Léger filtre désaturé pour une harmonie visuelle */
+  transition: transform 0.5s ease; /* Transition fluide pour le zoom au survol */
+}
+
+/* Voile dégradé créant un fondu blanc progressif au bas de la photo */
+.voile-degrade {
+  position: absolute;          /* Placé en superposition sur la photo */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;                 /* Couvre les 60% inférieurs de l'image */
+  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* Fondu du blanc opaque vers la transparence */
+  z-index: 2;                  /* Placé au-dessus du portrait */
+}
+
+/* Bloc contenant les informations écrites sous la photo */
+.infos-intervenant {
+  padding: 2rem 1.5rem;        /* Rembourrage interne */
+  background-color: #ffffff;   /* Fond blanc */
+  z-index: 3;                  /* Placé au-dessus du voile dégradé */
+}
+
+/* Nom de l'intervenant */
+.nom-intervenant {
+  font-size: 1.25rem;          /* Taille de titre pour le nom */
+  font-weight: 700;            /* Texte en gras */
+  color: #0f172a;              /* Couleur sombre principale */
+  margin: 0 0 0.4rem 0;        /* Petite marge sous le nom */
+}
+
+/* Poste / Titre professionnel de l'intervenant */
+.poste-intervenant {
+  font-size: 0.85rem;          /* Taille de sous-titre */
+  color: #94a3b8;              /* Couleur grise discrète */
+  margin: 0 0 1.5rem 0;        /* Marge avant le badge du pays */
+}
+
+/* Badge du pays (Style console / monospace) */
+.badge-pays {
+  font-size: 0.8rem;          /* Petite taille */
+  font-family: 'Courier New', Courier, monospace; /* Typographie à chasse fixe style code */
+  color: #0f172a;              /* Texte sombre */
+  display: flex;               /* Alignement horizontal du code et du nom de pays */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.5rem;                 /* Espace entre le code ("SN //") et le nom ("SÉNÉGAL") */
+  font-weight: bold;           /* Texte en gras */
+}
+
+/* Code pays en accentuation cyan */
+.code-pays {
+  color: #0ea5e9;              /* Bleu cyan distinctive */
+  font-weight: 700;            /* Texte très gras */
+}
+
+/* 
+   5. EFFETS D'INTERACTION AU SURVOL (HOVER)
+   */
+
+/* Effet d'élévation de la carte lors du survol ou pour la carte active */
+.carte-intervenant:hover, 
+.carte-intervenant.active {
+  transform: translateY(-5px); /* Décolle la carte de 5px vers le haut */
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08); /* Ombre portée douce pour marquer la profondeur */
+  border-left: 3px solid #1d53f5; /* Apparition d'une ligne d'accentuation bleue à gauche */
+}
+
+/* Effet de zoom sur le portrait lors du survol de la carte */
+.carte-intervenant:hover .image-portrait {
+  transform: scale(1.04);      /* Agrandissement subtil de 4% de la photo */
+}
+
+/*
+   6. RESPONSIVE DESIGN (ADAPTATION MOBILES & TABLETTES)
+    */
+
+/* Adaptation pour écrans de taille moyenne (Tablettes) */
+@media (max-width: 1100px) {
+  .grille-intervenants {
+    grid-template-columns: repeat(2, 1fr); /* Réduit la grille à 2 cartes par ligne */
+  }
+}
+
+/* Adaptation pour petits écrans (Mobiles) */
+@media (max-width: 650px) {
+  /* Réorganisation de l'en-tête sur mobile */
+  .entete-intervenants {
+    flex-direction: column;    /* Empile le titre et le bouton verticalement */
+    align-items: flex-start;   /* Aligne le bouton à gauche sous le titre */
+    gap: 1.5rem;               /* Espace entre le titre et le bouton */
+  }
+  
+  /* Passage de la grille en colonne unique */
+  .grille-intervenants {
+    grid-template-columns: 1fr; /* Une seule carte par ligne */
+  }
+}
+
+/* --------partenaire */
+
+/* 
+   1. SECTION SPONSORS (CONTENEUR GLOBAL)
+    */
+
+/* Style du conteneur principal de la section des sponsors */
+.conteneur-sponsors {
+  background-color: #f8fafc;   /* Fond clair uniforme et épuré */
+  padding: 80px 2rem;          /* Rembourrage interne : 80px haut/bas, 2rem gauche/droite */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Famille de police principale */
+  max-width: 1300px;           /* Largeur maximale pour aligner avec le reste du site */
+  margin: 0 auto;              /* Centrage horizontal de la section */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la largeur */
+}
+
+/*
+   2. EN-TÊTE DE LA SECTION (04/ PARTENAIRES & SPONSORS)
+    */
+
+/* Ligne d'en-tête contenant l'indexation (Numéro + Titre) */
+.entete-sponsors {
+  display: flex;               /* Alignement horizontal en Flexbox */
+  align-items: center;         /* Centrage vertical du numéro et du libellé */
+  gap: 0.75rem;                /* Espacement entre "04/" et "PARTENAIRES & SPONSORS" */
+  margin-bottom: 1.5rem;       /* Marge en bas avant le grand titre d'accroche */
+}
+
+/* Numéro de la section ("04/") en cyan */
+.conteneur-sponsors .numero-section {
+  font-size: 2rem;             /* Grande taille d'affichage */
+  font-weight: 800;            /* Typographie très grasse */
+  color: #0ea5e9;              /* Cyan de la charte graphique */
+}
+
+/* Libellé de la section ("PARTENAIRES & SPONSORS") */
+.conteneur-sponsors .titre-section {
+  font-size: 0.85rem;          /* Petite taille style console/code */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement aéré entre les lettres */
+  color: #94a3b8;              /* Couleur grise discrète */
+}
+
+/* Grand titre d'accroche de la section */
+.conteneur-sponsors .grand-titre {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Taille réactive s'adaptant à l'écran */
+  font-weight: 800;            /* Typographie très grasse */
+  color: #0f172a;              /* Bleu nuit très sombre */
+  line-height: 1.2;            /* Interligne compact */
+  margin: 0 0 4rem 0;          /* Marge de 4rem en bas avant la liste des sponsors */
+  max-width: 800px;            /* Limite la largeur pour une meilleure lisibilité */
+}
+
+/* 
+   3. STRUCTURE ET NIVEAUX DE SPONSORING
+    */
+
+/* Conteneur global de la liste des sponsors (Empilement vertical des catégories) */
+.liste-sponsors {
+  display: flex;               /* Organisation en mode Flexbox */
+  flex-direction: column;      /* Disposition verticale des niveaux (Or, Argent, Bronze) */
+  gap: 3.5rem;                 /* Espace généreux entre chaque catégorie de sponsors */
+}
+
+/* Bloc d'une catégorie individuelle de sponsor */
+.categorie-sponsors {
+  width: 100%;                 /* Occupe toute la largeur disponible */
+}
+
+/* 
+   4. SÉPARATEURS TEXTUELS ET LIGNES D'ENCADREMENT
+    */
+
+/* Titre de catégorie ("// SPONSORS OR", etc.) avec ligne d'extension */
+.separateur-sponsors {
+  font-size: 0.75rem;          /* Petite taille typographique style technique */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement large entre les lettres */
+  color: #94a3b8;              /* Couleur grise neutre */
+  display: flex;               /* Flexbox pour aligner le texte et la ligne horizontale */
+  align-items: center;         /* Centrage vertical de la ligne avec le texte */
+  gap: 0.5rem;                 /* Espace entre les éléments */
+  margin-bottom: 2rem;         /* Espace en bas avant d'afficher les logos */
+  position: relative;          /* Positionnement de référence pour le pseudo-élément */
+}
+
+/* Ligne fine horizontale automatique s'étendant à droite du texte */
+.separateur-sponsors::after {
+  content: "";                 /* Génère un élément vide */
+  flex: 1;                     /* Force la ligne à occuper tout l'espace restant */
+  height: 1px;                 /* Épaisseur d'un pixel pour la ligne */
+  background-color: #e2e8f0;   /* Couleur grise très claire pour le trait */
+  margin-left: 1rem;           /* Marge à gauche pour décoller le trait du texte */
+}
+
+/* Couleurs des puces et indices selon le niveau de sponsoring */
+.puce-or { 
+  color: #f59e0b;              /* Orange / Doré lumineux pour le niveau OR */
+}
+
+.puce-argent { 
+  color: #94a3b8;              /* Gris argenté pour le niveau ARGENT */
+}
+
+.puce-bronze { 
+  color: #b45309;              /* Bronze ambré pour le niveau BRONZE */
+}
+
+/* 
+   5. ALIGNEMENT FLEXBOX DES BLOCS DE LOGOS
+    */
+
+/* Grille Flexbox contenant les logos d'un même niveau */
+.grille-flex-logos {
+  display: flex;               /* Mode Flexbox */
+  flex-wrap: wrap;             /* Autorise le passage à la ligne si nécessaire */
+  gap: 1.2rem;                 /* Espacement de 1.2rem entre chaque bloc de logo */
+  align-items: center;         /* Centrage vertical des logos entre eux */
+  
+}
+
+/* Style de base partagé par tous les blocs de logos */
+.bloc-logo {
+  background-color: #ffffff;   /* Fond blanc pur pour faire ressortir les logos */
+  border: 1px solid #e6f0e2;   /* Fine bordure grise */
+  color: #64748b;              /* Couleur de texte/icône grise */
+  font-weight: 700;            /* Texte en gras */
+  display: flex;               /* Centrage du contenu en Flexbox */
+  align-items: center;         /* Centrage vertical du contenu */
+  justify-content: center;     /* Centrage horizontal du contenu */
+  box-sizing: border-box;      /* Inclut les bordures et paddings dans les calculs */
+  transition: all 0.25s ease;  /* Animation fluide lors du survol */
+  user-select: none;           /* Empêche la sélection accidentelle au curseur */
+}
+
+/* Effet au survol des blocs de logos */
+.bloc-logo:hover {
+  border-color: #cbd5e1;       /* Bordure légèrement plus foncée */
+  color: #0f172a;              /* Le texte/logo devient bleu nuit sombre */
+  transform: translateY(-2px); /* Très léger décollement vers le haut */
+}
+
+/*
+   6. DIFFÉRENCIATION VISUELLE DES TAILLES DE LOGOS
+    */
+
+/* 7. Logos du niveau OR (Incitations majeures - Grand format) */
+.logo-or {
+  padding: 1.8rem 2.5rem;      /* Rembourrage généreux */
+  font-size: 1.15rem;          /* Taille de texte plus grande */
+  min-width: 200px;            /* Largeur minimale importante */
+}
+
+/* 8. Logos du niveau ARGENT (Format intermédiaire) */
+.logo-argent {
+  padding: 1.4rem 2.rem;       /* Rembourrage moyen */
+  font-size: 1rem;             /* Taille de texte standard */
+  min-width: 170px;            /* Largeur minimale moyenne */
+}
+
+/* 9. Logos du niveau BRONZE (Format compact) */
+.logo-bronze {
+  padding: 1.1rem 1.6rem;      /* Rembourrage plus petit */
+  font-size: 0.9rem;           /* Petite taille de texte */
+  min-width: 140px;            /* Largeur minimale réduite */
+}
+
+/* 
+   10. RESPONSIVE DESIGN (MOBILES & TABLETTES)
+    */
+
+/* Adaptation pour les tablettes et smartphones (< 768px) */
+@media (max-width: 768px) {
+  .grille-flex-logos {
+    justify-content: center;   /* Centre les logos horizontalement sur petits écrans */
+  }
+  
+  .bloc-logo {
+    flex: 1 1 calc(50% - 1.2rem); /* Force 2 logos par ligne sur mobile */
+    min-width: unset;          /* Supprime la largeur minimale fixe */
+    text-align: center;        /* Alignement du texte au centre */
+  }
+}
+
+/* Adaptation pour les très petits mobiles (< 480px) */
+@media (max-width: 480px) {
+  .bloc-logo {
+    flex: 1 1 100%;            /* Force 1 seul logo par ligne sur petit écran */
+  }
+}
+
+/* -------FOOTER------ */
+/* 
+   1. STYLE GÉNÉRAL DU PIED DE PAGE (SECTION GLOBALE)
+    */
+
+/* Conteneur principal du pied de page */
+.pied-de-page {
+  background-color: #e2e8f0;   /* Fond gris/bleuté clair fidèle au design */
+  padding: 60px 2rem 30px 2rem;/* Rembourrage : 60px en haut, 2rem sur les côtés, 30px en bas */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Typographie principale */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la hauteur/largeur */
+}
+
+/* Enveloppe interne pour limiter la largeur maximale */
+.conteneur-pied {
+  max-width: 1300px;           /* Aligné sur la largeur maximale du reste du site */
+  margin: 0 auto;              /* Centrage horizontal dans la page */
+}
+
+/* 
+   2. DISPOSITION ET COLONNES (FLEXBOX)
+    */
+
+/* Conteneur Flexbox regroupant les 3 colonnes de contenu */
+.colonnes-pied {
+  display: flex;               /* Alignement horizontal des colonnes */
+  justify-content: space-between; /* Espacement maximal entre les colonnes */
+  gap: 3rem;                   /* Espace de 3rem entre chaque colonne */
+  padding-bottom: 3.5rem;      /* Espace en bas avant la barre de copyright */
+}
+
+/* Colonne de gauche (Informations & Description du sommet) */
+.colonne-info {
+  flex: 1.5 1 300px;           /* Plus large (1.5) avec une base minimale de 300px */
+}
+
+/* Colonnes de droite (Navigation et Réseaux sociaux) */
+.colonne-liens {
+  flex: 1 1 200px;             /* Largeur standard avec une base minimale de 200px */
+}
+
+/* 
+   3. CONTENU DE LA COLONNE D'INFORMATION (GAUCHE)
+    */
+
+/* Titre / Logo du Sommet */
+.logo-sommet {
+  font-size: 1.2rem;          /* Taille d'affichage du logo */
+  font-weight: 700;            /* Texte en gras */
+  color: #0f172a;              /* Bleu nuit sombre */
+  margin: 0 0 1.5rem 0;        /* Marge sous le logo */
+  display: flex;               /* Flexbox pour aligner l'icône et le texte */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.5rem;                 /* Espace entre l'icône et le texte */
+}
+
+/* Icône géométrique du logo */
+.icone-logo {
+  color: #0ea5e9;              /* Couleur cyan lumineuse */
+  font-size: 0.95rem;          /* Taille de l'icône */
+}
+
+/* Mot mis en valeur dans le logo ("CONNECT", etc.) */
+.texte-bleu {
+  color: #1d53f5;              /* Bleu royal dynamique */
+}
+
+/* Paragraphe descriptif du sommet */
+.description-sommet {
+  font-size: 0.95rem;          /* Taille de texte confortable */
+  color: #64748b;              /* Gris secondaire lisible */
+  line-height: 1.6;            /* Interligne aéré */
+  max-width: 400px;            /* Évite que les lignes de texte ne soient trop longues */
+  margin: 0 0 2rem 0;          /* Marge inférieure */
+}
+
+/* Statut d'ouverture des inscriptions (Style Terminal) */
+.statut-inscription {
+  font-size: 0.85rem;          /* Petite taille */
+  font-family: 'Courier New', Courier, monospace; /* Style typographique code/console */
+  color: #0ea5e9;              /* Texte cyan */
+  font-weight: 700;            /* Texte en gras */
+}
+
+/* Puce ou symbole précédant l'état des inscriptions */
+.puce-inscription {
+  margin-right: 0.2rem;        /* Léger décalage à droite */
+}
+
+/* 
+   4. COLONNES DE LIENS (NAVIGATION & RÉSEAUX SOCIAUX)
+    */
+
+/* Titre des catégories de liens ("// NAVIGATION", "// RESEAUX") */
+.titre-colonne {
+  font-size: 0.75rem;          /* Petite taille style technique */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement large entre les lettres */
+  color: #94a3b8;              /* Gris neutre */
+  margin: 0 0 1.5rem 0;        /* Marge inférieure */
+}
+
+/* Conteneur vertical des liens */
+.liens-navigation {
+  display: flex;               /* Mode Flexbox */
+  flex-direction: column;      /* Disposition en colonne */
+  gap: 0.9rem;                 /* Espace de 0.9rem entre chaque lien */
+}
+
+/* Style individuel des liens Hypertextes */
+.liens-navigation a {
+  text-decoration: none;       /* Supprime le soulignement par défaut */
+  font-size: 0.95rem;          /* Taille de police standard */
+  font-weight: 600;            /* Texte semi-gras */
+  color: #64748b;              /* Gris par défaut */
+  transition: color 0.2s ease, transform 0.2s ease; /* Transitions douces au survol */
+  display: inline-flex;        /* Flexbox pour aligner l'icône et le texte */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.5rem;                 /* Espace entre l'icône réseau et le texte */
+  width: max-content;          /* Ajuste la zone survolable au contenu exact */
+}
+
+/* Effet d'interaction au survol des liens */
+.liens-navigation a:hover {
+  color: #1d53f5;              /* Passage au bleu royal au survol */
+  transform: translateX(3px);  /* Déplacement subtil de 3px vers la droite */
+}
+
+/* Taille et centrage des icônes de réseaux sociaux */
+.icone-reseau {
+  font-size: 0.9rem;          /* Taille de l'icône FontAwesome */
+  width: 16px;                 /* Largeur fixe pour aligner parfaitement les textes */
+  text-align: center;          /* Centrage de l'icône dans sa zone fixe */
+}
+
+/* 
+   5. BARRE INFÉRIEURE (COPYRIGHT & BOUTON RETOUR EN HAUT)
+    */
+
+/* Ligne inférieure séparée par un trait */
+.barre-basse {
+  border-top: 1px solid #cbd5e1;/* Trait horizontal de séparation gris */
+  padding-top: 2rem;           /* Espace entre la ligne et le contenu du bas */
+  display: flex;               /* Alignement en Flexbox */
+  justify-content: space-between; /* Copyright à gauche, Bouton à droite */
+  align-items: center;         /* Centrage vertical */
+}
+
+/* Texte de Copyright */
+.texte-copyright {
+  font-size: 0.8rem;           /* Petite taille typographique */
+  font-family: 'Courier New', Courier, monospace; /* Style console */
+  color: #94a3b8;              /* Couleur grise discrète */
+  margin: 0;                   /* Annule la marge par défaut du paragraphe */
+}
+
+/* 
+   BOUTON DE RETOUR EN HAUT (STYLE BOUTON PHYSIQUE)
+    */
+
+.action-retour-haut {
+  background-color: #1d53f5;    /* Fond blanc pour ressortir sur le gris */
+  border: 1px solid #cbd5e1;    /* Fine bordure grise */
+  border-radius: 10pxpx;           /* Angles très légèrement adoucis */
+  padding: 0.7rem 1.2rem;       /* Rembourrage interne pour la forme bouton */
+  font-family: 'Courier New', Courier, monospace; /* Style console/tech */
+  font-size: 0.75rem;           /* Petite taille typographique */
+  font-weight: 700;             /* Texte en gras */
+  letter-spacing: 0.1em;        /* Espacement aéré entre les lettres */
+  color: #ffffff !important; /* Force la couleur du texte/icône */
+  cursor: pointer;              /* Curseur main */
+  display: inline-flex;         /* Alignement horizontal du texte et de l'icône */
+  align-items: center;          /* Centrage vertical */
+  gap: 0.6rem;                  /* Espace entre le texte et la flèche */
+  transition: all 0.25s ease;   /* Transition fluide sur toutes les propriétés */
+  
+}
+
+
+
+/* Animation de l'icône de flèche au survol */
+.action-retour-haut:hover .icone-fleche {
+  transform: translateY(-2px);  /* La flèche monte légèrement pour inciter au clic */
+}
+
+/* Style de l'icône de flèche */
+.icone-fleche {
+  font-size: 0.85rem;           /* Taille de la flèche FontAwesome */
+  transition: transform 0.25s ease; /* Transition fluide du mouvement de flèche */
+}
+
+/* 
+   6. RESPONSIVE DESIGN (MOBILES & TABLETTES)
+    */
+
+/* Adaptation pour écrans tactiles et téléphones (< 768px) */
+@media (max-width: 768px) {
+  /* Passage des 3 colonnes en disposition verticale */
+  .colonnes-pied {
+    flex-direction: column;    /* Empilement des colonnes */
+    gap: 2.5rem;               /* Réduction de l'espace inter-colonnes */
+  }
+
+  /* Réorganisation de la barre de copyright sur mobile */
+  .barre-basse {
+    flex-direction: column-reverse; /* Place le bouton de retour en haut au-dessus du copyright */
+    gap: 1.5rem;               /* Espacement entre le bouton et le copyright */
+    align-items: flex-start;   /* Alignement des éléments sur le bord gauche */
+  }
+}
+
+
+
+
+/* ======= PROGRAMME.HTML======= */
+/* HERO INTERNE */
+/* 
+   1. VARIABLES GLOBALES DE LA SECTION 
+    */
+
+:root {
+  --fond-clair-global: #e2e8f0;   /* Teinte gris/bleu pour l'arrière-plan de la bannière */
+  --texte-sombre: #0f172a;        /* Bleu nuit profond pour une forte lisibilité des titres */
+  --bleu-accent: #1d53f5;         /* Bleu royal vif pour le soulignement et les effets d'interaction */
+  --cyan-decoratif: #0ea5e9;      /* Cyan pour mettre en avant l'emplacement actuel dans le fil d'Ariane */
+}
+
+/* 
+   2. STRUCTURE ET CONTENEUR DU HERO INTERNE
+    */
+
+/* Bannière principale occupant toute la largeur haut de page */
+.banniere-hero-interne {
+  background-color: var(--fond-clair-global); /* Application de la couleur de fond via la variable */
+  width: 100%;                 /* Occupe 100% de la largeur de l'écran */
+  margin-top: 50px;
+  padding: 80px 2rem 60px 2rem;/* Rembourrage : 80px en haut, 2rem sur les côtés, 60px en bas */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la largeur totale */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Typographie principale */
+}
+
+/* Conteneur interne pour limiter la largeur et centrer le contenu */
+.conteneur-hero-interne {
+  max-width: 1300px;           /* Largeur maximale alignée avec les autres sections du site */
+  margin: 0 auto;              /* Centrage horizontal au milieu de l'écran */
+  position: relative;          /* Positionnement de référence pour d'éventuels éléments absolus */
+  display: flex;               /* Organisation des éléments enfants en mode Flexbox */
+  flex-direction: column;      /* Empilement vertical (Fil d'Ariane, puis Titre, puis Soulignement) */
+  align-items: flex-start;     /* Alignement de tous les éléments sur le bord gauche */
+}
+
+/* 
+   3. DESIGN ET DÉTAILS DU FIL D'ARIANE (BREADCRUMB)
+    */
+
+/* Conteneur horizontal du fil d'Ariane */
+.fil-ariane {
+  display: flex;               /* Alignement horizontal des liens et séparateurs */
+  align-items: center;         /* Centrage vertical de tous les éléments sur la même ligne */
+  gap: 0.5rem;                 /* Espace de 0.5rem entre chaque fragment du fil d'Ariane */
+  margin-bottom: 2.5rem;       /* Marge inférieure importante avant le grand titre H1 */
+  font-size: 0.75rem;          /* Petite taille typographique style technique */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement aéré entre les lettres */
+}
+
+/* Liens parents dans le fil d'Ariane (Ex: "ACCUEIL /") */
+.lien-ariane-parent {
+  text-decoration: none;       /* Supprime le soulignement par défaut des liens */
+  color: #a3b1c6;              /* Couleur grise/bleutée adoucie pour les pages précédentes */
+  transition: color 0.2s ease; /* Transition douce lors du changement de couleur au survol */
+}
+
+/* Effet au survol des liens parents */
+.lien-ariane-parent:hover {
+  color: var(--bleu-accent);   /* Le lien passe en bleu royal au survol */
+}
+
+/* Symbole séparateur (Ex: "/") */
+.separateur-ariane {
+  color: #cbd5e1;              /* Gris très clair et discret pour le séparateur */
+}
+
+/* Intitulé de la page actuelle dans le fil d'Ariane */
+.lien-ariane-actuel {
+  color: var(--cyan-decoratif);/* Mises en valeur par la couleur cyan dynamique */
+}
+
+/* 
+   4. TITRE PRINCIPAL (H1) ET LIGNE DÉCORATIVE
+   */
+
+/* Grand titre de la page interne */
+.titre-principal-interne {
+  font-size: clamp(3rem, 6vw, 5rem); /* Taille réactive s'adaptant à l'écran (Min: 3rem, Max: 5rem) */
+  font-weight: 800;            /* Typographie ultra-grasse d'impact */
+  color: var(--texte-sombre);  /* Bleu nuit sombre */
+  margin: 0 0 1.5rem 0;        /* Marge sous le titre */
+  letter-spacing: -0.02em;     /* Lettres légèrement resserrées pour un effet compact moderne */
+  line-height: 1;              /* Interligne minimal pour éviter les espaces verticaux parasites */
+}
+
+/* Ligne fine sous le titre (Accentuation visuelle) */
+.soulignement-decoratif {
+  width: 80px;                 /* Largeur fixe de la barre d'accentuation */
+  height: 3px;                 /* Épaisseur de 3 pixels pour le trait */
+  background-color: var(--bleu-accent); /* Couleur bleu royal */
+  margin-top: 0.5rem;          /* Espace au-dessus pour décoller du titre */
+}
+
+/* 
+   5. RESPONSIVE DESIGN (MOBILITY & TABLETTES)
+    */
+
+/* Ajustements pour les écrans de taille inférieure ou égale à 768px */
+@media (max-width: 768px) {
+  /* Réduction des rembourrages de la bannière sur mobile */
+  .banniere-hero-interne {
+    padding: 60px 1.5rem 40px 1.5rem; /* Ajustement du padding haut/bas et côtés */
+  }
+  
+  /* Réduction de la marge sous le fil d'Ariane sur petit écran */
+  .fil-ariane {
+    margin-bottom: 1.5rem;     /* Rapproche le fil d'Ariane du grand titre */
+  }
+}
+
+/* -----ONGLETS 3 JOURS------ */
+
+
+/* 
+   1. CONTENEUR PRINCIPAL DU PLANNING
+    */
+
+.conteneur-planning {
+  max-width: 1300px;           /* Largeur maximale de la section */
+  margin: 40px auto;           /* Centrage horizontal et marge haut/bas */
+  padding: 0 2rem;             /* Rembourrage sur les côtés */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Typographie */
+  box-sizing: border-box;      /* Inclut le padding dans la largeur totale */
+}
+
+/* 
+   2. BARRE D'ONGLETS (NAVIGATION EN JOURS)
+    */
+
+.navigation-onglets {
+  display: flex;               /* Disposition horizontale des onglets */
+  gap: 1.2rem;                 /* Espace entre chaque bouton */
+  margin-bottom: 3rem;         /* Espace sous la barre d'onglets */
+}
+
+/* Bouton d'onglet individuel */
+.onglet-jour {
+  flex: 1;                     /* Distribution équitable de l'espace */
+  max-width: 200px;            /* Largeur maximale par onglet */
+  background-color: #ffffff;   /* Fond blanc par défaut */
+  border: 1px solid #e2e8f0;   /* Fine bordure grise */
+  padding: 1.5rem;             /* Rembourrage interne */
+  text-align: left;            /* Alignement du texte à gauche */
+  cursor: pointer;             /* Curseur main */
+  display: flex;               /* Flexbox interne */
+  flex-direction: column;      /* Empilement vertical des textes */
+  transition: all 0.25s ease;  /* Animation fluide au survol et à la sélection */
+}
+
+/* Interaction au survol (Hover) */
+.onglet-jour:hover:not(.actif) {
+  border-color: #cbd5e1;       /* Bordure plus marquée au survol */
+  transform: translateY(-2px); /* Très léger décollement vers le haut */
+}
+
+/* Métadonnées de l'onglet (Date en haut) */
+.meta-date {
+  font-size: 0.75rem;
+  font-family: 'Courier New', Courier, monospace; /* Style console tech */
+  color: #94a3b8;              /* Couleur grise discrète */
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+/* Titre de l'onglet (Ex: Jour 1) */
+.titre-jour {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;              /* Bleu nuit sombre */
+  margin-bottom: 0.4rem;
+}
+
+/* Thème sous le titre (Ex: Ouverture & IA) */
+.theme-jour {
+  font-size: 0.85rem;
+  color: #64748b;              /* Gris intermédiaire */
+  font-weight: 500;
+}
+
+/* 
+   3. ÉTAT ACTIF DE L'ONGLET SÉLECTIONNÉ (BLEU ROYAL)
+   */
+
+/* Appliqué via JavaScript sur l'onglet sélectionné */
+.onglet-jour.actif {
+  background-color: #1d53f5;   /* Le fond passe au bleu royal */
+  border-color: #1d53f5;       /* La bordure passe au bleu royal */
+}
+
+.onglet-jour.actif .meta-date { 
+  color: #93c5fd;              /* Bleu clair lisible sur fond bleu foncé */
+}
+
+.onglet-jour.actif .titre-jour,
+.onglet-jour.actif .theme-jour { 
+  color: #ffffff;              /* Passage du texte au blanc */
+}
+
+/* 
+   4. VISIBILITÉ DES TABLEAUX (MANAGÉ PAR JAVASCRIPT)
+    */
+
+/* Cache tous les tableaux par défaut */
+.contenu-planning {
+  display: none;
+}
+
+/* Affiche uniquement le tableau du jour actif */
+.contenu-planning.actif {
+  display: block;
+}
+
+/* 
+   5. STYLE DES TABLEAUX DE PROGRAMME
+    */
+
+.table-programme {
+  width: 100%;                 /* Occupe toute la largeur */
+  border-collapse: collapse;   /* Fusionne les bordures des cellules */
+  background-color: #ffffff;   /* Fond blanc */
+  border: 1px solid #e2e8f0;   /* Cadre général de la table */
+}
+
+.table-programme tr {
+  border-bottom: 1px solid #f1f5f9; /* Trait fin entre les lignes */
+  transition: background-color 0.2s ease;
+}
+
+/* Alternance de couleurs (Lignes paires plus claires) */
+.table-programme tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* Mise en valeur d'une session au survol */
+.table-programme tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Cellules du tableau */
+.table-programme td {
+  padding: 1.8rem 1.5rem;      /* Espacement interne confortable */
+  font-size: 1rem;
+  vertical-align: middle;      /* Alignement vertical au centre */
+  color: #0f172a;
+}
+
+/* 
+   6. PERSONNALISATION DES COLONNES
+    */
+
+/* Colonne Heure (Ex: 09:00) */
+.colonne-heure {
+  font-weight: 700;
+  color: #0ea5e9 !important;   /* Cyan lumineux */
+  width: 10%;
+  font-size: 1.05rem !important;
+}
+
+/* Colonne Intitulé de Session */
+.colonne-session {
+  font-weight: 700;
+  width: 50%;
+}
+
+/* Colonne Speaker / Intervenant */
+.colonne-intervenant {
+  color: #64748b;
+  width: 20%;
+}
+
+/* Colonne Salle / Emplacement */
+.colonne-salle {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-family: 'Courier New', Courier, monospace; /* Style console */
+  font-weight: 600;
+  width: 20%;
+  white-space: nowrap;         /* Empêche la coupure du nom de la salle */
+}
+
+/* Icône de géolocalisation FontAwesome */
+.colonne-salle i {
+  color: #0ea5e9;              /* Icône cyan */
+  margin-right: 0.3rem;
+}
+
+/* 
+   7. RESPONSIVE DESIGN (MOBILITÉ ET TABLETTES)
+    */
+
+@media (max-width: 768px) {
+  /* Passages des onglets en empilement vertical sur mobile */
+  .navigation-onglets {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .onglet-jour {
+    max-width: 100%;           /* Pleine largeur pour les onglets */
+  }
+
+  /* Ajustements du tableau sur écran restreint */
+  .table-programme td {
+    padding: 1.2rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .colonne-heure {
+    width: 15%;
+  }
+}
+
+/* -------SECTION THÉMATIQUES-------- */
+/* 
+   1. CONTENEUR PRINCIPAL DE LA SECTION THÉMATIQUES
+    */
+
+.conteneur-thematiques {
+  background-color: #e2e8f0;   /* Fond gris/bleuté clair uniforme */
+  padding: 80px 2rem;          /* Rembourrage interne haut/bas et côtés */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Typographie */
+  max-width: 1300px;           /* Largeur maximale alignée sur le site */
+  margin: 0 auto;              /* Centrage horizontal */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de largeur */
+}
+
+/* 
+   2. EN-TÊTE ET TITRES DE SECTION
+    */
+
+.entete-thematiques {
+  display: flex;               /* Alignement horizontal */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.75rem;                 /* Espace entre numéro et titre */
+  margin-bottom: 1.5rem;       /* Espace sous l'en-tête */
+}
+
+.conteneur-thematiques .numero-section {
+  font-size: 2rem;             /* Taille du numéro (01/) */
+  font-weight: 800;            /* Ultra-gras */
+  color: #0ea5e9;              /* Cyan dynamique */
+}
+
+.conteneur-thematiques .titre-section {
+  font-size: 0.85rem;          /* Petite taille style technique */
+  font-weight: 700;            /* Texte en gras */
+  letter-spacing: 0.15em;      /* Espacement aéré des lettres */
+  color: #94a3b8;              /* Gris neutre */
+}
+
+.conteneur-thematiques .grand-titre {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Taille adaptative selon l'écran */
+  font-weight: 800;            /* Ultra-gras */
+  color: #0f172a;              /* Bleu nuit sombre */
+  line-height: 1.2;            /* Interligne resserré */
+  margin: 0 0 4rem 0;          /* Marge sous le titre */
+  max-width: 600px;            /* Limite la largeur du texte */
+}
+
+/* 
+   3. DISPOSITION EN GRILLE (GRID 2x2)
+    */
+
+.grille-thematiques {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes de même largeur */
+  gap: 2rem;                             /* Écartement de 2rem entre les cartes */
+}
+
+/* 
+   4. DESIGN DES CARTES (VISIBLES SANS JAVASCRIPT)
+    */
+
+.carte-theme {
+  background-color: #ffffff;   /* Cartes sur fond blanc pur */
+  padding: 2.5rem;             /* Espacement interne confortable */
+  display: flex;               /* Disposition en Flexbox */
+  align-items: flex-start;     /* Alignement en haut */
+  gap: 1.5rem;                 /* Espace entre l'icône et le texte */
+  box-sizing: border-box;
+  
+  /* SANS JS : Les cartes sont visibles à 100% dès le chargement */
+  opacity: 1;                  
+  transform: translateY(0);    
+  
+  /* Transition fluide pour l'effet de survol (Hover) */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Effet d'interaction au survol de la souris */
+.carte-theme:hover {
+  transform: translateY(-6px); /* Légère élévation vers le haut */
+  box-shadow: 0 12px 30px -5px rgba(15, 23, 42, 0.08); /* Ombre portée */
+}
+
+/* Carré englobant l'icône */
+.conteneur-icone-theme {
+  border: 1px solid #e2e8f0;   /* Fine bordure grise */
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;         /* Centrage vertical */
+  justify-content: center;      /* Centrage horizontal */
+  flex-shrink: 0;              /* Empêche la déformation de l'icône */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Interaction sur l'icône au survol */
+.carte-theme:hover .conteneur-icone-theme {
+  border-color: #1d53f5;       /* Bordure bleue au survol */
+  background-color: #f8fafc;   /* Teinte de fond subtile */
+}
+
+/* Style de l'icône FontAwesome */
+.conteneur-icone-theme i {
+  color: #1d53f5;              /* Bleu royal */
+  font-size: 1.3rem;
+}
+
+/* Contenu textuel */
+.contenu-theme {
+  display: flex;
+  flex-direction: column;
+}
+
+.index-theme {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #cbd5e1;              /* Gris clair */
+  margin-bottom: 0.5rem;
+}
+
+.titre-theme {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;              /* Bleu nuit */
+  margin: 0 0 0.8rem 0;
+}
+
+.description-theme {
+  font-size: 0.95rem;
+  color: #64748b;              /* Gris intermédiaire */
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Désactivation des règles de masque JS */
+.element-anime {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN (TABLETTES ET MOBILES)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .grille-thematiques {
+    grid-template-columns: 1fr; /* Passage sur 1 seule colonne */
+    gap: 1.5rem;
+  }
+
+  .carte-theme {
+    padding: 2rem;
+  }
+
+  .conteneur-thematiques .grand-titre {
+    margin-bottom: 2.5rem;
+  }
+}
+
+
+/* ========INTERVENANT.HTML========== */
+/* FILTRAGE DYNAMIQUE */
+
+/* 
+   1. CONTENEUR ET STRUCTURE DE LA SECTION
+    */
+
+.section-intervenants {
+  background-color: #e2e8f0;   /* Applique la couleur de fond gris/bleuté clair à la section */
+  padding: 40px 2rem 80px 2rem;/* Fixe le rembourrage : 40px en haut, 2rem à droite, 80px en bas et 2rem à gauche */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Définit la famille de polices de caractères */
+}
+
+.conteneur-filtres-global {
+  max-width: 1300px;           /* Limite la largeur maximale du conteneur à 1300 pixels */
+  margin: 0 auto;              /* Centre le conteneur horizontalement dans la page */
+}
+
+/* 
+   2. BARRE DE FILTRES ET BOUTONS EN CAPSULE
+    */
+
+.barre-filtres {
+  display: flex;               /* Active la disposition en Flexbox */
+  align-items: center;         /* Aligne verticalement au centre les éléments de la barre */
+  flex-wrap: wrap;             /* Permet aux boutons de passer à la ligne sur petit écran */
+  gap: 0.8rem;                 /* Spécifie un espace de 0.8rem entre chaque bouton */
+  margin-bottom: 3rem;         /* Ajoute une marge de 3rem sous la barre de filtres */
+}
+
+.bouton-filtre {
+  background-color: #f1f5f9;   /* Applique une couleur de fond gris très clair par défaut */
+  border: 1px solid #e2e8f0;   /* Dessine une fine bordure grise autour du bouton */
+  padding: 0.6rem 1.8rem;      /* Définit le rembourrage interne (haut/bas et gauche/droite) */
+  border-radius: 50px;         /* Arrondit les bords à 50px pour créer une forme de capsule */
+  font-size: 0.85rem;          /* Fixe la taille de la police du bouton à 0.85rem */
+  font-weight: 600;            /* Applique une graisse de texte semi-grasse (600) */
+  font-family: 'Courier New', Courier, monospace; /* Utilise une police à chasse fixe style console/tech */
+  color: #64748b;              /* Définit la couleur du texte en gris intermédiaire */
+  cursor: pointer;             /* Modifie le pointeur de la souris en main interactive */
+  transition: all 0.25s ease;  /* Anime tous les changements d'état du bouton sur 0.25 seconde */
+}
+
+.bouton-filtre:hover {
+  background-color: #cbd5e1;   /* Fonce la couleur de fond au survol de la souris */
+  color: #0f172a;              /* Change la couleur du texte vers un bleu nuit sombre */
+}
+
+/* 
+   3. ÉTAT ACTIF DU BOUTON FILTRE ET COMPTEUR
+    */
+
+.bouton-filtre.actif {
+  background-color: #1d53f5;   /* Applique un fond bleu royal sur le filtre sélectionné */
+  border-color: #1d53f5;       /* Change la couleur de bordure en bleu royal */
+  color: #ffffff;              /* Passe la couleur du texte au blanc */
+  font-weight: 700;            /* Renforce la graisse du texte en gras (700) */
+}
+
+.compteur-intervenants {
+  font-size: 0.85rem;          /* Fixe la taille de la police du compteur à 0.85rem */
+  color: #94a3b8;              /* Applique une couleur de texte grise discrète */
+  margin-left: 1rem;           /* Ajoute une marge de 1rem sur le côté gauche */
+  font-weight: 500;            /* Applique une graisse de texte moyenne (500) */
+}
+
+/* 
+   4. DISPOSITION DE LA GRILLE DES INTERVENANTS
+   */
+
+.grille-intervenants {
+  display: grid;               /* Active la disposition en grille CSS Grid */
+  grid-template-columns: repeat(3, 1fr); /* Aligne les cartes sur 3 colonnes de largeur égale */
+  gap: 2rem;                   /* Spécifie un espace de 2rem entre chaque carte de la grille */
+  align-items: start;          /* Empêche le redimensionnement vertical involontaire des cartes */
+}
+
+/* 
+   5. CARTE INDIVIDUELLE ET ETAT DE FILTRAGE
+    */
+
+.carte-intervenant {
+  background-color: #ffffff;   /* Applique un fond blanc pur sur la carte */
+  display: flex;               /* Active la disposition Flexbox pour la carte */
+  flex-direction: column;      /* Empile les éléments enfants verticalement (Photo puis Infos) */
+  width: 100%;                 /* Assure que la carte occupe toute la largeur de sa colonne */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul des dimensions */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Anime les propriétés opacité et transformation sur 0.3s */
+  opacity: 1;                  /* Rend la carte totalement visible par défaut */
+  transform: scale(1);         /* Maintient la carte à sa taille normale par défaut */
+}
+
+.carte-intervenant.masque {
+  display: none;               /* Masque la carte du flux de la page lors du filtrage JS */
+  opacity: 0;                  /* Rend la carte complètement transparente */
+  transform: scale(0.9);       /* Réduit légèrement l'échelle de la carte à 90% */
+}
+
+/* 
+   6. ZONE PHOTO ET EFFETS VISUELS
+   */
+
+.wrapper-photo {
+  width: 100%;                 /* Maintient le conteneur de la photo à 100% de la largeur de la carte */
+  aspect-ratio: 4 / 3;         /* Garantit un ratio uniforme pour que toutes les photos aient la même hauteur */
+  overflow: hidden;            /* Masque tout débordement d'image qui dépasserait du conteneur */
+  background-color: #cbd5e1;   /* Définit un fond gris neutre pendant le chargement */
+}
+
+.wrapper-photo img {
+  width: 100%;                 /* Fait occuper à l'image toute la largeur disponible */
+  height: 100%;                /* Fait occuper à l'image toute la hauteur disponible */
+  object-fit: cover;           /* Redimensionne l'image pour remplir le cadre sans la déformer */
+  object-position: center;     /* Centre la photo sur le sujet principal */
+  filter: grayscale(100%);     /* Applique un filtre noir et blanc intégral sur l'image */
+  transition: filter 0.3s ease;/* Anime la transition du filtre vers la couleur sur 0.3s */
+}
+
+.carte-intervenant:hover .wrapper-photo img {
+  filter: grayscale(0%);       /* Restaure les couleurs d'origine de la photo au survol de la carte */
+}
+
+/* 
+   7. CONTENU TEXTUEL DE LA CARTE
+    */
+
+.infos-intervenant {
+  padding: 1.5rem;             /* Applique un rembourrage interne de 1.5rem autour des textes */
+}
+
+.nom-intervenant {
+  font-size: 1.2rem;           /* Fixe la taille de police du nom à 1.2rem */
+  font-weight: 700;            /* Met le nom en gras (700) */
+  color: #0f172a;              /* Applique la couleur bleu nuit sombre au texte */
+  margin: 0 0 0.4rem 0;        /* Réinitialise les marges haut/côtés et ajoute 0.4rem sous le nom */
+}
+
+.poste-intervenant {
+  font-size: 0.9rem;           /* Fixe la taille de police du poste à 0.9rem */
+  color: #64748b;              /* Applique une couleur grise secondaire au texte */
+  margin: 0 0 1rem 0;          /* Réinitialise les marges haut/côtés et ajoute 1rem sous le poste */
+}
+
+.badge-pays {
+  font-size: 0.75rem;          /* Fixe la taille de la police du badge à 0.75rem */
+  font-weight: 700;            /* Met le texte du badge en gras (700) */
+  color: #0ea5e9;              /* Applique la couleur cyan au texte du badge */
+  font-family: 'Courier New', Courier, monospace; /* Applique la police à chasse fixe style console/tech */
+}
+
+/* 
+   8. ADAPTATION RESPONSIVE (MOBILES ET TABLETTES)
+    */
+
+@media (max-width: 992px) {    /* Active ces règles sur tablette (largeur <= 992px) */
+  .grille-intervenants {
+    grid-template-columns: repeat(2, 1fr); /* Adapte la grille à 2 colonnes sur tablette */
+  }
+}
+
+@media (max-width: 600px) {    /* Active ces règles sur mobile (largeur <= 600px) */
+  .barre-filtres {
+    gap: 0.5rem;               /* Réduit l'espace entre les boutons de filtre à 0.5rem sur mobile */
+  }
+  
+  .compteur-intervenants {
+    width: 100%;               /* Fait occuper toute la largeur au compteur sur mobile */
+    margin-left: 0;            /* Annule la marge gauche du compteur */
+    margin-top: 0.5rem;        /* Ajoute un espace de 0.5rem au-dessus du compteur */
+  }
+
+  .grille-intervenants {
+    grid-template-columns: 1fr;/* Passe la grille sur 1 seule colonne sur mobile */
+  }
+}                              /* Ferme la condition de requête média mobile */
+
+/* ------- GRILLE D'INTERVENANTS---------*/
+
+/* 
+   1. CONTENEUR ET STRUCTURE DE LA SECTION
+   */
+
+.section-intervenants {
+  background-color: #e2e8f0;   /* Couleur de fond gris/bleuté clair pour toute la section */
+  padding: 40px 2rem 80px 2rem;/* Rembourrage : 40px haut, 2rem côtés, 80px bas */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Typographie principale */
+}
+
+.conteneur-filtres-global {
+  max-width: 1300px;           /* Largeur maximale alignée sur le reste du site */
+  margin: 0 auto;              /* Centrage horizontal */
+}
+
+/* 
+   2. BARRE DE FILTRES ET BOUTONS CAPSULES
+    */
+
+.barre-filtres {
+  display: flex;               /* Disposition en ligne avec Flexbox */
+  align-items: center;         /* Centrage vertical des éléments */
+  flex-wrap: wrap;             /* Permet le passage à la ligne sur petit écran */
+  gap: 0.8rem;                 /* Écartement entre les boutons */
+  margin-bottom: 3rem;         /* Espace sous la barre de filtres */
+}
+
+.bouton-filtre {
+  background-color: #f1f5f9;   /* Fond gris très clair par défaut */
+  border: 1px solid #e2e8f0;   /* Fine bordure grise */
+  padding: 0.6rem 1.8rem;      /* Rembourrage interne */
+  border-radius: 50px;         /* Arrondi complet style pilule/capsule */
+  font-size: 0.85rem;          /* Taille de texte réduite */
+  font-weight: 600;            /* Texte semi-gras */
+  font-family: 'Courier New', Courier, monospace; /* Style technique/code */
+  color: #64748b;              /* Texte gris intermédiaire */
+  cursor: pointer;             /* Pointeur main au survol */
+  transition: all 0.25s ease;  /* Animation fluide sur tous les changements */
+}
+
+.bouton-filtre:hover {
+  background-color: #cbd5e1;   /* Fond plus foncé au survol */
+  color: #0f172a;              /* Texte bleu nuit au survol */
+}
+
+.bouton-filtre.actif {
+  background-color: #1d53f5;   /* Fond bleu royal pour le bouton sélectionné */
+  border-color: #1d53f5;       /* Bordure bleu royal */
+  color: #ffffff;              /* Texte blanc */
+  font-weight: 700;            /* Texte gras */
+}
+
+.compteur-intervenants {
+  font-size: 0.85rem;          /* Taille de texte du compteur */
+  color: #94a3b8;              /* Texte gris clair */
+  margin-left: auto;           /* Pousse le compteur tout à droite */
+  font-weight: 500;            /* Graisse moyenne */
+}
+
+/* 
+   3. DISPOSITION DE LA GRILLE DES INTERVENANTS (3 PAR LIGNE)
+    */
+
+.grille-intervenants {
+  display: grid;               /* Active la grille CSS */
+  grid-template-columns: repeat(3, 1fr); /* FORCE STRICTEMENT 3 COLONNES ÉGALES */
+  gap: 2rem;                   /* Écartement de 2rem entre les cartes */
+  align-items: start;          /* Empêche les cartes de s'étirer verticalement */
+}
+
+/* 
+   4. CARTE INDIVIDUELLE ET ÉTAT DE FILTRAGE
+    */
+
+.carte-intervenant {
+  background-color: #ffffff;   /* Fond blanc pur pour chaque carte */
+  display: flex;               /* Flexbox interne */
+  flex-direction: column;      /* Empilement vertical (Photo puis Infos) */
+  width: 100%;                 /* Ocupation totale de la colonne */
+  box-sizing: border-box;      /* Inclut les bordures et paddings dans la largeur */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transitions douces */
+  opacity: 1;                  /* Carte visible par défaut */
+  transform: scale(1);         /* Échelle normale par défaut */
+}
+
+.carte-intervenant.masque {
+  display: none;               /* Masque la carte pendant le filtrage JS */
+  opacity: 0;                  /* Opacité nulle */
+  transform: scale(0.9);       /* Légère réduction d'échelle */
+}
+
+/* 
+   5. ZONE PHOTO, BADGE SUR PHOTO ET EFFET SURVOL
+    */
+
+.wrapper-photo {
+  width: 100%;                 /* Largeur 100% de la carte */
+  aspect-ratio: 4 / 3;         /* RATIO CONSTANT : Garantit des photos de hauteur égale */
+  overflow: hidden;            /* Masque ce qui dépasse du cadre */
+  background-color: #cbd5e1;   /* Fond gris de chargement */
+  position: relative;          /* Indispensable pour positionner le badge dessus */
+}
+
+.wrapper-photo img {
+  width: 100%;                 /* L'image remplit tout le conteneur */
+  height: 100%;                /* L'image suit la hauteur définie par aspect-ratio */
+  object-fit: cover;           /* Recadre sans déformer */
+  object-position: center;     /* Centrage sur les visages */
+  filter: grayscale(100%);     /* Filtre noir et blanc */
+  transition: filter 0.3s ease;/* Animation fluide du retour de couleur */
+}
+
+.carte-intervenant:hover .wrapper-photo img {
+  filter: grayscale(0%);       /* Restaure les couleurs d'origine au survol */
+}
+
+/* Badge thématique superposé sur la photo */
+.badge-thematique-photo {
+  position: absolute;          /* Repositionnement au-dessus de l'image */
+  top: 1rem;                   /* Ancré à 1rem du haut */
+  right: 1rem;                 /* Ancré à 1rem de la droite */
+  background-color: rgba(15, 23, 42, 0.85); /* Fond bleu nuit semi-transparent */
+  color: #0ea5e9;              /* Texte Cyan */
+  font-size: 0.7rem;           /* Petite taille */
+  font-weight: 700;            /* Texte gras */
+  padding: 0.3rem 0.8rem;      /* Rembourrage interne */
+  border-radius: 4px;          /* Léger arrondi */
+  font-family: 'Courier New', Courier, monospace; /* Style console */
+  letter-spacing: 0.05em;      /* Espacement des lettres */
+}
+
+/* 
+   6. ZONE D'INFORMATIONS TEXTUELLES ET BLOC PAYS
+    */
+
+.infos-intervenant {
+  padding: 1.5rem;             /* Rembourrage interne autour du texte */
+}
+
+.nom-intervenant {
+  font-size: 1.2rem;           /* Taille du nom */
+  font-weight: 700;            /* Nom en gras */
+  color: #0f172a;              /* Bleu nuit */
+  margin: 0 0 0.4rem 0;        /* Marge sous le nom */
+}
+
+.poste-intervenant {
+  font-size: 0.9rem;           /* Taille du poste */
+  color: #64748b;              /* Gris intermédiaire */
+  margin: 0 0 1.2rem 0;        /* Marge sous le poste */
+}
+
+/* Zone d'affichage du pays (Ligne + Code + Nom) */
+.zone-pays {
+  display: flex;               /* Alignement horizontal de la ligne et du texte */
+  align-items: center;         /* Centrage vertical */
+  gap: 0.5rem;                 /* Espacement entre la ligne, le code et le nom */
+  font-size: 0.8rem;           /* Petite taille */
+  font-family: 'Courier New', Courier, monospace; /* Style technique */
+}
+
+.ligne-decorative-pays {
+  width: 15px;                 /* Longueur du petit trait décoratif */
+  height: 2px;                 /* Épaisseur du trait */
+  background-color: #0ea5e9;   /* Couleur cyan */
+  display: inline-block;
+}
+
+.code-pays {
+  color: #0ea5e9;              /* Couleur cyan pour le code ISO */
+  font-weight: 700;            /* En gras */
+}
+
+.nom-pays {
+  color: #94a3b8;              /* Couleur grise pour le nom complet du pays */
+}
+
+/* 
+   7. ADAPTATION RESPONSIVE (MOBILES ET TABLETTES)
+    */
+
+@media (max-width: 992px) {    /* Si l'écran est inférieur ou égal à 992px (Tablettes) */
+  .grille-intervenants {
+    grid-template-columns: repeat(2, 1fr); /* Passage à 2 cartes par ligne */
+  }
+}
+
+@media (max-width: 600px) {    /* Si l'écran est inférieur ou égal à 600px (Mobiles) */
+  .barre-filtres {
+    gap: 0.5rem;               /* Espacement plus petit entre les boutons */
+  }
+  
+  .compteur-intervenants {
+    width: 100%;               /* Le compteur prend toute la largeur */
+    margin-left: 0;            /* Annule le repousse à droite */
+    margin-top: 0.5rem;        /* Marge au-dessus */
+  }
+
+  .grille-intervenants {
+    grid-template-columns: 1fr;/* Passage à 1 seule carte par ligne */
+  }
+}
+
+
+/* ==========CONTACT========== */
+
+/* HERO INTERNE */
+/* 
+   1. VARIABLES GLOBALES DE COULEUR
+    */
+
+:root {
+  --fond-clair-global: #e2e8f0;   /* Déclare la couleur de fond gris/bleu clair */
+  --texte-sombre: #0f172a;        /* Déclare la couleur pour le texte bleu nuit profond */
+  --bleu-accent: #1d53f5;         /* Déclare la couleur bleu royal pour les accents et survol */
+  --cyan-decoratif: #0ea5e9;      /* Déclare la couleur cyan pour marquer la page actuelle */
+}
+
+/* 
+   2. BANNIÈRE ET CONTENEUR PRINCIPAL DU HERO
+    */
+
+.banniere-hero-interne {
+  background-color: var(--fond-clair-global); /* Applique la couleur de fond via la variable globale */
+  width: 100%;                 /* Maintient la bannière sur 100% de la largeur de l'écran */
+  padding: 80px 2rem 60px 2rem;/* Applique un rembourrage interne (haut, droite, bas, gauche) */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la largeur totale */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Définit les polices de caractères */
+}
+
+.conteneur-hero-interne {
+  max-width: 1300px;           /* Limite la largeur maximale du contenu à 1300 pixels */
+  margin: 0 auto;              /* Centre le conteneur horizontalement dans la page */
+  position: relative;          /* Définit le repère de positionnement pour d'éventuels enfants */
+  display: flex;               /* Active la disposition Flexbox */
+  flex-direction: column;      /* Empile les éléments enfants verticalement */
+  align-items: flex-start;     /* Aligne tous les éléments sur le bord gauche */
+}
+
+/* 
+   3. FIL D'ARIANE 
+    */
+
+.fil-ariane {
+  display: flex;               /* Active la disposition Flexbox pour aligner les liens */
+  align-items: center;         /* Aligne verticalement au centre les éléments du fil */
+  gap: 0.5rem;                 /* Spécifie un espace de 0.5rem entre chaque élément */
+  margin-bottom: 2.5rem;       /* Ajoute une marge sous le fil d'Ariane */
+  font-size: 0.75rem;          /* Fixe la taille du texte du fil d'Ariane */
+  font-weight: 700;            /* Applique une graisse de texte en gras (700) */
+  letter-spacing: 0.15em;      /* Augmente l'espacement entre les lettres */
+}
+
+.lien-ariane-parent {
+  text-decoration: none;       /* Supprime le soulignement par défaut du lien */
+  color: #a3b1c6;              /* Applique une couleur de texte gris/bleuté clair */
+  transition: color 0.2s ease; /* Anime le changement de couleur au survol sur 0.2 seconde */
+}
+
+.lien-ariane-parent:hover {
+  color: var(--bleu-accent);   /* Change la couleur du lien vers le bleu royal au survol */
+}
+
+.separateur-ariane {
+  color: #cbd5e1;              /* Applique une couleur grise discrète pour le séparateur */
+}
+
+.lien-ariane-actuel {
+  color: var(--cyan-decoratif);/* Applique la couleur cyan pour mettre en valeur la page active */
+}
+
+/* 
+   4. TITRE PRINCIPAL ET TRAIT DÉCORATIF
+    */
+
+.titre-principal-interne {
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem); /* Adapte la taille du titre dynamiquement selon la largeur de l'écran */
+  font-weight: 800;            /* Applique une graisse de texte ultra-grasse (800) */
+  color: var(--texte-sombre);  /* Applique la couleur bleu nuit profond au titre */
+  margin: 0 0 1.5rem 0;        /* Réinitialise les marges et ajoute 1.5rem d'espace en bas */
+  letter-spacing: -0.02em;     /* Resserre très légèrement l'espacement des lettres */
+  line-height: 1.1;            /* Définit une hauteur de ligne compacte */
+}
+
+.soulignement-decoratif {
+  width: 80px;                 /* Fixe la largeur du trait à 80 pixels */
+  height: 3px;                 /* Fixe l'épaisseur du trait à 3 pixels */
+  background-color: var(--bleu-accent); /* Applique la couleur bleu royal au trait */
+  margin-top: 0.5rem;          /* Ajoute un petit espace au-dessus du trait */
+}
+
+/* 
+   5. ADAPTATION RESPONSIVE MOBILE ET TABLETTE
+    */
+
+@media (max-width: 768px) {    /* Déclenche ces règles sur les écrans de 768px ou moins */
+  .banniere-hero-interne {
+    padding: 60px 1.5rem 40px 1.5rem; /* Réduit le rembourrage global pour les petits écrans */
+  }
+  
+  .fil-ariane {
+    margin-bottom: 1.5rem;     /* Réduit l'espace sous le fil d'Ariane sur mobile */
+  }
+}                              /* Ferme la condition de requête média mobile */
+
+
+/* FORMULAIRE D'INSCRIPTION */
+/* 
+   1. CONTENEUR GLOBAL ET DISPOSITION EN COLONNES
+    */
+
+.section-inscription-contact {
+  background-color: #f1f5f9;   /* Applique la couleur de fond gris/bleuté clair à la section */
+  padding: 60px 2rem 100px 2rem;/* Fixe le rembourrage : 60px haut, 2rem côtés, 100px bas */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Définit les polices de caractères principales */
+}
+
+.conteneur-inscription-flex {
+  max-width: 1300px;           /* Limite la largeur maximale du contenu à 1300 pixels */
+  margin: 0 auto;              /* Centre le conteneur horizontalement dans la page */
+  display: flex;               /* Active la disposition Flexbox pour aligner les 2 colonnes */
+  gap: 4rem;                   /* Spécifie un espace de 4rem entre la colonne formulaire et la colonne infos */
+}
+
+.colonne-formulaire {
+  flex: 1.8;                   /* Attribue 64% de la largeur disponible au formulaire (colonne gauche) */
+}
+
+.colonne-infos {
+  flex: 1;                     /* Attribue 36% de la largeur disponible aux infos (colonne droite) */
+}
+
+/* 
+   2. EN-TÊTE DE SECTION (NUMÉROTATION ET TITRE)
+    */
+
+.en-tete-section-form {
+  display: flex;               /* Active Flexbox pour aligner le numéro et le titre côte à côte */
+  align-items: center;         /* Aligne verticalement au centre les éléments de l'en-tête */
+  gap: 0.5rem;                 /* Spécifie un espace de 0.5rem entre le numéro et le titre */
+  margin-bottom: 2.5rem;       /* Ajoute une marge sous l'en-tête de section */
+}
+
+.index-section-num {
+  font-family: 'Segoe UI', sans-serif; /* Police moderne pour le numéro de section */
+  font-size: 1.8rem;           /* Fixe la taille de police du numéro à 1.8rem */
+  font-weight: 800;            /* Applique une graisse ultra-grasse (800) */
+  color: #0ea5e9;              /* Applique la couleur cyan au numéro */
+}
+
+.titre-section-caps {
+  font-family: 'Courier New', Courier, monospace; /* Police style console/technique */
+  font-size: 0.85rem;          /* Fixe la taille de la police du titre à 0.85rem */
+  font-weight: 700;            /* Applique une graisse en gras (700) */
+  text-transform: uppercase;   /* Mettre tout le texte du titre en majuscules */
+  color: #94a3b8;              /* Applique une couleur de texte grise discrète */
+  letter-spacing: 0.1em;       /* Augmente l'espacement entre les lettres */
+  margin-top: 4px;             /* Ajuste la position verticale pour l'aligner au numéro */
+}
+
+/*
+   3. STRUCTURE, GRILLE ET CHAMPS DU FORMULAIRE
+   */
+
+.grille-champs-internes {
+  display: grid;               /* Active la disposition en grille CSS Grid */
+  grid-template-columns: repeat(2, 1fr); /* Crée 2 colonnes d'égale largeur pour les inputs */
+  gap: 1.5rem;                 /* Spécifie un espace de 1.5rem entre les champs de la grille */
+  margin-bottom: 1.5rem;       /* Ajoute une marge sous la grille de champs */
+}
+
+.groupe-champ {
+  display: flex;               /* Active Flexbox pour aligner le label et son input */
+  flex-direction: column;      /* Empile le label au-dessus de l'input */
+  gap: 0.6rem;                 /* Spécifie un espace de 0.6rem entre le label et l'input */
+}
+
+.champ-pleine-largeur {
+  margin-bottom: 1.5rem;       /* Ajoute un espace sous les champs s'étendant sur toute la largeur (ex: textarea) */
+}
+
+.groupe-champ label {
+  font-family: 'Courier New', Courier, monospace; /* Police à chasse fixe style technique */
+  font-size: 0.75rem;          /* Fixe la taille de police des labels à 0.75rem */
+  font-weight: 700;            /* Applique une graisse en gras (700) */
+  text-transform: uppercase;   /* Force l'affichage des labels en majuscules */
+  color: #94a3b8;              /* Applique la couleur de texte grise */
+  letter-spacing: 0.05em;      /* Espacement léger entre les lettres */
+}
+
+.groupe-champ input, 
+.groupe-champ select, 
+.groupe-champ textarea {
+  background-color: #ffffff;   /* Applique un fond blanc pur aux champs de saisie */
+  border: 1px solid #e2e8f0;   /* Dessine une fine bordure grise autour des champs */
+  padding: 1rem 1.2rem;        /* Applique un rembourrage interne généreux */
+  font-size: 0.95rem;          /* Fixe la taille de police du texte saisi */
+  color: #0f172a;              /* Applique la couleur bleu nuit au texte de saisie */
+  border-radius: 0;            /* Force des angles droits nets (style architectural) */
+  outline: none;               /* Supprime le contour bleu par défaut du navigateur */
+  width: 100%;                 /* Assure que le champ occupe toute la largeur du conteneur */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la largeur */
+  transition: border-color 0.2s ease; /* Anime doucement le changement de couleur de bordure */
+}
+
+.groupe-champ input::placeholder,
+.groupe-champ textarea::placeholder {
+  color: #94a3b8;              /* Applique la couleur grise aux textes d'indication (placeholder) */
+}
+
+.groupe-champ input:focus, 
+.groupe-champ select:focus, 
+.groupe-champ textarea:focus {
+  border-color: #1d53f5;       /* Colore la bordure en bleu royal au clic/focus dans le champ */
+}
+
+/* 
+   4. PERSONNALISATION DU SÉLECTEUR (DROP DOWN)
+    */
+
+.wrapper-select {
+  position: relative;          /* Sert de repère de positionnement pour la flèche personnalisée */
+  width: 100%;                 /* S'étend sur toute la largeur disponible */
+}
+
+.wrapper-select::after {
+  content: '▼';                /* Insère le symbole de flèche vers le bas en CSS */
+  font-size: 0.65rem;          /* Fixe la taille du symbole flèche */
+  color: #0f172a;              /* Applique la couleur bleu nuit à la flèche */
+  position: absolute;          /* Positionne la flèche au-dessus du menu déroulant */
+  right: 1.2rem;               /* Ancre la flèche à 1.2rem du bord droit */
+  top: 50%;                    /* Place la flèche à 50% de la hauteur */
+  transform: translateY(-50%); /* Centre parfaitement la flèche verticalement */
+  pointer-events: none;        /* Permet aux clics de traverser la flèche vers le sélecteur */
+}
+
+.groupe-champ select {
+  appearance: none;            /* Supprime le style et la flèche par défaut du navigateur (Standard) */
+  -webkit-appearance: none;    /* Supprime le style par défaut sur Chrome/Safari/Edge */
+  cursor: pointer;             /* Modifie le curseur de souris en main au survol */
+  padding-right: 2.5rem;       /* Réserve de l'espace à droite pour ne pas chevaucher la flèche */
+}
+
+.groupe-champ textarea {
+  resize: vertical;            /* Autorise le redimensionnement uniquement en hauteur */
+  font-family: inherit;        /* Hérite de la police de caractères globale du parent */
+}
+
+/* 
+   5. BOUTON DE SOUMISSION DU FORMULAIRE
+    */
+
+.bouton-soumettre-bleu {
+  width: 100%;                 /* Fait occuper toute la largeur disponible au bouton */
+  background-color: #1d53f5;   /* Applique la couleur de fond bleu royal au bouton */
+  color: #ffffff;              /* Applique la couleur de texte blanche */
+  border: none;                /* Supprime toute bordure par défaut */
+  padding: 1.2rem;             /* Applique un rembourrage interne de 1.2rem */
+  font-family: 'Courier New', Courier, monospace; /* Style de police technique */
+  font-size: 0.95rem;          /* Fixe la taille du texte du bouton */
+  font-weight: 700;            /* Met le texte du bouton en gras */
+  letter-spacing: 0.1em;       /* Augmente l'espacement des lettres du bouton */
+  cursor: pointer;             /* Change le pointeur en main au survol */
+  display: flex;               /* Active Flexbox pour aligner le texte et l'icône flèche */
+  justify-content: center;     /* Centre horizontalement le texte et l'icône */
+  align-items: center;         /* Centre verticalement le texte et l'icône */
+  gap: 0.6rem;                 /* Spécifie un espace de 0.6rem entre le texte et l'icône */
+  transition: background-color 0.2s ease; /* Transition fluide au survol */
+  margin-top: 2rem;            /* Spécifie un espace de 2rem au-dessus du bouton */
+}
+
+.bouton-soumettre-bleu:hover {
+  background-color: #113dbb;   /* Fonce la couleur du bouton vers un bleu sombre au survol */
+}
+
+.fleche-bouton {
+  font-size: 1.1rem;           /* Agrandit légèrement la taille de l'icône flèche du bouton */
+}
+
+/* 
+   6. BLOC DE DROITE (CARTE BLANCHE D'INFORMATIONS)
+    */
+
+.carte-blanche-infos {
+  background-color: #ffffff;   /* Applique un fond blanc pur à la carte d'informations */
+  padding: 2.5rem;             /* Applique un rembourrage interne généreux de 2.5rem */
+  box-sizing: border-box;      /* Inclut le padding dans le calcul de la largeur */
+}
+
+.entete-lieu {
+  display: flex;               /* Active Flexbox pour aligner l'icône et le label du lieu */
+  align-items: center;         /* Aligne verticalement l'icône et le texte */
+  gap: 0.5rem;                 /* Écart de 0.5rem entre l'icône et le label */
+  margin-bottom: 1.2rem;       /* Marge sous l'en-tête du lieu */
+}
+
+.icone-adresse-cyan {
+  width: 18px;                 /* Fixe la largeur de l'icône SVG à 18px */
+  height: 18px;                /* Fixe la hauteur de l'icône SVG à 18px */
+  color: #0ea5e9;              /* Applique la couleur cyan à l'icône */
+}
+
+.label-lieu-titre {
+  font-family: 'Courier New', Courier, monospace; /* Police style technique */
+  font-size: 0.75rem;          /* Taille du petit label d'en-tête */
+  font-weight: 700;            /* Texte gras */
+  color: #cbd5e1;              /* Couleur grise très claire */
+  letter-spacing: 0.05em;      /* Espacement des lettres */
+}
+
+.nom-batiment {
+  font-size: 1.6rem;           /* Fixe la taille de police du nom du bâtiment à 1.6rem */
+  font-weight: 700;            /* Applique une graisse en gras (700) */
+  color: #0f172a;              /* Couleur bleu nuit sombre */
+  margin: 0 0 0.8rem 0;        /* Réinitialise les marges et ajoute 0.8rem en bas */
+}
+
+.details-adresse {
+  font-size: 0.95rem;          /* Taille de police pour l'adresse */
+  color: #64748b;              /* Couleur grise secondaire */
+  line-height: 1.6;            /* Hauteur de ligne aérée pour une bonne lisibilité */
+  margin: 0 0 2.5rem 0;        /* Marge sous le bloc d'adresse */
+}
+
+/* 
+   7. LISTE D'INFORMATIONS SPÉCIFIQUES (DATES, EMAIL, CONTACTS)
+    */
+
+.liste-details-specifiques {
+  display: flex;               /* Active Flexbox pour la liste des contacts/détails */
+  flex-direction: column;      /* Empile verticalement les éléments de détails */
+  gap: 1.5rem;                 /* Spécifie un espace de 1.5rem entre chaque ligne de détail */
+  margin-bottom: 2.5rem;       /* Marge sous la liste avant le plan */
+}
+
+.item-detail {
+  display: flex;               /* Alignement horizontal icône + textes */
+  align-items: center;         /* Centrage vertical */
+  gap: 1rem;                   /* Écart de 1rem entre le carré icône et les textes */
+}
+
+.encadre-icone-mini {
+  width: 36px;                 /* Largeur fixe du petit carré d'icône */
+  height: 36px;                /* Hauteur fixe du petit carré d'icône */
+  border: 1px solid #e2e8f0;   /* Fine bordure grise autour de l'icône */
+  display: flex;               /* Flexbox pour centrer l'icône à l'intérieur */
+  align-items: center;         /* Centrage vertical de l'icône */
+  justify-content: center;     /* Centrage horizontal de l'icône */
+  flex-shrink: 0;              /* Empêche le carré icône de se déformer/réduire */
+}
+
+.encadre-icone-mini svg {
+  width: 16px;                 /* Taille interne de l'icône SVG à 16px */
+  height: 16px;
+  color: #1d53f5;              /* Couleur bleu royal de l'icône SVG */
+}
+
+.textes-item {
+  display: flex;               /* Alignement vertical du label et de sa valeur */
+  flex-direction: column;
+}
+
+.meta-label-mono {
+  font-family: 'Courier New', Courier, monospace; /* Police style console */
+  font-size: 0.65rem;          /* Petite taille pour les labels descriptifs */
+  font-weight: 700;            /* Texte gras */
+  color: #cbd5e1;              /* Couleur grise discrète */
+  letter-spacing: 0.05em;      /* Espacement des lettres */
+}
+
+.meta-valeur {
+  font-size: 0.95rem;          /* Taille de texte pour les valeurs (ex: dates, heures) */
+  color: #475569;              /* Couleur grise intermédiaire */
+  font-weight: 500;            /* Graisse moyenne */
+  margin-top: 2px;             /* Ajustement d'espace avec le label au-dessus */
+}
+
+.lien-email-info {
+  text-decoration: none;       /* Supprime le soulignement du lien email */
+  transition: color 0.2s ease; /* Animation fluide au survol du lien email */
+}
+
+.lien-email-info:hover {
+  color: #1d53f5;              /* Colore le lien en bleu royal au survol */
+}
+
+/* 
+   8. MINI CARTE SCHÉMATIQUE TECHNIQUE (PLAN GRID)
+    */
+
+.mini-carte-technique {
+  width: 100%;                 /* S'étend sur toute la largeur de la carte d'infos */
+  height: 180px;               /* Fixe la hauteur de la zone de carte à 180 pixels */
+  background-color: #e6eefc;   /* Applique un fond bleu très clair */
+  border: 1px solid #dbeafe;   /* Fine bordure bleue autour de la carte */
+  
+  /* Crée un grillage technique bleu clair en fond CSS pur sans image externe */
+  background-image: linear-gradient(#dbeafe 1px, transparent 1px),
+                    linear-gradient(90deg, #dbeafe 1px, transparent 1px);
+  background-size: 20px 20px;   /* Taille des carreaux du grillage (20px x 20px) */
+  background-position: center;  /* Centre le motif de grillage */
+  position: relative;          /* Sert de repère pour les sous-éléments */
+  display: flex;               /* Active Flexbox pour centrer le repère GPS */
+  justify-content: center;     /* Centre horizontalement le repère GPS */
+  align-items: center;         /* Centre verticalement le repère GPS */
+}
+
+.repere-geographique {
+  display: flex;               /* Empilement vertical du point d'ancre et des textes GPS */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.point-ancre-bleu {
+  width: 32px;                 /* Largeur du marqueur bleu sur la carte */
+  height: 32px;                /* Hauteur du marqueur bleu sur la carte */
+  background-color: #1d53f5;   /* Couleur bleu royal pour le marqueur */
+  border-radius: 4px;          /* Léger arrondi d'angles à 4px */
+  display: flex;               /* Centrage de l'icône dans le marqueur */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(29, 83, 245, 0.4); /* Ombre portée bleutée sous le marqueur */
+  margin-bottom: 0.8rem;       /* Marge sous le marqueur */
+}
+
+.point-ancre-bleu svg {
+  width: 16px;                 /* Taille de l'icône SVG du marqueur */
+  height: 16px;
+}
+
+.label-adresse-carte {
+  font-family: 'Courier New', Courier, monospace; /* Style technique */
+  font-size: 0.75rem;          /* Taille du nom sur la carte */
+  font-weight: 700;            /* En gras */
+  color: #1e293b;              /* Texte bleu nuit foncer */
+}
+
+.coordonnees-gps {
+  font-family: 'Courier New', Courier, monospace; /* Style technique */
+  font-size: 0.65rem;          /* Petite taille pour les coordonnées GPS */
+  color: #94a3b8;              /* Couleur grise */
+  margin-top: 2px;             /* Petit espace au-dessus */
+}
+
+/* 
+   9. ADAPTATION RESPONSIVE (TABLETTES ET MOBILES)
+    */
+
+/* Écrans de taille moyenne (Tablettes - max 968px) */
+@media (max-width: 968px) {
+  .conteneur-inscription-flex {
+    flex-direction: column;    /* Bascule l'alignement des 2 colonnes en empilement vertical */
+    gap: 3rem;                 /* Réduit l'espace entre les deux blocs à 3rem */
+  }
+  
+  .colonne-formulaire, 
+  .colonne-infos {
+    width: 100%;               /* Les deux colonnes occupent toute la largeur */
+  }
+}
+
+/* Petit écrans (Mobiles - max 550px) */
+@media (max-width: 550px) {
+  .section-inscription-contact {
+    padding: 40px 1rem 60px 1rem; /* Réduit le padding global de la section sur mobile */
+  }
+  
+  .grille-champs-internes {
+    grid-template-columns: 1fr; /* Force la grille sur 1 seule colonne (tous les champs s'empilent) */
+    gap: 1.2rem;                /* Réduit l'écartement entre les champs */
+  }
+  
+  .carte-blanche-infos {
+    padding: 1.5rem;           /* Réduit le padding interne de la carte d'infos */
+  }
+  
+  .nom-batiment {
+    font-size: 1.4rem;         /* Réduit légèrement la taille du titre du bâtiment */
+  }
+}                              /* Ferme la condition média mobile */
+
+/* FAQ EN ACCORDÉON CSS PUR */
+/* 
+   1. CONTENEUR GLOBAL FAQ (MODE CLAIR)
+    */
+
+.conteneur-faq {
+  background-color: #f1f5f9;   /* Applique la couleur d'arrière-plan clair uniforme (gris/bleuté) */
+  padding: 80px 2rem;          /* Fixe le rembourrage interne : 80px en haut/bas et 2rem sur les côtés */
+  max-width: 1300px;           /* Limite la largeur maximale de la section à 1300 pixels */
+  margin: 0 auto;              /* Centre horizontalement le conteneur dans la page */
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; /* Définit les polices de caractères */
+  box-sizing: border-box;      /* Inclut le padding et les bordures dans le calcul des dimensions */
+}
+
+/* 
+   2. EN-TÊTE TYPOGRAPHIQUE ET TITRES
+    */
+
+.en-tete-faq {
+  display: flex;               /* Active la disposition Flexbox pour la ligne d'en-tête */
+  align-items: center;         /* Aligne verticalement au centre le numéro et le titre */
+  gap: 0.75rem;                /* Spécifie un espace de 0.75rem entre le numéro et le titre */
+  margin-bottom: 1.5rem;       /* Ajoute une marge sous le petit sur-titre */
+}
+
+.conteneur-faq .numero-section {
+  font-size: 2rem;             /* Fixe la taille de la police du numéro de section à 2rem */
+  font-weight: 800;            /* Applique une graisse ultra-grasse (800) */
+  color: #0ea5e9;              /* Applique la couleur cyan d'accentuation */
+}
+
+.conteneur-faq .titre-section {
+  font-size: 0.85rem;          /* Fixe la taille de la police du sur-titre à 0.85rem */
+  font-weight: 700;            /* Applique une graisse en gras (700) */
+  letter-spacing: 0.15em;      /* Augmente l'espacement entre les lettres pour l'effet style console */
+  color: #94a3b8;              /* Applique une couleur grise ardoise texturée */
+  text-transform: uppercase;   /* Force le texte du sur-titre en majuscules */
+}
+
+.conteneur-faq .grand-titre-faq {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Ajuste dynamiquement la taille du titre selon l'écran */
+  font-weight: 800;            /* Applique une graisse ultra-grasse (800) */
+  color: #0f172a;              /* Applique la couleur bleu nuit sombre au grand titre */
+  line-height: 1.2;            /* Fixe une hauteur de ligne compacte */
+  margin: 0 0 4rem 0;          /* Réinitialise les marges haut/côtés et ajoute 4rem en bas */
+}
+
+/* 
+   3. STRUCTURE DE L'ACCORDÉON ET ÉLÉMENTS UNITAIRES
+    */
+
+.accordeon-faq {
+  display: flex;               /* Active Flexbox pour la liste de l'accordéon */
+  flex-direction: column;      /* Empile verticalement chaque bloc de question/réponse */
+  gap: 1rem;                   /* Spécifie un écartement de 1rem entre chaque bloc de question */
+  max-width: 900px;            /* Limite la largeur à 900px pour une lisibilité textuelle optimale */
+}
+
+.item-faq {
+  background-color: #ffffff;   /* Applique un fond blanc pur pour détacher chaque bloc */
+  border: 1px solid #e2e8f0;   /* Dessine une fine bordure grise autour de l'élément */
+  overflow: hidden;            /* Empêche le contenu de déborder pendant les animations de hauteur */
+  transition: border-color 0.3s ease; /* Anime doucement le changement de couleur de bordure */
+}
+
+.declencheur-faq {
+  position: absolute;          /* Extrait la case à cocher du flux normal de la page */
+  opacity: 0;                  /* Rend la case à cocher totalement invisible */
+  z-index: -1;                 /* Place la case sous les autres éléments pour éviter toute gêne */
+}
+
+/* 
+   4. LIGNE D'EN-TÊTE CLIQUABLE ET ICÔNES
+    */
+
+.entete-item {
+  display: flex;               /* Active Flexbox pour aligner le texte et la flèche */
+  justify-content: space-between; /* Pousse la question à gauche et la flèche tout à droite */
+  align-items: center;         /* Aligne verticalement au centre le texte et la flèche */
+  padding: 1.8rem 2rem;        /* Définit le rembourrage interne (haut/bas et gauche/droite) */
+  cursor: pointer;             /* Modifie le pointeur de la souris en main interactive */
+  user-select: none;           /* Empêche la sélection bleue du texte lors des clics répétés */
+  background-color: #ffffff;   /* Applique un fond blanc pur par défaut */
+  transition: background-color 0.25s ease; /* Anime le changement de fond au survol */
+}
+
+.question-texte {
+  font-size: 1.15rem;          /* Fixe la taille de la police de la question à 1.15rem */
+  font-weight: 700;            /* Met le texte de la question en gras (700) */
+  color: #0f172a;              /* Applique la couleur bleu nuit au texte de la question */
+  padding-right: 1.5rem;       /* Ajoute un espace à droite pour ne pas coller à la flèche */
+}
+
+.icone-fleche {
+  font-size: 0.95rem;          /* Fixe la taille de l'icône de flèche */
+  color: #1d53f5;              /* Applique la couleur bleu royal d'accentuation à la flèche */
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); /* Anime la rotation fluide de la flèche */
+}
+
+.entete-item:hover {
+  background-color: #f8fafc;   /* Fonce très légèrement le fond au survol de la question */
+}
+
+/* 
+   5. LOGIQUE D'OUVERTURE ET ANIMATION CSS PUR (:checked)
+    */
+
+/* 1. Rotation à 180° et changement de couleur de la flèche au clic */
+.declencheur-faq:checked ~ .entete-item .icone-fleche {
+  transform: rotate(180deg);   /* Effectue un demi-tour à 180 degrés vers le haut */
+  color: #0ea5e9;              /* Passe la couleur de la flèche au cyan lorsque la réponse est ouverte */
+}
+
+/* 2. Coloration de la bordure de la carte active */
+.declencheur-faq:checked ~ .item-faq {
+  border-color: #cbd5e1;       /* Fonce légèrement la bordure du bloc actif */
+}
+
+/* 3. Panneau de réponse fermé par défaut */
+.panneau-reponse {
+  max-height: 0;               /* Verrouille la hauteur à 0 pour masquer le texte par défaut */
+  overflow: hidden;            /* Masque tout le contenu textuel qui dépasse des 0px de hauteur */
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Anime le déploiement de la hauteur */
+  background-color: #ffffff;   /* Garde le fond blanc pur */
+}
+
+/* Déploiement du panneau quand l'input invisible est coché */
+.declencheur-faq:checked ~ .panneau-reponse {
+  max-height: 300px;           /* Autorise le bloc à s'agrandir jusqu'à 300px pour afficher le texte */
+}
+
+/* Zone interne pour un rembourrage propre sans saut visuel */
+.contenu-reponse {
+  padding: 0 2rem 2rem 2rem;   /* Padding : 0 en haut (aligné sur l'entête), 2rem sur les côtés et le bas */
+  border-top: 1px solid #f1f5f9; /* Ajoute un très fin séparateur entre la question et la réponse */
+}
+
+.contenu-reponse p {
+  font-size: 1rem;             /* Fixe la taille de la police de la réponse à 1rem */
+  color: #64748b;              /* Applique une couleur grise douce pour une lecture confortable */
+  line-height: 1.6;            /* Hauteur de ligne aérée à 1.6 pour la lisibilité */
+  margin: 1.2rem 0 0 0;        /* Ajoute un espace de 1.2rem au-dessus du paragraphe */
+}
+
+/*
+   6. ADAPTATION RESPONSIVE (MOBILES ET TABLETTES)
+    */
+
+@media (max-width: 768px) {    /* Déclenche ces adaptations sur les écrans de 768px ou moins */
+  .conteneur-faq {
+    padding: 60px 1.5rem;      /* Réduit le rembourrage global sur mobile */
+  }
+  
+  .entete-item {
+    padding: 1.4rem 1.5rem;    /* Réduit le rembourrage de la ligne de question */
+  }
+  
+  .question-texte {
+    font-size: 1rem;           /* Réduit la taille de la police de la question sur mobile */
+  }
+  
+  .contenu-reponse {
+    padding: 0 1.5rem 1.5rem 1.5rem; /* Réduit le rembourrage de la zone de réponse sur mobile */
+  }
+}                              /* Ferme la requête média mobile */
+
