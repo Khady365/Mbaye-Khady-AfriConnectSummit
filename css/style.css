@@ -2939,3 +2939,129 @@ body {
   }
 }                              /* Ferme la requête média mobile */
 
+/* ========REGLAGE menu hamburger sur mobile.==================== */
+/* 
+   1. REGLES DESKTOP (Grands écrans : supérieurs à 768px)
+    */
+
+/* Donne une référence de positionnement à la navbar pour le menu absolu */
+.navbar {
+  position: relative;
+}
+
+/* Aligne le logo, le menu et les boutons sur une même ligne avec espace entre eux */
+.nav-container {
+  display: flex;             /* Active le mode Flexbox */
+  align-items: center;        /* Centre verticalement tous les éléments */
+  justify-content: space-between; /* Espace équitablement de gauche à droite */
+  padding: 1rem 2rem;        /* Marge interne (haut/bas 1rem, gauche/droite 2rem) */
+}
+
+/* Aligne les 4 liens + le bouton S'inscrire côte à côte sur PC */
+.nav-menu {
+  display: flex;             /* Dispose les li horizontalement */
+  align-items: center;        /* Aligne verticalement les éléments du menu */
+  list-style: none;          /* Supprime les puces par défaut de la liste ul */
+  gap: 1.5rem;               /* Espace de 1.5rem entre chaque lien */
+  margin: 0;                 /* Supprime la marge par défaut du ul */
+  padding: 0;                /* Supprime le rembourrage par défaut du ul */
+}
+
+/* Aligne le bouton Thème et le Hamburger côte à côte */
+.nav-actions {
+  display: flex;             /* Alignement en ligne */
+  align-items: center;        /* Centrage vertical */
+  gap: 1rem;                 /* Écartement entre le bouton thème et le hamburger */
+}
+
+/* Masque le bouton hamburger sur grand écran (il ne sert que sur mobile) */
+.hamburger {
+  display: none;             /* Caché par défaut sur PC */
+}
+
+
+/* 
+   2. REGLES MOBILE (Écrans de 768px ou moins)
+    */
+@media (max-width: 768px) {
+  
+  /* Affiche le bouton hamburger uniquement sur écran mobile */
+  .hamburger {
+    display: flex;             /* Rendre le bouton visible sous forme de conteneur flex */
+    flex-direction: column;    /* Empile les 3 barres verticalement */
+    justify-content: space-between; /* Espace équitablement les 3 barres */
+    width: 26px;               /* Largeur du bouton */
+    height: 20px;              /* Hauteur du bouton */
+    background: transparent;   /* Fond transparent */
+    border: none;              /* Supprime la bordure par défaut du bouton */
+    cursor: pointer;           /* Affiche la main au survol */
+    padding: 0;                /* Réinitialise les marges internes */
+  }
+
+  /* Style individuel des 3 petites barres du hamburger */
+  .hamburger .bar {
+    height: 3px;               /* Épaisseur de chaque barre */
+    width: 100%;               /* Prend toute la largeur du bouton (26px) */
+    background-color: currentColor; /* Prend la couleur du texte parent */
+    border-radius: 4px;        /* Arrondit les bords des barres */
+    transition: all 0.3s ease-in-out; /* Animation fluide lors de la transformation en X */
+  }
+
+  /* Configuration du menu déroulant mobile (Masqué au départ) */
+  .nav-menu {
+    position: absolute;        /* Sort la liste du flux normal pour la superposer */
+    top: 100%;                 /* Se place exactement sous la navbar */
+    left: 0;                   /* Aligné sur le bord gauche de l'écran */
+    width: 100%;               /* S'étend sur toute la largeur de l'écran */
+    
+    display: flex;             /* Active le mode Flexbox */
+    flex-direction: column;    /* Empile les liens verticalement les uns sous les autres */
+    align-items: center;        /* Centre les liens horizontalement */
+    gap: 1.2rem;               /* Espace vertical entre chaque lien */
+    
+    padding: 2rem 0;           /* Rembourrage haut et bas du menu déroulant */
+    background-color: #ffffff; /* Couleur de fond opaque (à adapter à ton thème) */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Ombre sous le menu pour donner du relief */
+    
+    /* Propriétés pour MASQUER le menu avec animation */
+    opacity: 0;                /* Menu totalement transparent */
+    visibility: hidden;        /* Rendu invisible et non cliquable */
+    transform: translateY(-15px); /* Légèrement décalé vers le haut */
+    transition: all 0.3s ease-in-out; /* Transition douce lors de l'ouverture/fermeture */
+    z-index: 999;              /* S'assure de passer au-dessus du reste de la page */
+  }
+
+  /* S'assure que chaque li occupe toute la largeur pour faciliter le clic */
+  .nav-menu .li-nav {
+    width: 100%;               /* Prend toute la largeur */
+    text-align: center;        /* Centre le texte du lien */
+  }
+
+  /* Ajustement du bouton S'INSCRIRE dans la liste mobile */
+  .nav-menu .cta-btn {
+    display: inline-block;     /* Permet de lui donner des marges et dimensions */
+    margin-top: 0.5rem;        /* Marge au-dessus du bouton */
+  }
+
+  /* ÉTAT OUVERT : Appliqué via JavaScript quand on clique sur le hamburger */
+  .nav-menu.active {
+    opacity: 1;                /* Rendre le menu totalement opaque */
+    visibility: visible;      /* Rendre le menu visible et cliquable */
+    transform: translateY(0);  /* Replacer le menu à sa position initiale */
+  }
+
+  /* ANIMATION EN X : Cache la barre du milieu quand la classe active est là */
+  .hamburger.active .bar:nth-child(2) { 
+    opacity: 0; 
+  }
+
+  /* ANIMATION EN X : Fait tourner la première barre à 45 degrés */
+  .hamburger.active .bar:nth-child(1) { 
+    transform: translateY(8.5px) rotate(45deg); 
+  }
+
+  /* ANIMATION EN X : Fait tourner la troisième barre à -45 degrés */
+  .hamburger.active .bar:nth-child(3) { 
+    transform: translateY(-8.5px) rotate(-45deg); 
+  }
+}
