@@ -6,35 +6,39 @@
 
 /* Variables globales applicables par défaut (Mode Clair) */
 :root {
-  --bg-navbar: #f3f6f9;        /* Couleur de fond de la barre de navigation (gris/bleu très clair) */
-  --text-main: #1e293b;        /* Couleur principale du texte (sombre pour la lisibilité) */
-  --text-muted: #64748b;       /* Couleur secondaire pour le texte discret ou inactif */
-  --primary-color: #1d4ed8;    /* Couleur primaire (bleu royal pour l'accentuation et boutons) */
-  --accent-cyan: #0ea5e9;       /* Couleur d'accentuation (cyan pour le logo et liens actifs) */
-  --border-color: #e2e8f0;     /* Couleur de la bordure inférieure de la navbar */
-  --btn-theme-bg: #ffffff;     /* Couleur de fond du bouton de bascule de thème */
-  --transition: all 0.25s ease;/* Transition fluide pour tous les effets de survol/changements */
+  --bg-page: #f8fafc;          /* Fond général de la page */
+  --bg-card: #ffffff;          /* Fond des cartes et conteneurs */
+  --bg-navbar: #f3f6f9;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --primary-color: #1d4ed8;
+  --border-color: #e2e8f0;
+  --btn-theme-bg: #ffffff;
+  --transition: all 0.25s ease;
 }
 
-/* Redéfinition des variables pour le Mode Sombre (Activé via l'attribut data-theme="dark") */
 [data-theme="dark"] {
-  --bg-navbar: #0f172a;        /* Fond de la navbar en bleu très sombre */
-  --text-main: #f8fafc;        /* Texte principal en blanc/gris très clair */
-  --text-muted: #94a3b8;       /* Texte secondaire en gris clair */
-  --primary-color: #3b82f6;    /* Bleu plus vif et lumineux adapté aux fonds sombres */
-  --border-color: #1e293b;     /* Bordure sombre pour un contraste doux */
-  --btn-theme-bg: #1e293b;     /* Fond du bouton de thème assorti au fond sombre */
+  --bg-page: #0b1120;          /* Fond de page très sombre */
+  --bg-card: #1e293b;          /* Cartes plus sombres que le fond */
+  --bg-navbar: #0f172a;
+  --text-main: #f8fafc;        /* Le texte passe en blanc/clair */
+  --text-muted: #94a3b8;
+  --primary-color: #3b82f6;
+  --border-color: #334155;
+  --btn-theme-bg: #1e293b;
 }
-
 /* 
    2. STYLES GÉNÉRAUX ETRÉINITIALISATION (BASE)
     */
 
 /* Styles appliqués sur tout le corps de la page */
 body {
+  
   margin: 0;                   /* Annulation des marges par défaut du navigateur */
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Police moderne et lisible */
+  
 }
+
 
 /*
    3. STRUCTURE ET CONTENEUR DE LA NAVBAR
@@ -50,6 +54,7 @@ body {
   border-bottom: 1px solid var(--border-color); /* Ajoute une bordure subtile en bas */
   z-index: 1000;               /* Assure que la navbar reste au-dessus des autres éléments */
   transition: var(--transition); /* Anime le changement de couleur de fond (mode clair/sombre) */
+  
 }
 
 /* Conteneur interne permettant de centrer et limiter la largeur du contenu */
@@ -62,6 +67,29 @@ body {
   padding: 0.75rem 2rem;       /* Espacement interne (haut/bas 0.75rem, gauche/droite 2rem) */
   height: 60px;                /* Fixe la hauteur totale de la barre de navigation */
   box-sizing: border-box;      /* Inclut le padding et la bordure dans le calcul des 60px */
+  
+}
+
+/* --- EFFET AU SCROLL (Shrink + Ombre) --- */
+
+/* Réduit la hauteur de 80px à 60px au défilement */
+.navbar.scrolled .nav-container {
+  height: 60px;
+}
+
+/* Ajoute l'ombre portée */
+.navbar.scrolled {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+/* Ombre adaptée au mode sombre */
+[data-theme="dark"] .navbar.scrolled {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+.hero, 
+section:first-of-type {
+  padding-top: 80px; /* Remplace 60px par 80px pour coller à la hauteur initiale */
 }
 
 /* 
@@ -69,14 +97,15 @@ body {
     */
 
 /* Conteneur du logo (icône + texte) */
-.nav-container > span {
+.logo-group {
   display: flex;               /* Aligne l'icône et le texte côte à côte */
   align-items: center;         /* Aligne verticalement l'icône et le texte */
-  gap: 0.4rem;                 /* Définit un espace de 0.4rem entre l'icône et le texte */
+  gap: 0.4rem;                 /* Définit un espace entre l'icône et le texte */
   font-weight: 700;            /* Met le texte du logo en gras */
   font-size: 1.15rem;          /* Définit la taille du texte du logo */
-  color: var(--text-main);     /* Applique la couleur de texte principale */
+  color: var(--text-main);     /* 👈 C'EST CETTE VARIABLE qui fera passer "AfriConnect" en blanc en mode sombre ! */
   user-select: none;           /* Empêche la sélection accidentelle du texte au clic */
+  transition: var(--transition); /* Transition fluide au changement de mode */
 }
 
 /* Style de l'icône dans le logo */
@@ -91,7 +120,6 @@ body {
   font-weight: 700;            /* S'assure que le texte reste bien en gras */
   margin-left: 0.2rem;         /* Décale légèrement la partie bleue vers la droite */
 }
-
 /* 
    5. MENU DE NAVIGATION ET LIENS
     */
@@ -211,6 +239,7 @@ section:first-of-type {
   --blue-glow: rgba(29, 83, 245, 0.15); /* Ombre/Lueur bleue douce */
   --border-color: #e2e8f0;     /* Bordures claires et discrètes */
   --accent-cyan: #0ea5e9;      /* Cyan pour le point et la localisation */
+  
 }
 
 /* Réinitialisation de base du corps de page */
@@ -1379,40 +1408,61 @@ body {
 }
 
 /* 
-   BOUTON DE RETOUR EN HAUT (STYLE BOUTON PHYSIQUE)
-    */
+  /* ==========================================================================
+   BOUTON DE RETOUR EN HAUT FIXE & FLOTTANT
+   ========================================================================== */
 
 .action-retour-haut {
-  background-color: #1d53f5;    /* Fond blanc pour ressortir sur le gris */
-  border: 1px solid #cbd5e1;    /* Fine bordure grise */
-  border-radius: 10pxpx;           /* Angles très légèrement adoucis */
-  padding: 0.7rem 1.2rem;       /* Rembourrage interne pour la forme bouton */
-  font-family: 'Courier New', Courier, monospace; /* Style console/tech */
-  font-size: 0.75rem;           /* Petite taille typographique */
-  font-weight: 700;             /* Texte en gras */
-  letter-spacing: 0.1em;        /* Espacement aéré entre les lettres */
-  color: #ffffff !important; /* Force la couleur du texte/icône */
-  cursor: pointer;              /* Curseur main */
-  display: inline-flex;         /* Alignement horizontal du texte et de l'icône */
-  align-items: center;          /* Centrage vertical */
-  gap: 0.6rem;                  /* Espace entre le texte et la flèche */
-  transition: all 0.25s ease;   /* Transition fluide sur toutes les propriétés */
+  position: fixed;               /* Fixe le bouton par-dessus le contenu sur l'écran */
+  bottom: 2rem;                  /* Le place à 2rem du bas de l'écran */
+  right: 2rem;                   /* Le place à 2rem de la droite de l'écran */
+  z-index: 999;                  /* S'assure qu'il reste au-dessus des autres éléments */
   
+  background-color: #1d53f5;     /* Couleur de fond bleu royal */
+  border: 1px solid #cbd5e1;     /* Fine bordure grise */
+  border-radius: 10px;           /* Angles adoucis (correction du 10pxpx) */
+  padding: 0.7rem 1.2rem;        /* Rembourrage interne pour la forme du bouton */
+  font-family: 'Courier New', Courier, monospace; /* Style typographique console/tech */
+  font-size: 0.75rem;            /* Taille du texte */
+  font-weight: 700;              /* Texte en gras */
+  letter-spacing: 0.1em;         /* Espacement entre les lettres */
+  color: #ffffff !important;     /* Force la couleur du texte et de l'icône en blanc */
+  cursor: pointer;               /* Curseur sous forme de main au survol */
+  
+  display: inline-flex;          /* Alignement horizontal fluide du texte et de l'icône */
+  align-items: center;           /* Centrage vertical */
+  gap: 0.6rem;                   /* Espace entre le texte et l'icône */
+  
+  /* Masquage par défaut (quand on est en haut de la page) */
+  opacity: 0;                    /* Rend le bouton totalement transparent */
+  visibility: hidden;            /* Empêche de cliquer dessus quand il est masqué */
+  transform: translateY(20px);   /* Le décale légèrement vers le bas pour l'effet d'apparition */
+  transition: all 0.3s ease;     /* Animation fluide pour l'apparition/disparition */
 }
 
+/* État affiché (ajouté dynamiquement par le JavaScript lors du scroll) */
+.action-retour-haut.visible {
+  opacity: 1;                    /* Rend le bouton totalement opaque */
+  visibility: visible;          /* Rend le bouton cliquable */
+  transform: translateY(0);      /* Le remet à sa position normale */
+}
 
+/* Survol du bouton */
+.action-retour-haut:hover {
+  background-color: #1541c4;     /* Assombrit légèrement le bleu au survol */
+  box-shadow: 0 10px 20px rgba(29, 83, 245, 0.3); /* Ajoute une ombre portée bleue */
+}
 
-/* Animation de l'icône de flèche au survol */
+/* Animation de la flèche au survol */
 .action-retour-haut:hover .icone-fleche {
-  transform: translateY(-2px);  /* La flèche monte légèrement pour inciter au clic */
+  transform: translateY(-3px);   /* Décale la flèche vers le haut pour inciter au clic */
 }
 
 /* Style de l'icône de flèche */
 .icone-fleche {
-  font-size: 0.85rem;           /* Taille de la flèche FontAwesome */
-  transition: transform 0.25s ease; /* Transition fluide du mouvement de flèche */
+  font-size: 0.85rem;            /* Taille de la flèche */
+  transition: transform 0.25s ease; /* Transition fluide de la flèche */
 }
-
 /* 
    6. RESPONSIVE DESIGN (MOBILES & TABLETTES)
     */
@@ -2941,127 +2991,930 @@ body {
 
 /* ========REGLAGE menu hamburger sur mobile.==================== */
 /* 
+  /* =========================================================
    1. REGLES DESKTOP (Grands écrans : supérieurs à 768px)
-    */
+   ========================================================= */
 
-/* Donne une référence de positionnement à la navbar pour le menu absolu */
+/* La navbar reste bien FIXE en haut */
 .navbar {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-navbar);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  transition: var(--transition);
 }
 
-/* Aligne le logo, le menu et les boutons sur une même ligne avec espace entre eux */
+/* Le conteneur interne sert de référence de position pour le menu mobile */
 .nav-container {
-  display: flex;             /* Active le mode Flexbox */
-  align-items: center;        /* Centre verticalement tous les éléments */
-  justify-content: space-between; /* Espace équitablement de gauche à droite */
-  padding: 1rem 2rem;        /* Marge interne (haut/bas 1rem, gauche/droite 2rem) */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
 }
 
 /* Aligne les 4 liens + le bouton S'inscrire côte à côte sur PC */
 .nav-menu {
-  display: flex;             /* Dispose les li horizontalement */
-  align-items: center;        /* Aligne verticalement les éléments du menu */
-  list-style: none;          /* Supprime les puces par défaut de la liste ul */
-  gap: 1.5rem;               /* Espace de 1.5rem entre chaque lien */
-  margin: 0;                 /* Supprime la marge par défaut du ul */
-  padding: 0;                /* Supprime le rembourrage par défaut du ul */
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* Aligne le bouton Thème et le Hamburger côte à côte */
 .nav-actions {
-  display: flex;             /* Alignement en ligne */
-  align-items: center;        /* Centrage vertical */
-  gap: 1rem;                 /* Écartement entre le bouton thème et le hamburger */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Masque le bouton hamburger sur grand écran (il ne sert que sur mobile) */
+/* Masque le bouton hamburger sur grand écran */
 .hamburger {
-  display: none;             /* Caché par défaut sur PC */
+  display: none;
 }
 
 
-/* 
+/* =========================================================
    2. REGLES MOBILE (Écrans de 768px ou moins)
-    */
+   ========================================================= */
 @media (max-width: 768px) {
   
   /* Affiche le bouton hamburger uniquement sur écran mobile */
   .hamburger {
-    display: flex;             /* Rendre le bouton visible sous forme de conteneur flex */
-    flex-direction: column;    /* Empile les 3 barres verticalement */
-    justify-content: space-between; /* Espace équitablement les 3 barres */
-    width: 26px;               /* Largeur du bouton */
-    height: 20px;              /* Hauteur du bouton */
-    background: transparent;   /* Fond transparent */
-    border: none;              /* Supprime la bordure par défaut du bouton */
-    cursor: pointer;           /* Affiche la main au survol */
-    padding: 0;                /* Réinitialise les marges internes */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
   }
 
   /* Style individuel des 3 petites barres du hamburger */
   .hamburger .bar {
-    height: 3px;               /* Épaisseur de chaque barre */
-    width: 100%;               /* Prend toute la largeur du bouton (26px) */
-    background-color: currentColor; /* Prend la couleur du texte parent */
-    border-radius: 4px;        /* Arrondit les bords des barres */
-    transition: all 0.3s ease-in-out; /* Animation fluide lors de la transformation en X */
+    height: 3px;
+    width: 100%;
+    background-color: currentColor;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
   }
 
-  /* Configuration du menu déroulant mobile (Masqué au départ) */
+  /* Configuration du menu déroulant mobile */
   .nav-menu {
-    position: absolute;        /* Sort la liste du flux normal pour la superposer */
-    top: 100%;                 /* Se place exactement sous la navbar */
-    left: 0;                   /* Aligné sur le bord gauche de l'écran */
-    width: 100%;               /* S'étend sur toute la largeur de l'écran */
+    position: absolute;        /* Se réfère à .nav-container (qui est relative) */
+    top: 100%;                 /* Se place juste en dessous de la barre */
+    left: 0;
+    width: 100%;
     
-    display: flex;             /* Active le mode Flexbox */
-    flex-direction: column;    /* Empile les liens verticalement les uns sous les autres */
-    align-items: center;        /* Centre les liens horizontalement */
-    gap: 1.2rem;               /* Espace vertical entre chaque lien */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
     
-    padding: 2rem 0;           /* Rembourrage haut et bas du menu déroulant */
-    background-color: #ffffff; /* Couleur de fond opaque (à adapter à ton thème) */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Ombre sous le menu pour donner du relief */
+    padding: 2rem 0;
+    background-color: var(--bg-navbar); /* Réutilise ta variable pour le mode sombre ! */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     
-    /* Propriétés pour MASQUER le menu avec animation */
-    opacity: 0;                /* Menu totalement transparent */
-    visibility: hidden;        /* Rendu invisible et non cliquable */
-    transform: translateY(-15px); /* Légèrement décalé vers le haut */
-    transition: all 0.3s ease-in-out; /* Transition douce lors de l'ouverture/fermeture */
-    z-index: 999;              /* S'assure de passer au-dessus du reste de la page */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: all 0.3s ease-in-out;
+    z-index: 999;
   }
 
-  /* S'assure que chaque li occupe toute la largeur pour faciliter le clic */
+  /* S'assure que chaque li occupe toute la largeur */
   .nav-menu .li-nav {
-    width: 100%;               /* Prend toute la largeur */
-    text-align: center;        /* Centre le texte du lien */
+    width: 100%;
+    text-align: center;
   }
 
   /* Ajustement du bouton S'INSCRIRE dans la liste mobile */
   .nav-menu .cta-btn {
-    display: inline-block;     /* Permet de lui donner des marges et dimensions */
-    margin-top: 0.5rem;        /* Marge au-dessus du bouton */
+    display: inline-block;
+    margin-top: 0.5rem;
   }
 
-  /* ÉTAT OUVERT : Appliqué via JavaScript quand on clique sur le hamburger */
+  /* ÉTAT OUVERT (via JS) */
   .nav-menu.active {
-    opacity: 1;                /* Rendre le menu totalement opaque */
-    visibility: visible;      /* Rendre le menu visible et cliquable */
-    transform: translateY(0);  /* Replacer le menu à sa position initiale */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  /* ANIMATION EN X : Cache la barre du milieu quand la classe active est là */
+  /* ANIMATIONS DU HAMBURGER EN (X) */
   .hamburger.active .bar:nth-child(2) { 
     opacity: 0; 
   }
 
-  /* ANIMATION EN X : Fait tourner la première barre à 45 degrés */
   .hamburger.active .bar:nth-child(1) { 
     transform: translateY(8.5px) rotate(45deg); 
   }
 
-  /* ANIMATION EN X : Fait tourner la troisième barre à -45 degrés */
   .hamburger.active .bar:nth-child(3) { 
     transform: translateY(-8.5px) rotate(-45deg); 
   }
+}
+/* ====================================================================================================================================
+Gestion des styles CSS via JavaScript
+===================================================================================================================== ================*/
+
+/* ==========================================
+   GESTION DES ICÔNES LUNE / SOLEIL
+   ========================================== */
+
+/* ------------------------------------------
+   1. ÉTAT PAR DÉFAUT (Mode Clair)
+   ------------------------------------------ */
+
+/* On cible l'icône du soleil qui se trouve dans le bouton de thème */
+.theme-btn .icon-sun {
+  /* Forcer l'affichage de l'icône en bloc en ligne (visible) */
+  display: inline-block !important; 
+}
+
+/* On cible l'icône de la lune qui se trouve dans le bouton de thème */
+.theme-btn .icon-moon {
+  /* Forcer le masquage complet de l'icône de la lune (invisible) */
+  display: none !important; 
+}
+
+/* ------------------------------------------
+   2. ÉTAT ACTIF (Mode Sombre)
+   ------------------------------------------ */
+
+/* Quand l'attribut data-theme="dark" est présent sur la page, 
+   on cible l'icône du soleil */
+[data-theme="dark"] .theme-btn .icon-sun {
+  /* Cacher le soleil quand le mode sombre est activé */
+  display: none !important; 
+}
+
+/* Quand l'attribut data-theme="dark" est présent sur la page, 
+   on cible l'icône de la lune */
+[data-theme="dark"] .theme-btn .icon-moon {
+  /* Afficher la lune quand le mode sombre est activé */
+  display: inline-block !important; 
+};
+
+/* ==========================================================================
+   RÈGLES SPÉCIFIQUES DE SÉCURITÉ POUR LE LOGO ET LES LIENS EN MODE SOMBRE
+   ========================================================================== */
+[data-theme="dark"] .logo-group {
+  color: var(--text-main) !important; /* Force la couleur du logo "AfriConnect" en blanc en mode sombre */
+}
+
+[data-theme="dark"] .nav-lien {
+  color: var(--text-muted);           /* S'assure que les liens inactifs restent lisibles en mode sombre */
+}
+
+/* Redéfinit la couleur spéciale pour Summit 2026 */
+.logo-group .anim-logo {
+  color: var(--primary-color) !important;
+}
+/* Met le texte "AfriConnect" ET l'icône du logo en blanc en mode sombre */
+[data-theme="dark"] .logo-group span,
+[data-theme="dark"] .logo-icon {
+  color: #ffffff !important;
+}
+
+/* Conserve la couleur bleue dynamique pour "Summit 2026" */
+[data-theme="dark"] .logo-group .anim-logo {
+  color: var(--primary-color) !important;
+}
+
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION HERO & COMPTE À REBOURS
+   ========================================================================== */
+
+[data-theme="dark"] .section {
+  /* Fond très sombre avec dégradé bleu nuit/noir */
+  background: radial-gradient(circle at 80% 20%, #0b1329 0%, #070a12 70%) !important;
+}
+
+/* 1. Titres et textes */
+[data-theme="dark"] .titre-noir {
+  color: #ffffff !important; /* "L'AVENIR" et "PAS." passent en blanc pur */
+}
+
+[data-theme="dark"] .hero-soustitre {
+  color: #94a3b8 !important; /* Sous-titre en gris clair lisible */
+}
+
+[data-theme="dark"] .hero-meta,
+[data-theme="dark"] .compte-rebours {
+  color: #64748b !important; /* Métadonnées et en-tête en gris tech */
+}
+
+/* 2. Cartes du Compte à Rebours */
+[data-theme="dark"] .rebours-grille {
+  background-color: #1e293b !important; /* Bordures de la grille en bleu sombre */
+  border-color: #1e293b !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .compte-box {
+  background-color: #0f172a !important; /* Fond sombre pour chaque case */
+}
+
+[data-theme="dark"] .nombre {
+  color: #ffffff !important; /* Chiffres (115, 09, etc.) en blanc pur */
+}
+
+[data-theme="dark"] .couleur-nombre {
+  color: rgba(255, 255, 255, 0.04) !important; /* Filigrane géant (1, 2, 3, 4) très subtil */
+}
+
+[data-theme="dark"] .label {
+  color: #64748b !important; /* Libellés "HEURES", "MINUTES" en gris */
+}
+
+[data-theme="dark"] .compte-box:first-child .label {
+  color: var(--accent-cyan) !important; /* "JOURS" garde son cyan lumineux */
+}
+
+/* 3. Pied de localisation */
+[data-theme="dark"] .rebours-footer {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #64748b !important;
+}
+
+/* 4. Bouton Secondaire (PROGRAMME) */
+[data-theme="dark"] .btn-secondary {
+  background-color: transparent !important;
+  color: #94a3b8 !important;
+  border-color: #1e293b !important;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  border-color: var(--blue-primary) !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION CHIFFRES CLÉS
+   ========================================================================== */
+
+/* 1. Fond de la section globale */
+[data-theme="dark"] .chiffre-cles {
+  background-color: #070a12 !important; /* Fond très sombre bleu nuit/noir */
+}
+
+/* 2. Titre de la section */
+[data-theme="dark"] .section-titre {
+  color: #64748b !important; /* Gris moyen pour "CHIFFRES CLÉS" */
+}
+
+/* 3. Cartes 2 et 4 (Anciennement Blanches) */
+[data-theme="dark"] .carte-blanc {
+  background-color: #0f172a !important; /* Fond sombre pur */
+  border-color: #1e293b !important;     /* Fine bordure sombre */
+  color: #ffffff !important;            /* Chiffres en blanc */
+}
+
+/* 4. Carte 3 (Anciennement Neutre) */
+[data-theme="dark"] .carte-neutre {
+  background-color: #0d1527 !important; /* Nuance sombre légèrement différente */
+  border-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+/* 5. Ajustement des filigranes géants (2, 3, 4) */
+[data-theme="dark"] .carte-blanc .couleur-chiffre,
+[data-theme="dark"] .carte-neutre .couleur-chiffre {
+  color: rgba(255, 255, 255, 0.04) !important; /* Filigrane très discret */
+}
+
+/* 6. Libellés sous les chiffres ("SPEAKERS", "JOURS", "PAYS") */
+[data-theme="dark"] .carte-blanc .stat-label,
+[data-theme="dark"] .carte-neutre .stat-label {
+  color: #64748b !important;
+}
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION POURQUOI PARTICIPER
+   ========================================================================== */
+
+/* 1. Fond de la section globale */
+[data-theme="dark"] .conteneur-pourquoi {
+  background-color: #070a12 !important; /* Fond sombre bleu nuit */
+}
+
+/* 2. Titre principal ("Rejoignez le mouvement...") */
+[data-theme="dark"] .grand-titre {
+  color: #ffffff !important; /* Passe en blanc éclatant */
+}
+
+/* 3. Cartes d'arguments */
+[data-theme="dark"] .carte-argument {
+  background-color: #0f172a !important; /* Fond bleu très sombre */
+  border-color: #1e293b !important;     /* Fine bordure discrète */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 4. Encadré de l'icône */
+[data-theme="dark"] .conteneur-icone {
+  background-color: #0b1329 !important; /* Fond légèrement plus foncé */
+  border-color: #1e293b !important;
+}
+
+[data-theme="dark"] .icone-bleue {
+  color: #38bdf8 !important; /* Cyan / bleu néon lumineux */
+}
+
+/* 5. Textes dans les cartes */
+[data-theme="dark"] .titre-argument {
+  color: #ffffff !important; /* Titres "Expertise Mondiale", etc. en blanc */
+}
+
+[data-theme="dark"] .description-argument {
+  color: #94a3b8 !important; /* Paragraphes en gris clair très lisible */
+}
+
+[data-theme="dark"] .petit-index {
+  color: #475569 !important; /* Indice "01 /" en gris tech */
+}
+
+/* 6. Filigranes géants (01, 02, 03) */
+[data-theme="dark"] .filigrane-nombre {
+  color: rgba(255, 255, 255, 0.03) !important; /* Filigrane blanc ultra discret */
+}
+/* ==========================================================================
+   MODE SOMBRE - SECTION INTERVENANTS
+   ========================================================================== */
+
+/* 1. Fond de la section globale */
+[data-theme="dark"] .conteneur-intervenants {
+  background-color: #070a12 !important; /* Fond très sombre bleu nuit */
+}
+
+/* 2. Titre et bouton d'en-tête */
+[data-theme="dark"] .conteneur-intervenants .grand-titre {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .bouton-voir-tous {
+  color: #94a3b8 !important;
+  border-color: #1e293b !important;
+  background-color: transparent !important;
+}
+
+[data-theme="dark"] .bouton-voir-tous:hover {
+  color: #ffffff !important;
+  border-color: var(--blue-primary, #1d53f5) !important;
+  background-color: rgba(29, 83, 245, 0.1) !important;
+}
+
+/* 3. Cartes des Intervenants */
+[data-theme="dark"] .carte-intervenant {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+}
+
+[data-theme="dark"] .conteneur-image {
+  background-color: #0b1329 !important;
+}
+
+/* 4. Correction du voile dégradé sur les photos (sombre au lieu de blanc) */
+[data-theme="dark"] .voile-degrade {
+  background: linear-gradient(to top, #0f172a 0%, rgba(15, 23, 42, 0) 100%) !important;
+}
+
+/* 5. Textes et badges */
+[data-theme="dark"] .infos-intervenant {
+  background-color: #0f172a !important;
+}
+
+[data-theme="dark"] .nom-intervenant {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .poste-intervenant {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .badge-pays {
+  color: #cbd5e1 !important;
+}
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION PARTENAIRES & SPONSORS
+   ========================================================================== */
+
+/* 1. Fond de la section globale */
+[data-theme="dark"] .conteneur-sponsors {
+  background-color: #070a12 !important; /* Fond sombre bleu nuit */
+}
+
+/* 2. Grand titre */
+[data-theme="dark"] .conteneur-sponsors .grand-titre {
+  color: #ffffff !important; /* Blanc pur pour l'accroche */
+}
+
+/* 3. Lignes de séparation sous les catégories ("PARTENAIRE OR", etc.) */
+[data-theme="dark"] .separateur-sponsors::after {
+  background-color: #1e293b !important; /* Ligne fine sombre et discrète */
+}
+
+/* 4. Blocs de logos */
+[data-theme="dark"] .bloc-logo {
+  background-color: #0f172a !important; /* Fond de carte sombre */
+  border-color: #1e293b !important;     /* Fine bordure grise sombre */
+  color: #cbd5e1 !important;            /* Noms des partenaires en blanc/gris clair */
+}
+
+/* 5. Effet au survol des logos */
+[data-theme="dark"] .bloc-logo:hover {
+  background-color: #131d35 !important; /* Légère mise en valeur au survol */
+  border-color: #38bdf8 !important;     /* Bordure cyan lumineuse */
+  color: #ffffff !important;            /* Texte passe en blanc pur */
+}
+
+/* ==========================================================================
+   MODE SOMBRE - FOOTER / PIED DE PAGE
+   ========================================================================== */
+
+/* 1. Fond global du pied de page */
+[data-theme="dark"] .pied-de-page {
+  background-color: #050811 !important; /* Bleu nuit très sombre */
+}
+
+/* 2. Titre / Logo principal */
+[data-theme="dark"] .logo-sommet {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .texte-bleu {
+  color: #3b82f6 !important; /* Bleu royal lumineux */
+}
+
+/* 3. Textes descriptifs et titres de colonnes */
+[data-theme="dark"] .description-sommet {
+  color: #94a3b8 !important; /* Gris neutre lisible */
+}
+
+[data-theme="dark"] .titre-colonne {
+  color: #64748b !important; /* Gris discret pour le style console */
+}
+
+/* 4. Liens de navigation & réseaux sociaux */
+[data-theme="dark"] .liens-navigation a {
+  color: #cbd5e1 !important; /* Blanc cassé clair */
+}
+
+[data-theme="dark"] .liens-navigation a:hover {
+  color: #38bdf8 !important; /* Passage au cyan néon au survol */
+}
+
+/* 5. Trait de séparation inférieur */
+[data-theme="dark"] .barre-basse {
+  border-top-color: #1e293b !important; /* Trait horizontal fin et sombre */
+}
+
+/* 6. Texte de Copyright */
+[data-theme="dark"] .texte-copyright {
+  color: #64748b !important;
+}
+
+/* 7. Bouton retour en haut */
+[data-theme="dark"] .action-retour-haut {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .action-retour-haut:hover {
+  background-color: #1d53f5 !important;
+  border-color: #1d53f5 !important;
+  color: #ffffff !important;
+}
+
+/* -----------------------------------------------------------------PAGE2 PROGRAMME.HTML---------------------------------------- */
+
+/* ==========================================================================
+   MODE SOMBRE - HERO INTERNE 
+   ========================================================================== */
+
+/* 1. Fond avec dégradé et halo lumineux */
+[data-theme="dark"] .banniere-hero-interne {
+  background: radial-gradient(circle at 30% 20%, #111a2e 0%, #070a12 70%) !important;
+}
+
+/* 2. Fil d'Ariane */
+[data-theme="dark"] .lien-ariane-parent {
+  color: #64748b !important;
+}
+
+[data-theme="dark"] .lien-ariane-parent:hover {
+  color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .separateur-ariane {
+  color: #334155 !important;
+}
+
+[data-theme="dark"] .lien-ariane-actuel {
+  color: #0ea5e9 !important;
+}
+
+/* 3. Titre Principal (H1) */
+[data-theme="dark"] .titre-principal-interne {
+  color: #ffffff !important;
+}
+
+/* 4. Trait de soulignement */
+[data-theme="dark"] .soulignement-decoratif {
+  background-color: #1d53f5 !important;
+}
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION PLANNING / PROGRAMME
+   ========================================================================== */
+
+/* 1. Onglets inactifs */
+[data-theme="dark"] .onglet-jour {
+  background-color: #0f172a !important; /* Fond sombre de la carte */
+  border-color: #1e293b !important;     /* Fine bordure grise */
+}
+
+[data-theme="dark"] .onglet-jour .meta-date {
+  color: #64748b !important;            /* Date en gris discret */
+}
+
+[data-theme="dark"] .onglet-jour .titre-jour {
+  color: #ffffff !important;            /* "Jour X" en blanc */
+}
+
+[data-theme="dark"] .onglet-jour .theme-jour {
+  color: #94a3b8 !important;            /* Sous-titre en gris neutre */
+}
+
+/* Hover sur onglet inactif */
+[data-theme="dark"] .onglet-jour:hover:not(.actif) {
+  border-color: #38bdf8 !important;     /* Surbrillance cyan au survol */
+}
+
+/* 2. Onglet actif (Sélectionné) */
+[data-theme="dark"] .onglet-jour.actif {
+  background-color: #1d53f5 !important; /* Fond bleu royal vif */
+  border-color: #1d53f5 !important;
+}
+
+[data-theme="dark"] .onglet-jour.actif .meta-date {
+  color: #93c5fd !important;            /* Bleu très clair */
+}
+
+[data-theme="dark"] .onglet-jour.actif .titre-jour,
+[data-theme="dark"] .onglet-jour.actif .theme-jour {
+  color: #ffffff !important;            /* Blanc pur */
+}
+
+/* 3. Structure du Tableau de Programme */
+[data-theme="dark"] .table-programme {
+  background-color: #0f172a !important; /* Fond sombre du tableau */
+  border-color: #1e293b !important;     /* Bordure externe */
+}
+
+/* Lignes et alternance de couleurs */
+[data-theme="dark"] .table-programme tr {
+  border-bottom-color: #1e293b !important;
+  background-color: #0a0f1d !important;
+}
+
+[data-theme="dark"] .table-programme tr:nth-child(even) {
+  background-color: #0d1424 !important; /* Alternance très subtile */
+}
+
+[data-theme="dark"] .table-programme tr:hover {
+  background-color: #131d33 !important; /* Mise en valeur au survol */
+}
+
+/* 4. Cellules & Textes du Tableau */
+[data-theme="dark"] .table-programme td {
+  color: #ffffff !important;            /* Intitulé de la session en blanc */
+}
+
+[data-theme="dark"] .colonne-heure {
+  color: #38bdf8 !important;            /* Cyan néon pour l'heure */
+}
+
+[data-theme="dark"] .colonne-intervenant {
+  color: #94a3b8 !important;            /* Gris clair pour les noms */
+}
+
+[data-theme="dark"] .colonne-salle {
+  color: #64748b !important;            /* Style console discret */
+}
+
+[data-theme="dark"] .colonne-salle i {
+  color: #38bdf8 !important;            /* Icône de lieu en cyan */
+}
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION THÉMATIQUES
+   ========================================================================== */
+
+/* 1. Fond global de la section */
+[data-theme="dark"] .conteneur-thematiques {
+  background-color: transparent !important; /* Laisse apparaître le fond sombre du site */
+}
+
+/* 2. En-tête et grand titre */
+[data-theme="dark"] .conteneur-thematiques .titre-section {
+  color: #64748b !important;            /* "THÈMES PRINCIPAUX" en gris neutre */
+}
+
+[data-theme="dark"] .conteneur-thematiques .grand-titre {
+  color: #ffffff !important;            /* Grand titre en blanc pur */
+}
+
+/* 3. Cartes thématiques */
+[data-theme="dark"] .carte-theme {
+  background-color: #0d1424 !important; /* Bleu nuit très sombre pour les cartes */
+  border: 1px solid #1e293b !important; /* Fine bordure discrète */
+}
+
+[data-theme="dark"] .carte-theme:hover {
+  border-color: #38bdf8 !important;     /* Surbrillance cyan de la carte au survol */
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 4. Carré englobant l'icône */
+[data-theme="dark"] .conteneur-icone-theme {
+  background-color: #070a12 !important; /* Fond encore plus sombre pour le carré */
+  border-color: #1e293b !important;     /* Bordure du carré */
+}
+
+[data-theme="dark"] .carte-theme:hover .conteneur-icone-theme {
+  border-color: #1d53f5 !important;     /* Bordure bleue au survol */
+}
+
+[data-theme="dark"] .conteneur-icone-theme i {
+  color: #1d53f5 !important;            /* Icône bleu royal lumineux */
+}
+
+/* 5. Textes dans les cartes */
+[data-theme="dark"] .index-theme {
+  color: #475569 !important;            /* "THÈME 01" en gris discret */
+}
+
+[data-theme="dark"] .titre-theme {
+  color: #ffffff !important;            /* Titres des thèmes en blanc */
+}
+
+[data-theme="dark"] .description-theme {
+  color: #94a3b8 !important;            /* Description en gris clair bien lisible */
+}
+
+/* ==========================================================================
+   FORCE MODE SOMBRE - SECTIONS COMPLETES
+   ========================================================================== */
+
+/* 1. On force le fond sombre sur la SECTION entière et son conteneur */
+[data-theme="dark"] section#themathiques-sommet,
+[data-theme="dark"] .conteneur-thematiques,
+[data-theme="dark"] section#zone-planning,
+[data-theme="dark"] .conteneur-planning {
+  background-color: #070a12 !important; /* Couleur bleu nuit du mode sombre */
+  background: #070a12 !important;
+}
+
+/* 2. On s'assure que le texte des grands titres est blanc */
+[data-theme="dark"] .conteneur-thematiques .grand-titre,
+[data-theme="dark"] .titre-principal-interne {
+  color: #ffffff !important;
+}
+/* ==========================================================================
+   FORCE LE FOND SOMBRE GLOBAL 
+   ========================================================================== */
+
+[data-theme="dark"],
+[data-theme="dark"] body,
+[data-theme="dark"] main {
+  background-color: #070a12 !important;
+  color: #ffffff;
+}
+/* ---------------------------------------PAGE 3 INTERVENANTS.HTML-------------------------------------------------------------------- */
+/* ==========================================================================
+   MODE SOMBRE - FOND DE SECTION & BOUTONS FILTRES 
+   ========================================================================== */
+
+/* 1. Fond global de la section Intervenants */
+[data-theme="dark"] .section-intervenants {
+  background-color: #070a12 !important; /* Force le fond bleu nuit sombre sur la section */
+}
+
+/* 2. Boutons de Filtres (Inactifs) */
+[data-theme="dark"] .bouton-filtre {
+  background-color: #0f172a !important; /* Fond sombre pour les capsules */
+  border-color: #1e293b !important;     /* Fine bordure grise */
+  color: #94a3b8 !important;            /* Texte gris clair */
+}
+
+/* Survol des boutons inactifs */
+[data-theme="dark"] .bouton-filtre:hover:not(.actif) {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;            /* Texte cyan au survol */
+  border-color: #38bdf8 !important;
+}
+
+/* 3. Bouton Filtre Actif (Sélectionné) */
+[data-theme="dark"] .bouton-filtre.actif {
+  background-color: #1d53f5 !important; /* Bleu royal vif */
+  border-color: #1d53f5 !important;
+  color: #ffffff !important;
+}
+
+/* 4. Compteur d'intervenants */
+[data-theme="dark"] .compteur-intervenants {
+  color: #64748b !important;            /* Texte discret */
+}
+
+/* ----------------------------------------PAGE4 CONTACT.HTML------------------------------------------------------------------------- */
+/* ==========================================================================
+   MODE SOMBRE - SECTION INSCRIPTION & LIEU
+   ========================================================================== */
+
+/* 1. Fond global de la section */
+[data-theme="dark"] .section-inscription-contact {
+  background-color: #070a12 !important; /* Bleu nuit très sombre */
+}
+
+/* 2. Champs de saisie, Selects et Textarea */
+[data-theme="dark"] .groupe-champ input,
+[data-theme="dark"] .groupe-champ select,
+[data-theme="dark"] .groupe-champ textarea {
+  background-color: #0f172a !important; /* Fond sombre pour les champs */
+  border-color: #1e293b !important;     /* Fine bordure grise */
+  color: #ffffff !important;            /* Texte tapé en blanc */
+}
+
+[data-theme="dark"] .groupe-champ input::placeholder,
+[data-theme="dark"] .groupe-champ textarea::placeholder {
+  color: #64748b !important;            /* Placeholder gris lisible */
+}
+
+/* Fleche personnalisée du select en mode sombre */
+[data-theme="dark"] .wrapper-select::after {
+  color: #94a3b8 !important;
+}
+
+/* Option au survol / focus des champs */
+[data-theme="dark"] .groupe-champ input:focus,
+[data-theme="dark"] .groupe-champ select:focus,
+[data-theme="dark"] .groupe-champ textarea:focus {
+  border-color: #38bdf8 !important;     /* Contour cyan au clic */
+}
+
+/* Options dans le menu déroulant (pour chrome/firefox) */
+[data-theme="dark"] .groupe-champ select option {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+/* 3. Carte d'informations (à droite) */
+[data-theme="dark"] .carte-blanche-infos {
+  background-color: #0d1424 !important; /* Carte légèrement plus claire que le fond */
+  border: 1px solid #1e293b;
+}
+
+/* Textes de la carte */
+[data-theme="dark"] .nom-batiment {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .details-adresse {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .meta-valeur {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .encadre-icone-mini {
+  border-color: #1e293b !important;
+  background-color: #0f172a !important;
+}
+
+/* 4. Mini carte géographique technique (Grid) */
+[data-theme="dark"] .mini-carte-technique {
+  background-color: #0b1120 !important;
+  border-color: #1e293b !important;
+  background-image: linear-gradient(#1e293b 1px, transparent 1px),
+                    linear-gradient(90deg, #1e293b 1px, transparent 1px) !important;
+}
+
+[data-theme="dark"] .label-adresse-carte {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .coordonnees-gps {
+  color: #64748b !important;
+}
+
+/* ==========================================================================
+   MODE SOMBRE - SECTION FAQ
+   ========================================================================== */
+
+/* 1. Fond global de la section FAQ */
+[data-theme="dark"] .conteneur-faq {
+  background-color: #070a12 !important; /* Fond sombre profond */
+}
+
+/* 2. Titre principal */
+[data-theme="dark"] .conteneur-faq .grand-titre-faq {
+  color: #ffffff !important; /* Texte du titre en blanc */
+}
+
+/* 3. Bloc de chaque question / réponse (Item) */
+[data-theme="dark"] .item-faq {
+  background-color: #0b1120 !important; /* Arrière-plan sombre des cartes */
+  border-color: #1e293b !important;     /* Bordure subtile bleu-gris */
+}
+
+/* 4. En-tête de la question (Ligne cliquable) */
+[data-theme="dark"] .entete-item {
+  background-color: #0b1120 !important;
+}
+
+[data-theme="dark"] .entete-item:hover {
+  background-color: #0f172a !important; /* Effet de survol légèrement plus clair */
+}
+
+/* Texte de la question */
+[data-theme="dark"] .question-texte {
+  color: #ffffff !important; /* Question en blanc pur */
+}
+
+/* Flèche à droite */
+[data-theme="dark"] .icone-fleche {
+  color: #64748b !important; /* Flèche grise en état fermé */
+}
+
+/* 5. Changements lors de l'ouverture (quand la case est cochée) */
+
+/* Rotation et couleur Cyan pour la flèche quand déplié */
+[data-theme="dark"] .declencheur-faq:checked ~ .entete-item .icone-fleche {
+  color: #38bdf8 !important; /* Cyan lumineux */
+}
+
+/* Bordure accentuée pour la carte ouverte */
+[data-theme="dark"] .declencheur-faq:checked ~ .item-faq {
+  border-color: #334155 !important;
+}
+
+/* 6. Panneau et contenu de la réponse */
+[data-theme="dark"] .panneau-reponse {
+  background-color: #0b1120 !important;
+}
+
+[data-theme="dark"] .contenu-reponse {
+  border-top-color: #1e293b !important; /* Ligne de séparation fine en mode sombre */
+}
+
+[data-theme="dark"] .contenu-reponse p {
+  color: #94a3b8 !important; /* Texte de la réponse en gris clair très lisible */
+}
+
+
+/* ==========================================================================
+   NAVBAR DYNAMIQUE HAUTEUR FIXE 60PX + EFFET SCROLL VISIBLE
+   ========================================================================== */
+
+/* 1. Préparation des animations fluides sur les éléments enfants */
+.logo-group, 
+.cta-btn {
+  transition: transform 0.3s ease, padding 0.3s ease; /* Anime en 0.3s tout changement de taille (transform) et de rembourrage (padding) */
+}
+
+/* 2. Style de la Navbar en état SCROLLÉ (déclenché dès qu'on défile la page) */
+.navbar.scrolled {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25) !important; /* Ajoute une ombre portée nette sous la navbar pour la détacher du fond */
+  border-bottom-color: var(--primary-color) !important;          /* Change la couleur de la bordure du bas vers la couleur primaire du site */
+}
+
+/* 3. Effet "Shrink" interne : Réduction du logo au scroll */
+.navbar.scrolled .logo-group {
+  transform: scale(0.92); /* Réduit visuellement la taille du logo de 8% pour donner l'impression de compression */
+}
+
+/* 4. Effet "Shrink" interne : Réduction du bouton au scroll */
+.navbar.scrolled .cta-btn {
+  padding: 0.45rem 1.2rem; /* Réduit le padding interne du bouton "S'INSCRIRE" pour le compacter */
+  transform: scale(0.95);  /* Réduit légèrement la taille globale du bouton de 5% */
+}
+
+/* 5. Adaptation de l'effet en Mode Sombre (dark mode) */
+[data-theme="dark"] .navbar.scrolled {
+  background-color: #070a12 !important;                       /* Force un fond sombre très opaque au moment du scroll */
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.9) !important; /* Renforce l'ombre portée pour qu'elle ressorte bien sur fond sombre */
+  border-bottom: 1px solid #1e293b !important;                  /* Applique une fine bordure sombre très propre en bas */
 }
